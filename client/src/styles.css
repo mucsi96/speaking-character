@@ -1,0 +1,150 @@
+:root {
+  --bg: #0b1f3a;
+  --text: #fff8e7;
+  --accent: #ffd23f;
+  font-size: clamp(16px, 1.6vw, 28px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+}
+
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.app canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Overlays sit above the canvas */
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.overlay > * {
+  pointer-events: auto;
+}
+
+.overlay--center {
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(11, 31, 58, 0.55), rgba(11, 31, 58, 0.9));
+}
+
+.overlay--top {
+  top: 0;
+  justify-content: flex-start;
+}
+
+.overlay--bottom {
+  bottom: 0;
+  justify-content: flex-end;
+}
+
+.title {
+  font-size: 3.4rem;
+  margin: 0;
+  text-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.6);
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.scene-title {
+  font-size: 2.6rem;
+  margin: 0;
+  padding: 0.6rem 1.6rem;
+  border-radius: 1rem;
+  background: rgba(11, 31, 58, 0.55);
+  text-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.6);
+}
+
+.hint {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.start-button {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1205;
+  background: var(--accent);
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.4);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.start-button:hover,
+.start-button:focus {
+  transform: scale(1.06);
+  outline: 0.25rem solid #fff;
+  box-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.55);
+}
+
+.prompt-text {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0.6rem 1.4rem;
+  border-radius: 1rem;
+  background: rgba(11, 31, 58, 0.6);
+}
+
+.color-buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.color-button {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  border: 0.2rem solid rgba(255, 255, 255, 0.85);
+  border-radius: 1rem;
+  padding: 1rem 2.4rem;
+  cursor: pointer;
+  min-width: 8rem;
+  box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4);
+}
+
+.color-button:hover,
+.color-button:focus {
+  transform: scale(1.05);
+  outline: 0.25rem solid #fff;
+}

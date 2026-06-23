@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: speaking-character
+  labels:
+    app: speaking-character
+  annotations:
+    # Adjust for your ingress controller (nginx shown as an example).
+    nginx.ingress.kubernetes.io/proxy-body-size: "1m"
+spec:
+  rules:
+    # Replace with the hostname you open on the TV.
+    - host: papagei.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: speaking-character
+                port:
+                  number: 80
