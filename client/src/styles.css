@@ -148,12 +148,3 @@ body,
   transform: scale(1.05);
   outline: 0.25rem solid #fff;
 }
-
-.credits {
-  position: absolute;
-  bottom: 0.4rem;
-  right: 0.8rem;
-  font-size: 0.7rem;
-  opacity: 0.5;
-  pointer-events: none;
-}

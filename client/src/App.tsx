@@ -37,11 +37,6 @@ export default function App() {
           </button>
         </div>
       )}
-
-      <footer className="credits">
-        Modelle: „Pirate Parrot" von Lautaro Masseroni & Insel via Sketchfab (CC&nbsp;BY).
-        Stimme: ElevenLabs.
-      </footer>
     </div>
   );
 }

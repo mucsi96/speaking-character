@@ -1,29 +1,8 @@
-import { useGLTF } from '@react-three/drei';
-import { useMemo } from 'react';
-
-const MODEL_URL = '/models/island.glb';
-
 /**
- * The pirate island stage from Sketchfab, used as the environment the parrot
- * stands on. Position/scale are conservative defaults — tweak `scale`/`position`
- * here to frame your specific model nicely.
+ * Pirate island stage built from primitives (sandy disc + water plane + a palm),
+ * the environment the parrot stands on.
  */
 export function Island() {
-  const { scene } = useGLTF(MODEL_URL);
-  const cloned = useMemo(() => scene.clone(true), [scene]);
-
-  return (
-    <group position={[0, -1.1, 0]} scale={1}>
-      <primitive object={cloned} />
-    </group>
-  );
-}
-
-/**
- * Simple placeholder island (sandy disc + water plane) shown when island.glb
- * is not present, so the scene never looks empty.
- */
-export function ProceduralIsland() {
   return (
     <group position={[0, -1.1, 0]}>
       {/* Water */}

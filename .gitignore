@@ -146,5 +146,3 @@ vite.config.ts.timestamp-*
 # Generated TTS audio cache
 /cache/
 server/cache/
-# Large 3D model binaries (added locally / baked into the image)
-client/public/models/*.glb

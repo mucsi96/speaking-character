@@ -1,15 +1,12 @@
 import { Canvas } from '@react-three/fiber';
 import { Sky } from '@react-three/drei';
-import { Suspense } from 'react';
-import { Island, ProceduralIsland } from './Island';
+import { Island } from './Island';
 import { Parrot } from './Parrot';
-import { ProceduralParrot } from './ProceduralParrot';
 import { LipSyncDriver } from './LipSyncDriver';
-import { ModelErrorBoundary } from './ModelErrorBoundary';
 
 /**
  * The full 3D stage: a pirate island with the talking parrot, framed for a TV.
- * Both GLB assets degrade gracefully to procedural placeholders if missing.
+ * Everything is built from primitives — no external assets to load.
  */
 export function Scene() {
   return (
@@ -31,15 +28,8 @@ export function Scene() {
         shadow-mapSize={[2048, 2048]}
       />
 
-      <Suspense fallback={null}>
-        <ModelErrorBoundary label="island" fallback={<ProceduralIsland />}>
-          <Island />
-        </ModelErrorBoundary>
-
-        <ModelErrorBoundary label="parrot" fallback={<ProceduralParrot />}>
-          <Parrot />
-        </ModelErrorBoundary>
-      </Suspense>
+      <Island />
+      <Parrot />
 
       <LipSyncDriver />
     </Canvas>

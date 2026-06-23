@@ -1,95 +1,141 @@
-import { useAnimations, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
-import { useEffect, useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import * as THREE from 'three';
 import { useShow } from '../store';
 import { useParrotPresence } from './useParrotPresence';
 
-const MODEL_URL = '/models/pirate-parrot.glb';
-
-// Names that typically identify a mouth/jaw on a rigged model.
-const JAW_NAME = /(jaw|beak|mouth|mandible|chin)/i;
-const MOUTH_MORPH = /(jaw|mouth|open|aa|viseme|talk)/i;
-
 /**
- * The real Sketchfab "Pirate Parrot" (CC-BY, Lautaro Masseroni). Plays the
- * model's built-in idle animation and lip-syncs by driving whatever the rig
- * exposes: a jaw/beak bone, a mouth morph target, or — failing both — a subtle
- * head bob scaled by the narration amplitude.
+ * Cartoon pirate parrot built entirely from geometry primitives. Classic red
+ * macaw with an eye patch and a tricorn-ish hat; the lower beak opens with the
+ * narration amplitude (useShow().mouthOpen).
  */
 export function Parrot() {
   const root = useParrotPresence();
-  const { scene, animations } = useGLTF(MODEL_URL);
-  const cloned = useMemo(() => scene.clone(true), [scene]);
-  const { actions, names } = useAnimations(animations, cloned);
+  const lowerBeak = useRef<THREE.Group>(null);
 
-  // Locate a jaw bone and/or a mouth morph target once the model is ready.
-  const rig = useMemo<{
-    jaw: THREE.Object3D | null;
-    jawBaseX: number;
-    morphMesh: THREE.Mesh | null;
-    morphIndex: number;
-  }>(() => {
-    let jaw: THREE.Object3D | null = null;
-    let jawBaseX = 0;
-    let morphMesh: THREE.Mesh | null = null;
-    let morphIndex = -1;
-
-    cloned.traverse((obj) => {
-      if (!jaw && JAW_NAME.test(obj.name)) {
-        jaw = obj;
-        jawBaseX = obj.rotation.x;
-      }
-      const mesh = obj as THREE.Mesh;
-      if (morphIndex < 0 && mesh.morphTargetDictionary) {
-        for (const [key, idx] of Object.entries(mesh.morphTargetDictionary)) {
-          if (MOUTH_MORPH.test(key)) {
-            morphMesh = mesh;
-            morphIndex = idx;
-            break;
-          }
-        }
-      }
-    });
-
-    return { jaw, jawBaseX, morphMesh, morphIndex };
-  }, [cloned]);
-
-  // Play the first/looping animation as an idle.
-  useEffect(() => {
-    if (names.length === 0) return;
-    const idle =
-      names.find((n) => /idle|breath|fly|loop/i.test(n)) ?? names[0];
-    const action = actions[idle];
-    action?.reset().fadeIn(0.3).play();
-    return () => {
-      action?.fadeOut(0.2);
-    };
-  }, [actions, names]);
-
-  const headBob = useRef(0);
-
-  useFrame((_state, delta) => {
+  useFrame(() => {
     const mouth = useShow.getState().mouthOpen;
-
-    if (rig.jaw) {
-      (rig.jaw as THREE.Object3D).rotation.x = rig.jawBaseX + mouth * 0.5;
-    } else if (rig.morphMesh && rig.morphIndex >= 0) {
-      const infl = rig.morphMesh.morphTargetInfluences;
-      if (infl) infl[rig.morphIndex] = mouth;
-    } else {
-      // No mouth rig: bob the whole model a touch while speaking.
-      headBob.current = THREE.MathUtils.damp(headBob.current, mouth, 10, delta);
-      cloned.rotation.x = headBob.current * 0.12;
+    if (lowerBeak.current) {
+      lowerBeak.current.rotation.x = 0.05 + mouth * 0.5;
     }
   });
 
+  const red = '#d62828';
+  const redDark = '#9d1414';
+  const yellow = '#ffd23f';
+  const beak = '#2b2b2b';
+
   return (
-    <group ref={root}>
-      <primitive object={cloned} />
+    <group ref={root} position={[0, 0, 0]}>
+      {/* Tail feathers */}
+      <group position={[0, -0.2, -0.5]} rotation={[0.5, 0, 0]}>
+        {[-0.18, 0, 0.18].map((x, i) => (
+          <mesh key={i} position={[x, 0, 0]} rotation={[0, 0, x * 1.2]}>
+            <boxGeometry args={[0.12, 0.9, 0.05]} />
+            <meshStandardMaterial color={i === 1 ? '#1d70b8' : yellow} />
+          </mesh>
+        ))}
+      </group>
+
+      {/* Body */}
+      <mesh position={[0, 0, 0]} castShadow>
+        <capsuleGeometry args={[0.55, 0.7, 12, 24]} />
+        <meshStandardMaterial color={red} />
+      </mesh>
+      {/* Lighter belly */}
+      <mesh position={[0, -0.1, 0.42]} scale={[0.7, 0.9, 0.5]}>
+        <sphereGeometry args={[0.5, 24, 24]} />
+        <meshStandardMaterial color={yellow} />
+      </mesh>
+
+      {/* Wings */}
+      {[-1, 1].map((side) => (
+        <mesh
+          key={side}
+          position={[side * 0.55, 0.05, 0]}
+          rotation={[0, 0, side * 0.3]}
+          scale={[0.25, 0.6, 0.5]}
+        >
+          <sphereGeometry args={[0.5, 16, 16]} />
+          <meshStandardMaterial color={redDark} />
+        </mesh>
+      ))}
+
+      {/* Head */}
+      <group position={[0, 0.85, 0.05]}>
+        <mesh castShadow>
+          <sphereGeometry args={[0.5, 28, 28]} />
+          <meshStandardMaterial color={red} />
+        </mesh>
+
+        {/* Eyes */}
+        {[-1, 1].map((side) => (
+          <group key={side} position={[side * 0.22, 0.12, 0.4]}>
+            <mesh>
+              <sphereGeometry args={[0.13, 16, 16]} />
+              <meshStandardMaterial color="#ffffff" />
+            </mesh>
+            <mesh position={[0, 0, 0.08]}>
+              <sphereGeometry args={[0.07, 16, 16]} />
+              <meshStandardMaterial color="#111111" />
+            </mesh>
+          </group>
+        ))}
+
+        {/* Pirate eye patch over the left eye */}
+        <group position={[-0.22, 0.12, 0.41]}>
+          <mesh>
+            <circleGeometry args={[0.16, 24]} />
+            <meshStandardMaterial color="#0a0a0a" side={THREE.DoubleSide} />
+          </mesh>
+        </group>
+        {/* Eye patch strap */}
+        <mesh position={[0, 0.28, 0]} rotation={[0, 0, 0.4]}>
+          <torusGeometry args={[0.5, 0.02, 8, 40, Math.PI]} />
+          <meshStandardMaterial color="#0a0a0a" />
+        </mesh>
+
+        {/* Beak */}
+        <group position={[0, -0.05, 0.5]}>
+          {/* Upper beak (fixed) */}
+          <mesh rotation={[Math.PI / 2 + 0.3, 0, 0]} position={[0, 0.05, 0.05]}>
+            <coneGeometry args={[0.22, 0.4, 16]} />
+            <meshStandardMaterial color={beak} />
+          </mesh>
+          {/* Lower beak (animated) */}
+          <group ref={lowerBeak} position={[0, -0.02, 0]}>
+            <mesh rotation={[Math.PI / 2 - 0.2, 0, 0]} position={[0, -0.08, 0.04]}>
+              <coneGeometry args={[0.17, 0.28, 16]} />
+              <meshStandardMaterial color="#1a1a1a" />
+            </mesh>
+          </group>
+        </group>
+
+        {/* Pirate hat */}
+        <group position={[0, 0.48, -0.02]}>
+          <mesh rotation={[-0.15, 0, 0]}>
+            <cylinderGeometry args={[0.52, 0.58, 0.08, 24]} />
+            <meshStandardMaterial color="#111111" />
+          </mesh>
+          <mesh position={[0, 0.18, 0]}>
+            <coneGeometry args={[0.42, 0.4, 24]} />
+            <meshStandardMaterial color="#111111" />
+          </mesh>
+          {/* Skull dot */}
+          <mesh position={[0, 0.12, 0.4]}>
+            <circleGeometry args={[0.1, 20]} />
+            <meshStandardMaterial color="#ffffff" side={THREE.DoubleSide} />
+          </mesh>
+        </group>
+      </group>
+
+      {/* Feet */}
+      {[-1, 1].map((side) => (
+        <mesh key={side} position={[side * 0.2, -0.95, 0.1]}>
+          <cylinderGeometry args={[0.06, 0.06, 0.2, 8]} />
+          <meshStandardMaterial color={yellow} />
+        </mesh>
+      ))}
     </group>
   );
 }
-
-// Preload is intentionally not called: if the asset is absent we want the
-// ModelErrorBoundary to catch the failure and show the procedural parrot.

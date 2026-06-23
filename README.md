@@ -36,13 +36,8 @@ npm run dev                 # client on :5173, server on :3000 (proxied)
 Open http://localhost:5173. Without ElevenLabs configured the visuals still
 work; narration just won't play.
 
-### 3D models
-
-The parrot and island load from `client/public/models/{pirate-parrot,island}.glb`.
-They are **not** committed — see
-[`client/public/models/README.md`](client/public/models/README.md) for download
-links and licenses. If absent, the app renders **procedural placeholders**, so it
-always runs.
+The parrot and island are built entirely from geometry primitives in
+[`client/src/three/`](client/src/three) — no external 3D assets to download.
 
 ## ElevenLabs / voice
 
@@ -89,6 +84,4 @@ it.
 
 ## Credits
 
-- 3D models from Sketchfab under **CC BY** — "Pirate Parrot" by Lautaro
-  Masseroni, and the island model (confirm its license on download).
 - Voice synthesis by **ElevenLabs**.
