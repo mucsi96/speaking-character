@@ -34,8 +34,12 @@ const JAW_FACTOR = -1;
 const WING_L_FACTOR = 1.308997;
 const WING_R_FACTOR = -1.308997;
 
-const JAW_AXIS = new THREE.Vector3(1, 0, 0);
-const WING_AXIS = new THREE.Vector3(1, 0, 0);
+const JAW_AXIS = new THREE.Vector3(-0.987, 0, 0.159);
+// wing.L and wing.R have their own local axis-angle axes (the bones were not
+// mirrored symmetrically), so each gets its own axis. The opposite driver signs
+// live in WING_*_FACTOR.
+const WING_L_AXIS = new THREE.Vector3(0.159, 0.227, -0.961);
+const WING_R_AXIS = new THREE.Vector3(0.948, 0.312, -0.072);
 
 interface BoneRig {
   jaw?: THREE.Object3D;
@@ -125,11 +129,11 @@ export function Parrot() {
     const wingsDown = THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1);
 
     if (rig.wingL && rig.restWingL) {
-      q.setFromAxisAngle(WING_AXIS, wingsDown * WING_L_FACTOR);
+      q.setFromAxisAngle(WING_L_AXIS, wingsDown * WING_L_FACTOR);
       rig.wingL.quaternion.copy(rig.restWingL).multiply(q);
     }
     if (rig.wingR && rig.restWingR) {
-      q.setFromAxisAngle(WING_AXIS, wingsDown * WING_R_FACTOR);
+      q.setFromAxisAngle(WING_R_AXIS, wingsDown * WING_R_FACTOR);
       rig.wingR.quaternion.copy(rig.restWingR).multiply(q);
     }
   });
