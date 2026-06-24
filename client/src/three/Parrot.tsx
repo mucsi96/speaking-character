@@ -8,63 +8,81 @@ import { useParrotPresence } from './useParrotPresence';
 
 const MODEL_URL = '/models/coco.glb';
 
-// Exact shape-key (morph target) names authored in Blender. The model exposes
-// these two and we drive them directly — no rig guessing.
-const JAW_CLOSE = 'jaw_close';
-const WINGS_DOWN = 'wings_down';
+// Bone names exported from the Blender armature (`Parrot_Rig`).
+const JAW_BONE = 'jaw';
+const WING_L_BONE = 'wing.L';
+const WING_R_BONE = 'wing.R';
 
-interface MorphRef {
-  mesh: THREE.Mesh;
-  index: number;
-}
+// ---------------------------------------------------------------------------
+// We re-implement the Blender drivers in code.
+//
+// In Blender the mouth/wings are NOT mesh morphs — `jaw_close` and `wings_down`
+// are empty 0–1 control dials, and a *driver* turns each dial into an axis-angle
+// bone rotation. glTF 2.0 exports neither drivers nor empty shape keys' intent,
+// so we reproduce the drivers here. The driven channel is the bone's axis-angle
+// "Rotation W" (= rotation angle in radians):
+//
+//   jaw    : W = jaw_close  * -1
+//   wing.L : W = wings_down *  1.308997   (≈  75°)
+//   wing.R : W = wings_down * -1.308997   (≈ -75°, mirror of the left)
+//
+// Each angle is applied around the bone's local hinge axis (its axis-angle
+// X/Y/Z) on top of the exported rest rotation. If a hinge twists instead of
+// swinging, change the matching *_AXIS to a different local unit vector.
+// ---------------------------------------------------------------------------
+const JAW_FACTOR = -1;
+const WING_L_FACTOR = 1.308997;
+const WING_R_FACTOR = -1.308997;
 
-/** Find the mesh + influence index for a named morph target anywhere in the tree. */
-function findMorph(root: THREE.Object3D, name: string): MorphRef | null {
-  let found: MorphRef | null = null;
-  root.traverse((obj) => {
-    if (found) return;
-    const mesh = obj as THREE.Mesh;
-    const dict = mesh.morphTargetDictionary;
-    if (dict && name in dict) {
-      found = { mesh, index: dict[name] };
-    }
-  });
-  return found;
-}
+const JAW_AXIS = new THREE.Vector3(1, 0, 0);
+const WING_AXIS = new THREE.Vector3(1, 0, 0);
 
-function setMorph(ref: MorphRef | null, value: number): void {
-  if (!ref) return;
-  const infl = ref.mesh.morphTargetInfluences;
-  if (infl) infl[ref.index] = value;
+interface BoneRig {
+  jaw?: THREE.Object3D;
+  wingL?: THREE.Object3D;
+  wingR?: THREE.Object3D;
+  restJaw?: THREE.Quaternion;
+  restWingL?: THREE.Quaternion;
+  restWingR?: THREE.Quaternion;
 }
 
 /**
- * The real "Coco" parrot exported from Blender (`coco.glb`). It carries two
- * shape keys that we animate every frame:
+ * The real "Coco" parrot exported from Blender (`coco.glb`). The mouth and wings
+ * are animated by rotating the armature bones every frame (the Blender drivers,
+ * reproduced in code — see the notes above):
  *
- * - `jaw_close` — closes the beak. The base mesh is modelled mouth-open, so the
- *   beak rests fully closed (influence 1) and *opens* with the narration
- *   amplitude: `jaw_close = 1 - mouthOpen`. This is the lip-sync.
- * - `wings_down` — lowers the wings. We keep them softly relaxed at idle and let
- *   the parrot flap with rising excitement while it speaks, so the whole body
- *   feels alive during narration rather than just the beak.
+ * - `jaw` — beak rests open and *closes* as `jaw_close` rises. We drive
+ *   `jaw_close = 1 - mouthOpen`, so it sits closed in silence and swings open
+ *   with the narration amplitude (lip-sync).
+ * - `wing.L` / `wing.R` — flap from a `wings_down` value: a gentle idle flap so
+ *   the bird always looks alive, plus a faster, wider flap layered on from the
+ *   speech energy while it talks.
  */
 export function Parrot() {
   const root = useParrotPresence();
   const { scene, animations } = useGLTF(MODEL_URL);
   // Clone so multiple mounts / HMR don't mutate the cached source scene.
-  // IMPORTANT: use SkeletonUtils.clone, not scene.clone(true). The parrot is a
-  // SkinnedMesh (Blender armature) that also carries the jaw_close/wings_down
-  // morph targets. A plain Object3D.clone() leaves the cloned mesh bound to the
-  // ORIGINAL skeleton/morph state, so the morph influences we set every frame
-  // never reach the rendered geometry — the beak and wings stay frozen even
-  // though the values are correct. SkeletonUtils.clone rebinds skeleton + morphs
-  // to the cloned tree.
+  // IMPORTANT: SkeletonUtils.clone, not scene.clone(true) — the parrot is a
+  // SkinnedMesh, and a plain Object3D.clone() leaves the cloned mesh bound to
+  // the original skeleton so our bone rotations never reach the rendered body.
   const model = useMemo(() => cloneSkinned(scene), [scene]);
   const { actions, names } = useAnimations(animations, model);
 
-  const jaw = useMemo(() => findMorph(model, JAW_CLOSE), [model]);
-  const wings = useMemo(() => findMorph(model, WINGS_DOWN), [model]);
+  // Grab the bones by name and snapshot their exported rest rotations so each
+  // frame's rotation is a clean delta from rest rather than an accumulation.
+  const rig = useMemo<BoneRig>(() => {
+    const jaw = model.getObjectByName(JAW_BONE);
+    const wingL = model.getObjectByName(WING_L_BONE);
+    const wingR = model.getObjectByName(WING_R_BONE);
+    return {
+      jaw,
+      wingL,
+      wingR,
+      restJaw: jaw?.quaternion.clone(),
+      restWingL: wingL?.quaternion.clone(),
+      restWingR: wingR?.quaternion.clone(),
+    };
+  }, [model]);
 
   // Play a built-in idle clip if the model ships one (harmless no-op otherwise).
   useEffect(() => {
@@ -79,16 +97,22 @@ export function Parrot() {
 
   // Smoothed "is speaking" envelope that drives how hard the wings flap.
   const speakEnergy = useRef(0);
+  // Reusable scratch quaternion so we don't allocate every frame.
+  const tmpQ = useRef(new THREE.Quaternion());
 
   useFrame((state, delta) => {
     const mouth = useShow.getState().mouthOpen;
     const t = state.clock.elapsedTime;
+    const q = tmpQ.current;
 
-    // Lip-sync: beak rests closed, opens with the voice amplitude.
-    setMorph(jaw, 1 - mouth);
+    // --- Mouth: jaw_close dial — closed in silence, opens with the voice. ---
+    if (rig.jaw && rig.restJaw) {
+      const jawClose = 1 - mouth; // 0..1 control dial
+      q.setFromAxisAngle(JAW_AXIS, jawClose * JAW_FACTOR);
+      rig.jaw.quaternion.copy(rig.restJaw).multiply(q);
+    }
 
-    // Wings: ease toward the current speech energy, then flap faster + wider the
-    // louder the narration. At rest they settle to a slightly-relaxed pose.
+    // --- Wings: wings_down dial — idle flap + speech energy. ---
     speakEnergy.current = THREE.MathUtils.damp(
       speakEnergy.current,
       mouth,
@@ -96,12 +120,18 @@ export function Parrot() {
       delta
     );
     const energy = speakEnergy.current;
-    // Baseline idle flap so the parrot always looks alive, even before/without
-    // narration (no audio → no speech energy). Speech adds a faster, wider flap
-    // on top, so it gets livelier the louder it talks.
     const idleFlap = 0.12 + 0.08 * Math.sin(t * 2.2);
     const speakFlap = energy * (0.5 + 0.5 * Math.sin(t * (4 + energy * 10)));
-    setMorph(wings, THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1));
+    const wingsDown = THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1);
+
+    if (rig.wingL && rig.restWingL) {
+      q.setFromAxisAngle(WING_AXIS, wingsDown * WING_L_FACTOR);
+      rig.wingL.quaternion.copy(rig.restWingL).multiply(q);
+    }
+    if (rig.wingR && rig.restWingR) {
+      q.setFromAxisAngle(WING_AXIS, wingsDown * WING_R_FACTOR);
+      rig.wingR.quaternion.copy(rig.restWingR).multiply(q);
+    }
   });
 
   return (
