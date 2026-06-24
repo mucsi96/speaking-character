@@ -36,8 +36,11 @@ npm run dev                 # client on :5173, server on :3000 (proxied)
 Open http://localhost:5173. Without ElevenLabs configured the visuals still
 work; narration just won't play.
 
-The parrot and island are built entirely from geometry primitives in
-[`client/src/three/`](client/src/three) — no external 3D assets to download.
+The parrot is a Blender model, [`client/public/models/coco.glb`](client/public/models),
+loaded with `useGLTF`. Its `jaw_close` and `wings_down` shape keys are driven by
+the narration amplitude for lip-sync and wing flapping (see
+[`client/src/three/Parrot.tsx`](client/src/three/Parrot.tsx)). The island is
+built from geometry primitives in [`client/src/three/`](client/src/three).
 
 ## ElevenLabs / voice
 
