@@ -2,6 +2,7 @@ import { useAnimations, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
+import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { useShow } from '../store';
 import { useParrotPresence } from './useParrotPresence';
 
@@ -52,7 +53,14 @@ export function Parrot() {
   const root = useParrotPresence();
   const { scene, animations } = useGLTF(MODEL_URL);
   // Clone so multiple mounts / HMR don't mutate the cached source scene.
-  const model = useMemo(() => scene.clone(true), [scene]);
+  // IMPORTANT: use SkeletonUtils.clone, not scene.clone(true). The parrot is a
+  // SkinnedMesh (Blender armature) that also carries the jaw_close/wings_down
+  // morph targets. A plain Object3D.clone() leaves the cloned mesh bound to the
+  // ORIGINAL skeleton/morph state, so the morph influences we set every frame
+  // never reach the rendered geometry — the beak and wings stay frozen even
+  // though the values are correct. SkeletonUtils.clone rebinds skeleton + morphs
+  // to the cloned tree.
+  const model = useMemo(() => cloneSkinned(scene), [scene]);
   const { actions, names } = useAnimations(animations, model);
 
   const jaw = useMemo(() => findMorph(model, JAW_CLOSE), [model]);
