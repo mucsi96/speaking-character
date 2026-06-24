@@ -1,12 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import { Sky } from '@react-three/drei';
+import { Suspense } from 'react';
 import { Island } from './Island';
 import { Parrot } from './Parrot';
 import { LipSyncDriver } from './LipSyncDriver';
 
 /**
- * The full 3D stage: a pirate island with the talking parrot, framed for a TV.
- * Everything is built from primitives — no external assets to load.
+ * The full 3D stage: a procedural pirate island with the talking `coco.glb`
+ * parrot, framed for a TV. The parrot loads under Suspense.
  */
 export function Scene() {
   return (
@@ -29,7 +30,9 @@ export function Scene() {
       />
 
       <Island />
-      <Parrot />
+      <Suspense fallback={null}>
+        <Parrot />
+      </Suspense>
 
       <LipSyncDriver />
     </Canvas>
