@@ -88,8 +88,12 @@ export function Parrot() {
       delta
     );
     const energy = speakEnergy.current;
-    const flap = 0.5 + 0.5 * Math.sin(t * (4 + energy * 10));
-    setMorph(wings, THREE.MathUtils.clamp(0.1 + energy * flap, 0, 1));
+    // Baseline idle flap so the parrot always looks alive, even before/without
+    // narration (no audio → no speech energy). Speech adds a faster, wider flap
+    // on top, so it gets livelier the louder it talks.
+    const idleFlap = 0.12 + 0.08 * Math.sin(t * 2.2);
+    const speakFlap = energy * (0.5 + 0.5 * Math.sin(t * (4 + energy * 10)));
+    setMorph(wings, THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1));
   });
 
   return (
