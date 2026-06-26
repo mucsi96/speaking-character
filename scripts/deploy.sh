@@ -39,7 +39,7 @@ helm upgrade $RELEASE_NAME mucsi96/node-app \
     --set appPort=8080 \
     --set basePath=/ \
     --set clientId=$API_CLIENT_ID \
-    --set serviceAccountName=speaking-character-workload-identity \
+    --set serviceAccountName=party-workload-identity \
     --set env.PORT=8080 \
     --set env.CACHE_DIR=/app/cache \
     --set env.ELEVENLABS_MODEL_ID=eleven_v3 \
