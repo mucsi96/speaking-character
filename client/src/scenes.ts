@@ -91,10 +91,14 @@ export const correctLines: string[] = [
 
 /**
  * Generic lines Coco speaks on a wrong code, played with the `wrong` animation
- * before the kids get another try.
+ * before the kids get another try. The tone stays calm and encouraging: never
+ * cross, always inviting the kids to take another try because they can do it.
  */
 export const wrongLines: string[] = [
-  'Oho! Das war leider nicht die richtige Zahl. Versucht es nochmal!',
-  'Arrr, knapp daneben! Denkt nochmal nach und probiert eine andere Zahl.',
-  'Nein, nein, kleine Landratten! Diese Zahl stimmt noch nicht.',
+  'Das war noch nicht die richtige Zahl, aber das macht gar nichts. ' +
+    'Atmet einmal tief durch und versucht es ganz in Ruhe nochmal. Ihr schafft das!',
+  'Fast geschafft, kleine Piraten! Schaut euch den Hinweis nochmal in Ruhe an ' +
+    'und probiert eine andere Zahl. Ich glaube ganz fest an euch!',
+  'Kein Problem, das passiert den besten Seeräubern! Lasst euch Zeit, denkt ' +
+    'nochmal nach und versucht es erneut. Ihr seid clever genug, das zu lösen!',
 ];
