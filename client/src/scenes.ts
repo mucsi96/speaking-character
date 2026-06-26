@@ -96,9 +96,12 @@ export const correctLines: string[] = [
  */
 export const wrongLines: string[] = [
   'Das war noch nicht die richtige Zahl, aber das macht gar nichts. ' +
-    'Atmet einmal tief durch und versucht es ganz in Ruhe nochmal. Ihr schafft das!',
-  'Fast geschafft, kleine Piraten! Schaut euch den Hinweis nochmal in Ruhe an ' +
-    'und probiert eine andere Zahl. Ich glaube ganz fest an euch!',
-  'Kein Problem, das passiert den besten Seeräubern! Lasst euch Zeit, denkt ' +
-    'nochmal nach und versucht es erneut. Ihr seid clever genug, das zu lösen!',
+    'Da habt ihr euch wohl verzählt. Geht nochmal ganz in Ruhe zur Aufgabe ' +
+    'zurück, löst sie in Ruhe und holt euch die richtige Zahl. Ihr schafft das!',
+  'Fast geschafft, kleine Piraten! Diese Zahl passt noch nicht ganz. ' +
+    'Geht nochmal zurück zur Aufgabe und schaut euch alles ganz genau an, ' +
+    'dann findet ihr die richtige Zahl. Ich glaube ganz fest an euch!',
+  'Kein Problem, das passiert den besten Seeräubern! Da hat sich ein kleiner ' +
+    'Fehler eingeschlichen. Macht die Aufgabe in Ruhe nochmal, dann habt ihr ' +
+    'die richtige Zahl. Ihr seid clever genug, das zu lösen!',
 ];
