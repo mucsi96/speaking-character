@@ -2,8 +2,8 @@
 
 set -e # Exit immediately if a command exits with a non-zero status
 
-AZURE_KEYVAULT_NAME="${AZURE_KEYVAULT_NAME:-speaking-character}"
-NAMESPACE="${NAMESPACE:-speaking-character}"
+AZURE_KEYVAULT_NAME="${AZURE_KEYVAULT_NAME:-party}"
+NAMESPACE="${NAMESPACE:-party}"
 export KUBECONFIG="${KUBECONFIG:-.kube/config}"
 
 mkdir -p "$(dirname "$KUBECONFIG")"
