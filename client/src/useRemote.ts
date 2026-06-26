@@ -1,31 +1,32 @@
 import { useEffect } from 'react';
 import { useShow } from './store';
 
-// LG webOS / HbbTV colored remote buttons.
-const COLOR_KEYCODES = new Set([403, 404, 405, 406]); // red, green, yellow, blue
-// Keys that start the show (Enter / OK on the remote, plus Space for desktop).
+// Keys that start / restart the show (Enter / OK on the remote, plus Space for
+// desktop testing).
 const START_KEYS = new Set(['Enter', ' ', 'Spacebar']);
 
 /**
  * Global key handling for the TV remote:
  * - Enter / OK starts the show when idle (or restarts when finished).
- * - Any colored button advances to the next scene while waiting.
+ *
+ * Code entry between scenes is handled by the focused <input> in `CodeInput`
+ * (the remote's number buttons type into it; OK submits the form), so we
+ * deliberately only act here while `idle` or `finished` — otherwise this
+ * listener's preventDefault would swallow the form's submit.
  */
 export function useRemote(): void {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      const { phase, start, advance, reset } = useShow.getState();
+      const { phase, start, reset } = useShow.getState();
 
-      if (COLOR_KEYCODES.has(e.keyCode)) {
-        e.preventDefault();
-        if (phase === 'waiting') advance();
-        return;
-      }
+      if (!START_KEYS.has(e.key)) return;
 
-      if (START_KEYS.has(e.key)) {
+      if (phase === 'idle') {
         e.preventDefault();
-        if (phase === 'idle') start();
-        else if (phase === 'finished') reset();
+        start();
+      } else if (phase === 'finished') {
+        e.preventDefault();
+        reset();
       }
     };
 

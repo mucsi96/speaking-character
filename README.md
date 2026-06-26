@@ -9,10 +9,16 @@ driven by the remote's colored buttons.
 ## How the show works
 
 1. **Start** (click or remote OK) → the parrot appears on its island.
-2. It speaks a German **intro + first task**, then disappears.
-3. A prompt asks the kids to press a **colored button** on the remote.
-4. Any color button → the parrot reappears with the **next task**.
+2. It speaks a German **intro + first task**, then a **code field** appears.
+3. The kids find the task's secret number in the real world and press it on the
+   remote's **number buttons** — it's checked the instant they press it.
+4. Right code → Coco **celebrates** and the **next task** plays. Wrong code →
+   Coco **shakes his head** and they try again.
 5. Repeats through all scenes until the treasure is found.
+
+Each task scene has a single-digit `code` in
+[`client/src/scenes.ts`](client/src/scenes.ts) — hide the matching number as a
+physical clue in your play area.
 
 Edit the whole German script in [`client/src/scenes.ts`](client/src/scenes.ts).
 
@@ -77,13 +83,13 @@ kubectl apply -f k8s/
 ```
 
 Open the ingress host in the LG TV browser; press OK to start and use the
-colored buttons to advance.
+number buttons to enter each task's secret code.
 
 ## On the TV remote
 
-webOS maps the colored buttons to key codes **403 (red), 404 (green),
-405 (yellow), 406 (blue)** — any of them advances the show. **Enter/OK** starts
-it.
+**Enter/OK** starts the show (and restarts it at the end). Between scenes a
+**number button (0–9)** enters the secret code, which the parrot checks the
+moment it's pressed.
 
 ## Credits
 

@@ -123,28 +123,35 @@ body,
   background: rgba(11, 31, 58, 0.6);
 }
 
-.color-buttons {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.color-button {
-  font-size: 1.4rem;
+.code-input {
+  width: 5rem;
+  height: 5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  border: 0.2rem solid rgba(255, 255, 255, 0.85);
+  text-align: center;
+  color: #1a1205;
+  background: var(--text);
+  border: 0.25rem solid var(--accent);
   border-radius: 1rem;
-  padding: 1rem 2.4rem;
-  cursor: pointer;
-  min-width: 8rem;
   box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.4);
 }
 
-.color-button:hover,
-.color-button:focus {
-  transform: scale(1.05);
+.code-input:focus {
   outline: 0.25rem solid #fff;
+}
+
+.feedback {
+  font-size: 2.6rem;
+  margin: 0;
+  padding: 0.6rem 1.6rem;
+  border-radius: 1rem;
+  text-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.6);
+}
+
+.feedback--correct {
+  background: rgba(46, 204, 113, 0.85);
+}
+
+.feedback--wrong {
+  background: rgba(226, 59, 59, 0.85);
 }
