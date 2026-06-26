@@ -20,7 +20,6 @@ export function CodeInput() {
 
   return (
     <div className="overlay overlay--bottom">
-      <p className="prompt-text">Drücke den geheimen Code auf der Fernbedienung!</p>
       <input
         ref={inputRef}
         className="code-input"
