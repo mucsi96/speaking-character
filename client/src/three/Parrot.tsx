@@ -2,72 +2,54 @@ import { useAnimations, useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
+import { clone as cloneSkinned } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { useShow } from '../store';
 import { useParrotPresence } from './useParrotPresence';
 
 const MODEL_URL = '/models/coco.glb';
 
-// Exact shape-key (morph target) names authored in Blender. The model exposes
-// these two and we drive them directly — no rig guessing.
-const JAW_CLOSE = 'jaw_close';
-const WINGS_DOWN = 'wings_down';
-
-interface MorphRef {
-  mesh: THREE.Mesh;
-  index: number;
-}
-
-/** Find the mesh + influence index for a named morph target anywhere in the tree. */
-function findMorph(root: THREE.Object3D, name: string): MorphRef | null {
-  let found: MorphRef | null = null;
-  root.traverse((obj) => {
-    if (found) return;
-    const mesh = obj as THREE.Mesh;
-    const dict = mesh.morphTargetDictionary;
-    if (dict && name in dict) {
-      found = { mesh, index: dict[name] };
-    }
-  });
-  return found;
-}
-
-function setMorph(ref: MorphRef | null, value: number): void {
-  if (!ref) return;
-  const infl = ref.mesh.morphTargetInfluences;
-  if (infl) infl[ref.index] = value;
-}
+// Named AnimationClips exported from Blender (Animation Mode = "NLA Tracks"), one
+// 1-second clip per control. Each clip animates only its own bones (jaw vs. the
+// two wings), so we can run both at full weight at once without them fighting.
+const JAW_CLIP = 'jaw_close';
+const WINGS_CLIP = 'wings_down';
 
 /**
- * The real "Coco" parrot exported from Blender (`coco.glb`). It carries two
- * shape keys that we animate every frame:
+ * The real "Coco" parrot exported from Blender (`coco.glb`). Instead of driving
+ * bones by hand, we play the two baked clips *paused* at full weight and scrub
+ * each clip's playhead from a 0→1 signal:
  *
- * - `jaw_close` — closes the beak. The base mesh is modelled mouth-open, so the
- *   beak rests fully closed (influence 1) and *opens* with the narration
- *   amplitude: `jaw_close = 1 - mouthOpen`. This is the lip-sync.
- * - `wings_down` — lowers the wings. We keep them softly relaxed at idle and let
- *   the parrot flap with rising excitement while it speaks, so the whole body
- *   feels alive during narration rather than just the beak.
+ * - `jaw_close` — scrubbed from the narration amplitude for lip-sync. The clip
+ *   runs rest/open (t=0) → closed (t=end), so we scrub `1 - mouthOpen`: closed in
+ *   silence, opening as the voice gets louder. (Drop the `1 -` if your clip is
+ *   authored the other way round.)
+ * - `wings_down` — scrubbed from a gentle idle flap plus the speech energy, so
+ *   the wings always move a little and flap harder while it talks.
  */
 export function Parrot() {
   const root = useParrotPresence();
   const { scene, animations } = useGLTF(MODEL_URL);
   // Clone so multiple mounts / HMR don't mutate the cached source scene.
-  const model = useMemo(() => scene.clone(true), [scene]);
-  const { actions, names } = useAnimations(animations, model);
+  // IMPORTANT: SkeletonUtils.clone, not scene.clone(true) — the parrot is a
+  // SkinnedMesh, and a plain Object3D.clone() leaves the cloned mesh bound to
+  // the original skeleton, so the mixer's bone animation never reaches the body.
+  const model = useMemo(() => cloneSkinned(scene), [scene]);
+  const { actions } = useAnimations(animations, model);
 
-  const jaw = useMemo(() => findMorph(model, JAW_CLOSE), [model]);
-  const wings = useMemo(() => findMorph(model, WINGS_DOWN), [model]);
-
-  // Play a built-in idle clip if the model ships one (harmless no-op otherwise).
+  // Start both clips playing but paused at full weight. We set each action's
+  // `time` every frame; drei's useAnimations runs mixer.update, which applies the
+  // posed (paused) clips to the bones.
   useEffect(() => {
-    if (names.length === 0) return;
-    const idle = names.find((n) => /idle|breath|fly|loop/i.test(n)) ?? names[0];
-    const action = actions[idle];
-    action?.reset().fadeIn(0.3).play();
-    return () => {
-      action?.fadeOut(0.2);
-    };
-  }, [actions, names]);
+    for (const name of [JAW_CLIP, WINGS_CLIP]) {
+      const action = actions[name];
+      if (!action) continue;
+      action.reset();
+      action.play();
+      action.setEffectiveWeight(1);
+      action.paused = true;
+      action.time = 0;
+    }
+  }, [actions]);
 
   // Smoothed "is speaking" envelope that drives how hard the wings flap.
   const speakEnergy = useRef(0);
@@ -76,11 +58,15 @@ export function Parrot() {
     const mouth = useShow.getState().mouthOpen;
     const t = state.clock.elapsedTime;
 
-    // Lip-sync: beak rests closed, opens with the voice amplitude.
-    setMorph(jaw, 1 - mouth);
+    // Lip-sync: scrub the jaw clip — closed in silence, open with the voice.
+    const jaw = actions[JAW_CLIP];
+    if (jaw) {
+      const dur = jaw.getClip().duration;
+      jaw.time = THREE.MathUtils.clamp(1 - mouth, 0, 1) * dur;
+    }
 
-    // Wings: ease toward the current speech energy, then flap faster + wider the
-    // louder the narration. At rest they settle to a slightly-relaxed pose.
+    // Wings: ease toward the current speech energy; a baseline idle flap keeps
+    // the bird alive when quiet, speech layers a faster, wider flap on top.
     speakEnergy.current = THREE.MathUtils.damp(
       speakEnergy.current,
       mouth,
@@ -88,8 +74,15 @@ export function Parrot() {
       delta
     );
     const energy = speakEnergy.current;
-    const flap = 0.5 + 0.5 * Math.sin(t * (4 + energy * 10));
-    setMorph(wings, THREE.MathUtils.clamp(0.1 + energy * flap, 0, 1));
+    const idleFlap = 0.12 + 0.08 * Math.sin(t * 2.2);
+    const speakFlap = energy * (0.5 + 0.5 * Math.sin(t * (4 + energy * 10)));
+    const wingsDown = THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1);
+
+    const wings = actions[WINGS_CLIP];
+    if (wings) {
+      const dur = wings.getClip().duration;
+      wings.time = wingsDown * dur;
+    }
   });
 
   return (

@@ -5,9 +5,16 @@ import { useShow } from '../store';
 
 /**
  * Drives the parrot group's appear / idle / disappear motion.
- * - Visible (scale 1, raised) while the show is `playing`.
- * - Hidden (scale 0, sunk) otherwise.
+ * - Scales in (and rises) once the show starts and stays visible for the whole
+ *   show — through narration *and* the between-scene color-button prompts.
+ * - Hidden (scale 0, sunk) only while `idle` (start screen) — so it sinks away
+ *   on reset and scales back in on the next start.
  * - Gentle idle bob + sway while visible.
+ *
+ * Visibility is deliberately decoupled from narration timing: tying it to the
+ * `playing` phase made the parrot flash out the instant narration finished (or
+ * failed fast when TTS is unconfigured), which looked like it vanished as soon
+ * as it started talking.
  * Returns a ref to attach to the parrot's root <group>.
  */
 export function useParrotPresence() {
@@ -18,7 +25,8 @@ export function useParrotPresence() {
     const group = ref.current;
     if (!group) return;
 
-    const visible = useShow.getState().phase === 'playing';
+    // Present for the whole show; only hidden on the idle start screen.
+    const visible = useShow.getState().phase !== 'idle';
     const target = visible ? 1 : 0;
     // Smoothly approach the target visibility (frame-rate independent).
     visibleAmount.current = THREE.MathUtils.damp(
