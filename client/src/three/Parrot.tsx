@@ -19,7 +19,7 @@ const WRONG_CLIP = 'wrong';
 // The idle drivers we scrub each frame; muted while a reaction clip owns the body.
 const IDLE_CLIPS = [JAW_CLIP, WINGS_CLIP];
 // Play the celebrate/wrong reactions at 1/5 speed for a calmer, slower motion.
-const REACTION_TIME_SCALE = 0.2;
+const REACTION_TIME_SCALE = 1;
 
 /**
  * The real "Coco" parrot exported from Blender (`coco.glb`). Instead of driving
@@ -143,7 +143,7 @@ export function Parrot() {
     const energy = speakEnergy.current;
     const idleFlap = 0.12 + 0.08 * Math.sin(t * 2.2);
     // Flap 5x slower while speaking for a calmer wing motion.
-    const speakFlap = 2 * energy * (0.5 + 0.5 * Math.sin((t * (4 + energy * 10)) / 25));
+    const speakFlap = energy * (0.5 + 0.5 * Math.sin((t * (4 + energy * 10)) / 25));
     const wingsDown = THREE.MathUtils.clamp(idleFlap + speakFlap, 0, 1);
 
     const wings = actions[WINGS_CLIP];
