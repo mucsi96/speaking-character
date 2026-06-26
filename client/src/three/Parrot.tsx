@@ -53,6 +53,15 @@ export function Parrot() {
   // scrub stands down and lets the reaction drive the whole body.
   const reacting = useRef(false);
 
+  // Log which clips the loaded model actually carries, so it's obvious from the
+  // console whether `celebrate` / `wrong` made it into this export of coco.glb.
+  useEffect(() => {
+    console.log(
+      '[Parrot] discovered animation clips:',
+      animations.map((c) => c.name)
+    );
+  }, [animations]);
+
   // Start both idle clips playing but paused at full weight. We set each action's
   // `time` every frame; drei's useAnimations runs mixer.update, which applies the
   // posed (paused) clips to the bones.
@@ -82,7 +91,12 @@ export function Parrot() {
     if (!clipName) return;
 
     const action = actions[clipName];
-    if (!action) return; // model doesn't carry this clip (older export)
+    if (!action) {
+      console.warn(
+        `[Parrot] reaction clip "${clipName}" not found in model — re-export coco.glb with this NLA track to see the animation.`
+      );
+      return; // model doesn't carry this clip (older export)
+    }
 
     const restoreIdle = () => {
       reacting.current = false;
