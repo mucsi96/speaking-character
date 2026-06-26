@@ -10,8 +10,8 @@ driven by the remote's colored buttons.
 
 1. **Start** (click or remote OK) → the parrot appears on its island.
 2. It speaks a German **intro + first task**, then a **code field** appears.
-3. The kids find the task's secret number in the real world and type it on the
-   remote's **number buttons**, then press **OK**.
+3. The kids find the task's secret number in the real world and press it on the
+   remote's **number buttons** — it's checked the instant they press it.
 4. Right code → Coco **celebrates** and the **next task** plays. Wrong code →
    Coco **shakes his head** and they try again.
 5. Repeats through all scenes until the treasure is found.
@@ -87,9 +87,9 @@ number buttons to enter each task's secret code.
 
 ## On the TV remote
 
-**Enter/OK** starts the show (and restarts it at the end). Between scenes the
-**number buttons (0–9)** type the secret code into the on-screen field, and
-**OK** submits it for the parrot to check.
+**Enter/OK** starts the show (and restarts it at the end). Between scenes a
+**number button (0–9)** enters the secret code, which the parrot checks the
+moment it's pressed.
 
 ## Credits
 

@@ -1,11 +1,12 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useShow } from '../store';
 
 /**
  * Shown while `entering`: a single-digit code field the kids fill in with the
- * remote's number buttons, then confirm with OK/Enter (or the on-screen button)
- * to have Käpten Coco check it. webOS sends the number buttons as ordinary
- * digit key events, so they type straight into the focused input.
+ * remote's number buttons. The code is one digit, so we validate the instant a
+ * number is pressed — no separate confirm/OK step. webOS sends the number
+ * buttons as ordinary digit key events, so they type straight into the focused
+ * input.
  */
 export function CodeInput() {
   const submitCode = useShow((s) => s.submitCode);
@@ -17,33 +18,26 @@ export function CodeInput() {
     inputRef.current?.focus();
   }, []);
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (value === '') return;
-    submitCode(value);
-    setValue('');
-  };
-
   return (
-    <form className="overlay overlay--bottom" onSubmit={onSubmit}>
-      <p className="prompt-text">Gib den geheimen Code ein und drücke OK!</p>
-      <div className="code-row">
-        <input
-          ref={inputRef}
-          className="code-input"
-          type="text"
-          inputMode="numeric"
-          pattern="[0-9]"
-          maxLength={1}
-          autoFocus
-          aria-label="Geheimer Code"
-          value={value}
-          onChange={(e) => setValue(e.target.value.replace(/\D/g, '').slice(0, 1))}
-        />
-        <button type="submit" className="start-button">
-          Prüfen
-        </button>
-      </div>
-    </form>
+    <div className="overlay overlay--bottom">
+      <p className="prompt-text">Drücke den geheimen Code auf der Fernbedienung!</p>
+      <input
+        ref={inputRef}
+        className="code-input"
+        type="text"
+        inputMode="numeric"
+        pattern="[0-9]"
+        maxLength={1}
+        autoFocus
+        aria-label="Geheimer Code"
+        value={value}
+        onChange={(e) => {
+          const digit = e.target.value.replace(/\D/g, '').slice(-1);
+          setValue(digit);
+          // Single-digit code: check it as soon as a number is pressed.
+          if (digit) submitCode(digit);
+        }}
+      />
+    </div>
   );
 }
