@@ -84,3 +84,23 @@ export const scenes: Scene[] = [
       'Lasst die Geburtstagsfeier beginnen! Arrr und alles Gute zum Geburtstag!',
   },
 ];
+
+/**
+ * Generic lines Käpten Coco speaks while celebrating a correct code. One is
+ * picked at random and played together with the `celebrate` animation.
+ */
+export const correctLines: string[] = [
+  'Yo-ho-ho! Das war goldrichtig, ihr schlauen Seeräuber!',
+  'Arrr! Genau die richtige Zahl! Weiter geht die Schatzsuche!',
+  'Bravo, kleine Piraten! Volltreffer!',
+];
+
+/**
+ * Generic lines Coco speaks on a wrong code, played with the `wrong` animation
+ * before the kids get another try.
+ */
+export const wrongLines: string[] = [
+  'Oho! Das war leider nicht die richtige Zahl. Versucht es nochmal!',
+  'Arrr, knapp daneben! Denkt nochmal nach und probiert eine andere Zahl.',
+  'Nein, nein, kleine Landratten! Diese Zahl stimmt noch nicht.',
+];

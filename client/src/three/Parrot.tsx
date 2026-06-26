@@ -46,7 +46,6 @@ export function Parrot() {
   const { actions, mixer } = useAnimations(animations, model);
 
   const phase = useShow((s) => s.phase);
-  const reactionDone = useShow((s) => s.reactionDone);
 
   // True while a `celebrate`/`wrong` clip is playing, so the per-frame idle
   // scrub stands down and lets the reaction drive the whole body.
@@ -68,7 +67,9 @@ export function Parrot() {
   }, [actions]);
 
   // Play a one-shot reaction clip for the correct (`celebrate`) / wrong (`wrong`)
-  // answer, then tell the store when it's done so the show can move on.
+  // answer. This is purely visual — the matching praise/try-again speech in
+  // useNarration owns the phase transition, so the show advances correctly even
+  // when an older model lacks these clips.
   useEffect(() => {
     const clipName =
       phase === 'celebrating'
@@ -79,11 +80,12 @@ export function Parrot() {
     if (!clipName) return;
 
     const action = actions[clipName];
-    // If the model doesn't carry this clip (older export), don't strand the show.
-    if (!action) {
-      reactionDone();
-      return;
-    }
+    if (!action) return; // model doesn't carry this clip (older export)
+
+    const restoreIdle = () => {
+      reacting.current = false;
+      for (const name of IDLE_CLIPS) actions[name]?.setEffectiveWeight(1);
+    };
 
     reacting.current = true;
     // Mute the idle scrub so the reaction clip is the only thing posing the body.
@@ -96,20 +98,19 @@ export function Parrot() {
     action.paused = false;
     action.play();
 
+    // When the short clip ends, hand the body back so lip-sync resumes for the
+    // rest of the spoken line.
     const onFinished = (e: { action: THREE.AnimationAction }) => {
-      if (e.action !== action) return;
-      reacting.current = false;
-      action.stop();
-      // Hand the body back to the idle drivers for the next scene.
-      for (const name of IDLE_CLIPS) actions[name]?.setEffectiveWeight(1);
-      reactionDone();
+      if (e.action === action) restoreIdle();
     };
-
     mixer.addEventListener('finished', onFinished);
+
     return () => {
       mixer.removeEventListener('finished', onFinished);
+      action.stop();
+      restoreIdle();
     };
-  }, [phase, actions, mixer, reactionDone]);
+  }, [phase, actions, mixer]);
 
   // Smoothed "is speaking" envelope that drives how hard the wings flap.
   const speakEnergy = useRef(0);
