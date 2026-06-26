@@ -8,16 +8,21 @@ import { useParrotPresence } from './useParrotPresence';
 
 const MODEL_URL = '/models/coco.glb';
 
-// Named AnimationClips exported from Blender (Animation Mode = "NLA Tracks"), one
-// 1-second clip per control. Each clip animates only its own bones (jaw vs. the
-// two wings), so we can run both at full weight at once without them fighting.
+// Named AnimationClips exported from Blender (Animation Mode = "NLA Tracks").
+// `jaw_close` / `wings_down` are 1-second clips we scrub by hand for lip-sync
+// and flapping. `celebrate` / `wrong` are full-body reaction clips (0–36 frames)
+// we play once, start to finish, for correct / incorrect code answers.
 const JAW_CLIP = 'jaw_close';
 const WINGS_CLIP = 'wings_down';
+const CELEBRATE_CLIP = 'celebrate';
+const WRONG_CLIP = 'wrong';
+// The idle drivers we scrub each frame; muted while a reaction clip owns the body.
+const IDLE_CLIPS = [JAW_CLIP, WINGS_CLIP];
 
 /**
  * The real "Coco" parrot exported from Blender (`coco.glb`). Instead of driving
- * bones by hand, we play the two baked clips *paused* at full weight and scrub
- * each clip's playhead from a 0→1 signal:
+ * bones by hand, we play the two baked idle clips *paused* at full weight and
+ * scrub each clip's playhead from a 0→1 signal:
  *
  * - `jaw_close` — scrubbed from the narration amplitude for lip-sync. The clip
  *   runs rest/open (t=0) → closed (t=end), so we scrub `1 - mouthOpen`: closed in
@@ -25,6 +30,10 @@ const WINGS_CLIP = 'wings_down';
  *   authored the other way round.)
  * - `wings_down` — scrubbed from a gentle idle flap plus the speech energy, so
  *   the wings always move a little and flap harder while it talks.
+ *
+ * On top of that, the `celebrate` / `wrong` clips play as one-shots when the kids
+ * answer a code: while one runs we mute the idle scrub so the reaction owns the
+ * whole body, then report back to the store when it finishes.
  */
 export function Parrot() {
   const root = useParrotPresence();
@@ -34,13 +43,20 @@ export function Parrot() {
   // SkinnedMesh, and a plain Object3D.clone() leaves the cloned mesh bound to
   // the original skeleton, so the mixer's bone animation never reaches the body.
   const model = useMemo(() => cloneSkinned(scene), [scene]);
-  const { actions } = useAnimations(animations, model);
+  const { actions, mixer } = useAnimations(animations, model);
 
-  // Start both clips playing but paused at full weight. We set each action's
+  const phase = useShow((s) => s.phase);
+  const reactionDone = useShow((s) => s.reactionDone);
+
+  // True while a `celebrate`/`wrong` clip is playing, so the per-frame idle
+  // scrub stands down and lets the reaction drive the whole body.
+  const reacting = useRef(false);
+
+  // Start both idle clips playing but paused at full weight. We set each action's
   // `time` every frame; drei's useAnimations runs mixer.update, which applies the
   // posed (paused) clips to the bones.
   useEffect(() => {
-    for (const name of [JAW_CLIP, WINGS_CLIP]) {
+    for (const name of IDLE_CLIPS) {
       const action = actions[name];
       if (!action) continue;
       action.reset();
@@ -51,10 +67,57 @@ export function Parrot() {
     }
   }, [actions]);
 
+  // Play a one-shot reaction clip for the correct (`celebrate`) / wrong (`wrong`)
+  // answer, then tell the store when it's done so the show can move on.
+  useEffect(() => {
+    const clipName =
+      phase === 'celebrating'
+        ? CELEBRATE_CLIP
+        : phase === 'rejecting'
+        ? WRONG_CLIP
+        : null;
+    if (!clipName) return;
+
+    const action = actions[clipName];
+    // If the model doesn't carry this clip (older export), don't strand the show.
+    if (!action) {
+      reactionDone();
+      return;
+    }
+
+    reacting.current = true;
+    // Mute the idle scrub so the reaction clip is the only thing posing the body.
+    for (const name of IDLE_CLIPS) actions[name]?.setEffectiveWeight(0);
+
+    action.reset();
+    action.setLoop(THREE.LoopOnce, 1);
+    action.clampWhenFinished = true;
+    action.setEffectiveWeight(1);
+    action.paused = false;
+    action.play();
+
+    const onFinished = (e: { action: THREE.AnimationAction }) => {
+      if (e.action !== action) return;
+      reacting.current = false;
+      action.stop();
+      // Hand the body back to the idle drivers for the next scene.
+      for (const name of IDLE_CLIPS) actions[name]?.setEffectiveWeight(1);
+      reactionDone();
+    };
+
+    mixer.addEventListener('finished', onFinished);
+    return () => {
+      mixer.removeEventListener('finished', onFinished);
+    };
+  }, [phase, actions, mixer, reactionDone]);
+
   // Smoothed "is speaking" envelope that drives how hard the wings flap.
   const speakEnergy = useRef(0);
 
   useFrame((state, delta) => {
+    // While a reaction clip owns the body, leave the idle scrub alone.
+    if (reacting.current) return;
+
     const mouth = useShow.getState().mouthOpen;
     const t = state.clock.elapsedTime;
 

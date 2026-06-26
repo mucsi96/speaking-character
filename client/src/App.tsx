@@ -1,6 +1,6 @@
 import { Scene } from './three/Scene';
 import { StartScreen } from './ui/StartScreen';
-import { Prompt } from './ui/Prompt';
+import { CodeInput } from './ui/CodeInput';
 import { useRemote } from './useRemote';
 import { useNarration } from './useNarration';
 import { useShow } from './store';
@@ -26,7 +26,18 @@ export default function App() {
       )}
 
       {phase === 'idle' && <StartScreen />}
-      {phase === 'waiting' && <Prompt />}
+      {phase === 'entering' && <CodeInput />}
+
+      {phase === 'celebrating' && (
+        <div className="overlay overlay--top">
+          <h2 className="feedback feedback--correct">✅ Richtig! Yo-ho-ho!</h2>
+        </div>
+      )}
+      {phase === 'rejecting' && (
+        <div className="overlay overlay--top">
+          <h2 className="feedback feedback--wrong">❌ Oje, versucht es nochmal!</h2>
+        </div>
+      )}
 
       {phase === 'finished' && (
         <div className="overlay overlay--center">

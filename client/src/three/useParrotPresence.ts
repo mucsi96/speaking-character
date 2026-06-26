@@ -6,7 +6,7 @@ import { useShow } from '../store';
 /**
  * Drives the parrot group's appear / idle / disappear motion.
  * - Scales in (and rises) once the show starts and stays visible for the whole
- *   show — through narration *and* the between-scene color-button prompts.
+ *   show — through narration *and* the between-scene code prompts.
  * - Hidden (scale 0, sunk) only while `idle` (start screen) — so it sinks away
  *   on reset and scales back in on the next start.
  * - Gentle idle bob + sway while visible.

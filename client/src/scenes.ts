@@ -9,7 +9,15 @@
  *
  *  Einfach den `text` ändern. Der Text wird per ElevenLabs auf Deutsch
  *  vorgelesen. `title` erscheint groß auf dem Bildschirm.
- *  Mit einer Farbtaste auf der Fernbedienung geht es zur nächsten Szene.
+ *
+ *  `code` (optionale Ziffer 0–9): Nach dem Vorlesen erscheint ein Eingabefeld.
+ *  Die Kinder geben die Lösung über die Zahlentasten der Fernbedienung ein.
+ *  - Richtig → Käpten Coco jubelt (Animation `celebrate`) und es geht weiter.
+ *  - Falsch  → Coco schüttelt den Kopf (Animation `wrong`) und sie dürfen es
+ *    nochmal versuchen.
+ *  Tipp: Versteckt die passende Zahl als echten Hinweis im Spielbereich
+ *  (z.B. auf der Schatzkarte). Szenen ohne `code` (wie `outro`) gehen einfach
+ *  zu Ende.
  * ============================================================================
  */
 
@@ -17,6 +25,8 @@ export interface Scene {
   id: string;
   title: string;
   text: string;
+  /** Single-digit answer the kids must enter to continue (optional). */
+  code?: string;
 }
 
 export const scenes: Scene[] = [
@@ -29,8 +39,9 @@ export const scenes: Scene[] = [
       'Glückwunsch zum Geburtstag! Heute gehen wir gemeinsam auf eine große ' +
       'Schatzsuche. Versteckt auf dieser Insel liegt ein geheimer Piratenschatz. ' +
       'Aber Achtung: Nur mutige Piraten finden ihn! Eure erste Aufgabe: Sucht ' +
-      'im Garten nach drei roten Federn, so rot wie meine Lieblingsbeeren. ' +
-      'Wenn ihr sie gefunden habt, drückt eine bunte Taste auf der Fernbedienung!',
+      'im Garten nach roten Federn, so rot wie meine Lieblingsbeeren. ' +
+      'Zählt sie genau und tippt ein, wie viele Federn ihr gefunden habt!',
+    code: '3',
   },
   {
     id: 'task-1',
@@ -39,8 +50,9 @@ export const scenes: Scene[] = [
       'Stark gemacht, ihr Landratten! Ihr habt die roten Federn gefunden! ' +
       'Jetzt braucht ihr die geheime Schatzkarte. Sie ist in viele kleine ' +
       'Teile zerrissen. Sucht im ganzen Haus nach den Kartenstücken und setzt ' +
-      'sie wie ein Puzzle zusammen. Wenn die Karte vollständig ist, drückt ' +
-      'wieder eine bunte Taste!',
+      'sie wie ein Puzzle zusammen. Auf der fertigen Karte steht eine große ' +
+      'geheime Zahl. Findet sie und tippt sie auf der Fernbedienung ein!',
+    code: '7',
   },
   {
     id: 'task-2',
@@ -48,8 +60,9 @@ export const scenes: Scene[] = [
     text:
       'Yo-ho-ho! Die Karte ist fertig! Echte Piraten müssen auch singen ' +
       'können. Eure Aufgabe: Singt alle zusammen so laut ihr könnt das ' +
-      'Geburtstagslied. Und tanzt dabei wie wilde Seeräuber! Wenn ihr fertig ' +
-      'gesungen habt, drückt eine bunte Taste.',
+      'Geburtstagslied. Und tanzt dabei wie wilde Seeräuber! Am Ende des Liedes ' +
+      'ruft der Käpten eine Glückszahl. Zählt mit und tippt die Zahl ein!',
+    code: '5',
   },
   {
     id: 'task-3',
@@ -57,8 +70,9 @@ export const scenes: Scene[] = [
     text:
       'Donnerwetter, das klang wunderbar! Jetzt kommt die Mutprobe. Auf der ' +
       'Schatzkarte ist ein großes X eingezeichnet. Folgt der Karte bis zum X. ' +
-      'Dort müsst ihr gemeinsam dreimal hüpfen und laut Arrr! rufen. Dann ist ' +
-      'der Schatz nicht mehr weit. Drückt eine bunte Taste, wenn ihr beim X seid!',
+      'Dort liegt ein versteckter Hinweis mit einer geheimen Zahl. Hüpft dreimal, ' +
+      'ruft laut Arrr! und tippt dann die Zahl vom Hinweis ein!',
+    code: '9',
   },
   {
     id: 'outro',
