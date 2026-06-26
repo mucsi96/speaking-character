@@ -98,3 +98,14 @@ export const wrongLines: string[] = [
   'Arrr, knapp daneben! Denkt nochmal nach und probiert eine andere Zahl.',
   'Nein, nein, kleine Landratten! Diese Zahl stimmt noch nicht.',
 ];
+
+/**
+ * Every line Käpten Coco can possibly speak — scene tasks plus the random
+ * correct/wrong reactions. Sent to the server on startup so the TTS for all of
+ * them is generated and cached up front, keeping the live show smooth.
+ */
+export const allSpeech: string[] = [
+  ...scenes.map((scene) => scene.text),
+  ...correctLines,
+  ...wrongLines,
+];

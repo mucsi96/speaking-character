@@ -35,6 +35,104 @@ function healthHandler(_req: Request, res: Response): void {
   res.json({ status: 'ok', voiceConfigured: Boolean(ELEVENLABS_VOICE_ID && ELEVENLABS_API_KEY) });
 }
 
+/** Thrown when ElevenLabs responds with a non-OK status. */
+class TtsUpstreamError extends Error {
+  constructor(public status: number, public detail: string) {
+    super(`ElevenLabs error ${status}`);
+    this.name = 'TtsUpstreamError';
+  }
+}
+
+/** Cache path for a line, keyed by a hash of (voice + model + text). */
+function cachePathFor(text: string): string {
+  const hash = createHash('sha256')
+    .update(`${ELEVENLABS_VOICE_ID}:${ELEVENLABS_MODEL_ID}:${text}`)
+    .digest('hex');
+  return join(CACHE_DIR, `${hash}.mp3`);
+}
+
+/**
+ * Return the MP3 for `text`, generating it via ElevenLabs and caching it on disk
+ * on a miss. `cached` reports whether the result came from the disk cache.
+ */
+async function synthesize(text: string): Promise<{ audio: Buffer; cached: boolean }> {
+  const cachePath = cachePathFor(text);
+  if (await fileExists(cachePath)) {
+    return { audio: await readFile(cachePath), cached: true };
+  }
+
+  const upstream = await fetch(
+    `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(ELEVENLABS_VOICE_ID)}`,
+    {
+      method: 'POST',
+      headers: {
+        'xi-api-key': ELEVENLABS_API_KEY,
+        'Content-Type': 'application/json',
+        Accept: 'audio/mpeg',
+      },
+      body: JSON.stringify({
+        text,
+        model_id: ELEVENLABS_MODEL_ID,
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+          style: 0.4,
+          use_speaker_boost: true,
+        },
+      }),
+    }
+  );
+
+  if (!upstream.ok) {
+    const detail = await upstream.text().catch(() => '');
+    throw new TtsUpstreamError(upstream.status, detail);
+  }
+
+  const audio = Buffer.from(await upstream.arrayBuffer());
+  await mkdir(CACHE_DIR, { recursive: true });
+  await writeFile(cachePath, audio);
+  return { audio, cached: false };
+}
+
+// Only one precache run at a time; repeated requests (e.g. a client reload while
+// the first warm-up is still going) are ignored rather than synthesizing twice.
+let precacheRunning = false;
+
+/**
+ * Warm the disk cache for every line up front so the live show never waits on
+ * ElevenLabs. Runs sequentially in the background and logs progress so the
+ * warm-up can be followed in the server logs.
+ */
+async function runPrecache(texts: string[]): Promise<void> {
+  const total = texts.length;
+  let cachedCount = 0;
+  let generatedCount = 0;
+  let failedCount = 0;
+
+  console.log(`[precache] starting warm-up of ${total} clip(s)`);
+  for (let i = 0; i < total; i++) {
+    const text = texts[i];
+    const position = `${i + 1}/${total}`;
+    const preview = text.length > 60 ? `${text.slice(0, 57)}...` : text;
+    try {
+      const { cached } = await synthesize(text);
+      if (cached) cachedCount++;
+      else generatedCount++;
+      console.log(
+        `[precache] ${position} ${cached ? 'already cached' : 'generated'}: "${preview}"`
+      );
+    } catch (err) {
+      failedCount++;
+      const reason = err instanceof Error ? err.message : String(err);
+      console.error(`[precache] ${position} FAILED (${reason}): "${preview}"`);
+    }
+  }
+  console.log(
+    `[precache] finished: ${total} total, ${cachedCount} already cached, ` +
+      `${generatedCount} generated, ${failedCount} failed`
+  );
+}
+
 // `/health` is what the node_app Helm chart probes (liveness/startup); `/healthz`
 // is kept for backwards compatibility with the local/dev manifests.
 app.get('/health', healthHandler);
@@ -75,60 +173,61 @@ app.post('/api/tts', async (req: Request, res: Response) => {
     return;
   }
 
-  const hash = createHash('sha256')
-    .update(`${ELEVENLABS_VOICE_ID}:${ELEVENLABS_MODEL_ID}:${text}`)
-    .digest('hex');
-  const cachePath = join(CACHE_DIR, `${hash}.mp3`);
-
   try {
-    if (await fileExists(cachePath)) {
-      const cached = await readFile(cachePath);
-      res.setHeader('Content-Type', 'audio/mpeg');
-      res.setHeader('X-Cache', 'HIT');
-      res.send(cached);
-      return;
-    }
-
-    const upstream = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(ELEVENLABS_VOICE_ID)}`,
-      {
-        method: 'POST',
-        headers: {
-          'xi-api-key': ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json',
-          Accept: 'audio/mpeg',
-        },
-        body: JSON.stringify({
-          text,
-          model_id: ELEVENLABS_MODEL_ID,
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-            style: 0.4,
-            use_speaker_boost: true,
-          },
-        }),
-      }
-    );
-
-    if (!upstream.ok) {
-      const detail = await upstream.text().catch(() => '');
-      console.error(`ElevenLabs error ${upstream.status}: ${detail}`);
-      res.status(502).json({ error: 'TTS upstream failed.', status: upstream.status });
-      return;
-    }
-
-    const audio = Buffer.from(await upstream.arrayBuffer());
-    await mkdir(CACHE_DIR, { recursive: true });
-    await writeFile(cachePath, audio);
-
+    const { audio, cached } = await synthesize(text);
     res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('X-Cache', 'MISS');
+    res.setHeader('X-Cache', cached ? 'HIT' : 'MISS');
     res.send(audio);
   } catch (err) {
+    if (err instanceof TtsUpstreamError) {
+      console.error(`ElevenLabs error ${err.status}: ${err.detail}`);
+      res.status(502).json({ error: 'TTS upstream failed.', status: err.status });
+      return;
+    }
     console.error('TTS request failed:', err);
     res.status(500).json({ error: 'Internal error generating speech.' });
   }
+});
+
+/**
+ * Pre-cache every line the client will speak so the live show is smooth. The
+ * client posts all of its texts on startup; we kick off a background warm-up and
+ * answer immediately. Progress is written to the server logs (see runPrecache).
+ */
+app.post('/api/precache', (req: Request, res: Response) => {
+  const raw: unknown = req.body?.texts;
+  const texts = Array.isArray(raw)
+    ? [
+        ...new Set(
+          raw
+            .filter((t): t is string => typeof t === 'string')
+            .map((t) => t.trim())
+            .filter((t) => t.length > 0)
+        ),
+      ]
+    : [];
+
+  if (texts.length === 0) {
+    res.status(400).json({ error: 'Missing non-empty "texts" array in request body.' });
+    return;
+  }
+  if (!ELEVENLABS_API_KEY || !ELEVENLABS_VOICE_ID) {
+    res.status(503).json({
+      error:
+        'ElevenLabs is not configured. Set ELEVENLABS_API_KEY and ELEVENLABS_VOICE_ID.',
+    });
+    return;
+  }
+  if (precacheRunning) {
+    res.status(202).json({ status: 'already-running' });
+    return;
+  }
+
+  precacheRunning = true;
+  res.status(202).json({ status: 'started', total: texts.length });
+  runPrecache(texts).finally(() => {
+    precacheRunning = false;
+  });
 });
 
 // Serve the built client and fall back to index.html for SPA routing.

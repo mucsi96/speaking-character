@@ -62,6 +62,22 @@ The server holds the API key (never the browser). Configure via env:
 Generated MP3s are cached on disk (`CACHE_DIR`) keyed by text+voice+model, so
 each line is only synthesized once.
 
+On startup the client posts every line Coco can speak (scene tasks plus the
+random correct/wrong reactions, see `allSpeech` in
+[`client/src/scenes.ts`](client/src/scenes.ts)) to `POST /api/precache`. The
+server warms the disk cache for all of them in the background — sequentially, so
+ElevenLabs isn't hammered — and logs progress to its console:
+
+```
+[precache] starting warm-up of 11 clip(s)
+[precache] 1/11 generated: "Ahoi, ihr tapferen kleinen Piraten! Ich bin Käpten..."
+...
+[precache] finished: 11 total, 4 already cached, 7 generated, 0 failed
+```
+
+That way the very first live run has no ElevenLabs latency on any line. Load the
+app once to warm the cache, then run the show.
+
 ## Production build & Docker
 
 ```bash
