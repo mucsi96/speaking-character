@@ -19,7 +19,7 @@ RUN npm prune --omit=dev
 FROM node:22-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=8080
 ENV CACHE_DIR=/app/cache
 
 # Server runtime + built artifacts.
@@ -30,6 +30,6 @@ COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
 
 RUN mkdir -p /app/cache
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["node", "server/dist/index.js"]

@@ -31,8 +31,29 @@ async function fileExists(path: string): Promise<boolean> {
   }
 }
 
-app.get('/healthz', (_req: Request, res: Response) => {
+function healthHandler(_req: Request, res: Response): void {
   res.json({ status: 'ok', voiceConfigured: Boolean(ELEVENLABS_VOICE_ID && ELEVENLABS_API_KEY) });
+}
+
+// `/health` is what the node_app Helm chart probes (liveness/startup); `/healthz`
+// is kept for backwards compatibility with the local/dev manifests.
+app.get('/health', healthHandler);
+app.get('/healthz', healthHandler);
+
+// Minimal Prometheus exposition for the chart's ServiceMonitor (`/metrics`).
+app.get('/metrics', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'text/plain; version=0.0.4; charset=utf-8');
+  res.send(
+    [
+      '# HELP nodejs_up Whether the speaking-character server is up.',
+      '# TYPE nodejs_up gauge',
+      'nodejs_up 1',
+      '# HELP process_uptime_seconds Process uptime in seconds.',
+      '# TYPE process_uptime_seconds gauge',
+      `process_uptime_seconds ${process.uptime().toFixed(0)}`,
+      '',
+    ].join('\n')
+  );
 });
 
 /**

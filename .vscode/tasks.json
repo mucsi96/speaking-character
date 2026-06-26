@@ -4,7 +4,7 @@
     {
       "label": "Install Dependencies",
       "type": "shell",
-      "command": "${workspaceFolder}/scripts/install-deps.sh",
+      "command": "${workspaceFolder}/scripts/install_dependencies.sh",
       "group": "build",
       "presentation": {
         "reveal": "always",
@@ -33,6 +33,39 @@
           "endsPattern": "ready in"
         }
       }
+    },
+    {
+      "label": "Pod Up (local smoke test)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/pod_up.sh",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Pod Down",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/pod_down.sh",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Deploy to Kubernetes",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/deploy.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "problemMatcher": []
     }
   ]
 }
