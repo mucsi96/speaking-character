@@ -18,6 +18,10 @@
  *  Tipp: Versteckt die passende Zahl als echten Hinweis im Spielbereich
  *  (z.B. auf der Schatzkarte). Szenen ohne `code` (wie `outro`) gehen einfach
  *  zu Ende.
+ *
+ *  Das Script lebt auf dem Server: es wird per `GET /api/script` an den Client
+ *  ausgeliefert und beim Serverstart komplett vorgerendert (Cache-Preheat),
+ *  damit die Show ohne ElevenLabs-Wartezeit läuft.
  * ============================================================================
  */
 
@@ -26,6 +30,12 @@ export interface Scene {
   text: string;
   /** Single-digit answer the kids must enter to continue (optional). */
   code?: string;
+}
+
+export interface Script {
+  scenes: Scene[];
+  correctLines: string[];
+  wrongLines: string[];
 }
 
 export const scenes: Scene[] = [
@@ -99,10 +109,13 @@ export const wrongLines: string[] = [
   'Nein, nein, kleine Landratten! Diese Zahl stimmt noch nicht.',
 ];
 
+/** The full script served to the client via `GET /api/script`. */
+export const script: Script = { scenes, correctLines, wrongLines };
+
 /**
  * Every line Käpten Coco can possibly speak — scene tasks plus the random
- * correct/wrong reactions. Sent to the server on startup so the TTS for all of
- * them is generated and cached up front, keeping the live show smooth.
+ * correct/wrong reactions. Used to pre-render all TTS on server startup so the
+ * live show never waits on ElevenLabs.
  */
 export const allSpeech: string[] = [
   ...scenes.map((scene) => scene.text),

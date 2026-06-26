@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
 import { constants as fsConstants } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { script, allSpeech } from './scenes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -94,10 +95,6 @@ async function synthesize(text: string): Promise<{ audio: Buffer; cached: boolea
   return { audio, cached: false };
 }
 
-// Only one precache run at a time; repeated requests (e.g. a client reload while
-// the first warm-up is still going) are ignored rather than synthesizing twice.
-let precacheRunning = false;
-
 /**
  * Warm the disk cache for every line up front so the live show never waits on
  * ElevenLabs. Runs sequentially in the background and logs progress so the
@@ -132,6 +129,12 @@ async function runPrecache(texts: string[]): Promise<void> {
       `${generatedCount} generated, ${failedCount} failed`
   );
 }
+
+// Serve the show script (German text + codes) to the client. The client renders
+// from this rather than holding its own copy, so the script has a single home.
+app.get('/api/script', (_req: Request, res: Response) => {
+  res.json(script);
+});
 
 // `/health` is what the node_app Helm chart probes (liveness/startup); `/healthz`
 // is kept for backwards compatibility with the local/dev manifests.
@@ -189,47 +192,6 @@ app.post('/api/tts', async (req: Request, res: Response) => {
   }
 });
 
-/**
- * Pre-cache every line the client will speak so the live show is smooth. The
- * client posts all of its texts on startup; we kick off a background warm-up and
- * answer immediately. Progress is written to the server logs (see runPrecache).
- */
-app.post('/api/precache', (req: Request, res: Response) => {
-  const raw: unknown = req.body?.texts;
-  const texts = Array.isArray(raw)
-    ? [
-        ...new Set(
-          raw
-            .filter((t): t is string => typeof t === 'string')
-            .map((t) => t.trim())
-            .filter((t) => t.length > 0)
-        ),
-      ]
-    : [];
-
-  if (texts.length === 0) {
-    res.status(400).json({ error: 'Missing non-empty "texts" array in request body.' });
-    return;
-  }
-  if (!ELEVENLABS_API_KEY || !ELEVENLABS_VOICE_ID) {
-    res.status(503).json({
-      error:
-        'ElevenLabs is not configured. Set ELEVENLABS_API_KEY and ELEVENLABS_VOICE_ID.',
-    });
-    return;
-  }
-  if (precacheRunning) {
-    res.status(202).json({ status: 'already-running' });
-    return;
-  }
-
-  precacheRunning = true;
-  res.status(202).json({ status: 'started', total: texts.length });
-  runPrecache(texts).finally(() => {
-    precacheRunning = false;
-  });
-});
-
 // Serve the built client and fall back to index.html for SPA routing.
 app.use(express.static(CLIENT_DIST));
 app.get('*', async (_req: Request, res: Response) => {
@@ -249,4 +211,12 @@ app.listen(PORT, () => {
   console.log(`  cache dir:   ${CACHE_DIR}`);
   console.log(`  voice:       ${ELEVENLABS_VOICE_ID || '(not set)'}`);
   console.log(`  model:       ${ELEVENLABS_MODEL_ID}`);
+
+  // Pre-render every line on startup so the live show is smooth. Runs in the
+  // background; the server is already accepting requests while it warms up.
+  if (ELEVENLABS_API_KEY && ELEVENLABS_VOICE_ID) {
+    void runPrecache(allSpeech);
+  } else {
+    console.log('[precache] skipped: ElevenLabs not configured');
+  }
 });

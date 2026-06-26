@@ -1,12 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import { precacheSpeech } from './precache';
+import { useShow } from './store';
 import './styles.css';
 
-// Warm the server-side TTS cache for every line as soon as the app loads, so the
-// live show isn't held up by ElevenLabs latency the first time a line plays.
-precacheSpeech();
+// Fetch the show script from the server as soon as the app loads. The server
+// owns the script and pre-renders all of its TTS on startup, so the live show
+// runs without ElevenLabs latency.
+void useShow.getState().loadScript();
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Root element not found');

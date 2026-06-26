@@ -17,10 +17,12 @@ driven by the remote's colored buttons.
 5. Repeats through all scenes until the treasure is found.
 
 Each task scene has a single-digit `code` in
-[`client/src/scenes.ts`](client/src/scenes.ts) — hide the matching number as a
+[`server/src/scenes.ts`](server/src/scenes.ts) — hide the matching number as a
 physical clue in your play area.
 
-Edit the whole German script in [`client/src/scenes.ts`](client/src/scenes.ts).
+Edit the whole German script in [`server/src/scenes.ts`](server/src/scenes.ts).
+The server owns the script: it serves it to the client over `GET /api/script`
+and pre-renders all of its TTS on startup (see below).
 
 ## Project layout
 
@@ -62,11 +64,11 @@ The server holds the API key (never the browser). Configure via env:
 Generated MP3s are cached on disk (`CACHE_DIR`) keyed by text+voice+model, so
 each line is only synthesized once.
 
-On startup the client posts every line Coco can speak (scene tasks plus the
-random correct/wrong reactions, see `allSpeech` in
-[`client/src/scenes.ts`](client/src/scenes.ts)) to `POST /api/precache`. The
-server warms the disk cache for all of them in the background — sequentially, so
-ElevenLabs isn't hammered — and logs progress to its console:
+**Startup cache preheat.** ElevenLabs has noticeable latency the first time a
+line is synthesized. To keep the live show smooth, the server pre-renders every
+line it can speak (scene tasks plus the random correct/wrong reactions, see
+`allSpeech` in [`server/src/scenes.ts`](server/src/scenes.ts)) **on startup** —
+sequentially, so ElevenLabs isn't hammered — and logs progress to its console:
 
 ```
 [precache] starting warm-up of 11 clip(s)
@@ -75,8 +77,9 @@ ElevenLabs isn't hammered — and logs progress to its console:
 [precache] finished: 11 total, 4 already cached, 7 generated, 0 failed
 ```
 
-That way the very first live run has no ElevenLabs latency on any line. Load the
-app once to warm the cache, then run the show.
+By the time the show runs, every line is a cache HIT with no ElevenLabs latency.
+The warm-up runs in the background, so the server starts serving immediately; if
+ElevenLabs isn't configured it's skipped with a log line.
 
 ## Production build & Docker
 
