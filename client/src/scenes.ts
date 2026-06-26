@@ -23,7 +23,6 @@
 
 export interface Scene {
   id: string;
-  title: string;
   text: string;
   /** Single-digit answer the kids must enter to continue (optional). */
   code?: string;
@@ -32,7 +31,6 @@ export interface Scene {
 export const scenes: Scene[] = [
   {
     id: 'intro',
-    title: 'Ahoi, kleine Piraten!',
     text:
       'Ahoi, ihr tapferen kleinen Piraten! Ich bin Käpten Coco, der schlauste ' +
       'Papagei der sieben Weltmeere! Herzlichen ' +
@@ -45,7 +43,6 @@ export const scenes: Scene[] = [
   },
   {
     id: 'task-1',
-    title: 'Die Schatzkarte',
     text:
       'Stark gemacht, ihr Landratten! Ihr habt die roten Federn gefunden! ' +
       'Jetzt braucht ihr die geheime Schatzkarte. Sie ist in viele kleine ' +
@@ -56,7 +53,6 @@ export const scenes: Scene[] = [
   },
   {
     id: 'task-2',
-    title: 'Das Piratenlied',
     text:
       'Yo-ho-ho! Die Karte ist fertig! Echte Piraten müssen auch singen ' +
       'können. Eure Aufgabe: Singt alle zusammen so laut ihr könnt das ' +
@@ -66,7 +62,6 @@ export const scenes: Scene[] = [
   },
   {
     id: 'task-3',
-    title: 'Der Mutige Sprung',
     text:
       'Donnerwetter, das klang wunderbar! Jetzt kommt die Mutprobe. Auf der ' +
       'Schatzkarte ist ein großes X eingezeichnet. Folgt der Karte bis zum X. ' +
@@ -76,7 +71,6 @@ export const scenes: Scene[] = [
   },
   {
     id: 'outro',
-    title: 'Der Schatz ist gefunden!',
     text:
       'Ihr habt es geschafft, ihr großartigen Piraten! Genau hier ist der ' +
       'Schatz vergraben. Grabt vorsichtig und teilt die Beute gerecht unter ' +
