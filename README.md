@@ -163,4 +163,7 @@ moment it's pressed.
 
 ## Credits
 
+- 3D model generation by **[Tripo AI](https://www.tripo3d.ai/)** — the textured
+  parrot mesh was created from a colored reference image with its Image-to-3D
+  workflow (see [`MODEL.md`](MODEL.md)).
 - Voice synthesis by **ElevenLabs**.
