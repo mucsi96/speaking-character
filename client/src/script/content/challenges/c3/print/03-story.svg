@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 448" width="130mm" height="112mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="520" height="448" rx="18" fill="#f6eccf"/>
+  <rect x="9" y="9" width="502" height="430" rx="13" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="24" y="16" width="472" height="44" rx="10" fill="#8c2b22"/>
+  <text x="260" y="45" text-anchor="middle" fill="#fdf2d6" font-size="22" font-weight="700">Aufgabe 3 <tspan font-size="20">🦜</tspan></text>
+
+  <!-- word to count -->
+  <text x="130" y="93" text-anchor="end" fill="#8c2b22" font-size="15" font-weight="700">Euer Wort:</text>
+  <rect x="140" y="73" width="200" height="30" rx="15" fill="#8c2b22"/>
+  <text x="240" y="94" text-anchor="middle" fill="#fdf2d6" font-size="18" font-weight="700">Gold</text>
+
+  <!-- inner parchment panel -->
+  <rect x="24" y="112" width="472" height="242" rx="12" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.5"/>
+
+  <!-- story (read aloud; count "Gold") -->
+  <g fill="#2a2118" font-size="16">
+    <text x="46" y="140">In der dunklen Höhle entdeckte die Crew eine</text>
+    <text x="46" y="167">schwere Truhe voller Gold. Käpt'n Rotbart öffnete</text>
+    <text x="46" y="194">den Deckel, und alle staunten: So viel Gold</text>
+    <text x="46" y="221">hatten sie noch nie gesehen! Funkelnde Ringe</text>
+    <text x="46" y="248">und goldene Becher lagen zwischen den Münzen.</text>
+    <text x="46" y="275">„Dieses Gold gehört jetzt uns!", rief Rotbart,</text>
+    <text x="46" y="302">und die ganze Mannschaft jubelte laut vor</text>
+    <text x="46" y="329">Freude in der finsteren Höhle.</text>
+  </g>
+
+  <!-- count field -->
+  <rect x="24" y="362" width="472" height="46" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="44" y="391" fill="#8c2b22" font-size="18">So oft gezählt:</text>
+  <line x1="220" y1="395" x2="476" y2="395" stroke="#c2a76a" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <!-- footer -->
+  <circle cx="40" cy="428" r="6" fill="#d6463a"/>
+  <text x="54" y="433" fill="#7a6a4a" font-size="12">C3 · laut vorlesen</text>
+  <text x="496" y="433" text-anchor="end" font-size="14"><tspan fill="#e0a92e">★ ★ ★</tspan></text>
+</svg>

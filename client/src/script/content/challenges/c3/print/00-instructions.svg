@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="20" y="14" width="360" height="46" rx="10" fill="#8c2b22"/>
+  <text x="200" y="36" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS</text>
+  <text x="200" y="53" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">So bekommt ihr eure Zahl</text>
+
+  <!-- title -->
+  <text x="200" y="82" text-anchor="middle" fill="#8c2b22" font-size="22" font-weight="700">Papageien-Geschichte</text>
+
+  <!-- steps -->
+  <g fill="#2a2118" font-size="12">
+    <text x="34" y="100"><tspan fill="#8c2b22" font-weight="700">1.</tspan>  Jeder liest <tspan font-weight="700">eine Karte LAUT</tspan> vor.</text>
+    <text x="34" y="119"><tspan fill="#8c2b22" font-weight="700">2.</tspan>  Zählt, wie oft <tspan font-weight="700">euer Wort</tspan> vorkommt,</text>
+    <text x="52" y="135">und schreibt die Zahl auf.</text>
+    <text x="34" y="154"><tspan fill="#8c2b22" font-weight="700">3.</tspan>  <tspan font-weight="700">Addiert alle 5 Zahlen</tspan> zu einer Gesamtzahl.</text>
+    <text x="34" y="173"><tspan fill="#8c2b22" font-weight="700">4.</tspan>  Sucht die Gesamtzahl in der <tspan font-weight="700">Schatz-Tabelle</tspan> —</text>
+    <text x="52" y="189">die Zahl daneben ist eure Zahl!</text>
+  </g>
+
+  <!-- treasure mapping table: Gesamt -> Zahl -->
+  <text x="200" y="204" text-anchor="middle" fill="#8c2b22" font-size="13" font-weight="700" letter-spacing="1">SCHATZ-TABELLE</text>
+  <g font-size="12" fill="#7a6a4a" text-anchor="end">
+    <text x="40" y="230">Gesamt</text>
+    <text x="40" y="258">Zahl</text>
+  </g>
+  <g text-anchor="middle">
+    <!-- column 1: 10 -> 8 -->
+    <rect x="52" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="52" y1="240" x2="112" y2="240" stroke="#c2a76a" stroke-width="1"/>
+    <text x="82" y="234" fill="#2a2118" font-size="16" font-weight="700">10</text>
+    <text x="82" y="259" fill="#8c2b22" font-size="16" font-weight="700">8</text>
+    <!-- column 2: 11 -> 5 -->
+    <rect x="118" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="118" y1="240" x2="178" y2="240" stroke="#c2a76a" stroke-width="1"/>
+    <text x="148" y="234" fill="#2a2118" font-size="16" font-weight="700">11</text>
+    <text x="148" y="259" fill="#8c2b22" font-size="16" font-weight="700">5</text>
+    <!-- column 3: 12 -> 4 (the answer) -->
+    <rect x="184" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="184" y1="240" x2="244" y2="240" stroke="#c2a76a" stroke-width="1"/>
+    <text x="214" y="234" fill="#2a2118" font-size="16" font-weight="700">12</text>
+    <text x="214" y="259" fill="#8c2b22" font-size="16" font-weight="700">4</text>
+    <!-- column 4: 13 -> 9 -->
+    <rect x="250" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="250" y1="240" x2="310" y2="240" stroke="#c2a76a" stroke-width="1"/>
+    <text x="280" y="234" fill="#2a2118" font-size="16" font-weight="700">13</text>
+    <text x="280" y="259" fill="#8c2b22" font-size="16" font-weight="700">9</text>
+    <!-- column 5: 14 -> 2 -->
+    <rect x="316" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="316" y1="240" x2="376" y2="240" stroke="#c2a76a" stroke-width="1"/>
+    <text x="346" y="234" fill="#2a2118" font-size="16" font-weight="700">14</text>
+    <text x="346" y="259" fill="#8c2b22" font-size="16" font-weight="700">2</text>
+  </g>
+
+  <!-- footer -->
+  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C3 · 5 Karten</text>
+</svg>
