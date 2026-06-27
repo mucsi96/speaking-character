@@ -42,6 +42,11 @@ helm upgrade $RELEASE_NAME mucsi96/node-app \
     --set serviceAccountName=party-workload-identity \
     --set env.PORT=8080 \
     --set env.CACHE_DIR=/app/cache \
+    --set persistentVolumeClaims[0].name=party-audio-cache \
+    --set persistentVolumeClaims[0].mountPath=/app/cache \
+    --set persistentVolumeClaims[0].storage=1Gi \
+    --set persistentVolumeClaims[0].accessMode=ReadWriteMany \
+    --set persistentVolumeClaims[0].storageClassName=azurefile-csi \
     --set env.ELEVENLABS_MODEL_ID=eleven_v3 \
     --set env.ELEVENLABS_API_KEY=$ELEVENLABS_API_KEY \
     --set env.ELEVENLABS_VOICE_ID=w3wNNJF8d1omt8wc0Bxg \
