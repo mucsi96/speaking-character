@@ -1,20 +1,21 @@
 ---
 order: 6
 id: C6
-title: Geomag-Pyramide
+title: Geomag-Bauwerke
 room: "Nappali · térbeli építés"
-tags: [Geomag, Közös]
+tags: [Geomag, "5 párhuzamos"]
 dial: "🔵 → 6"
 code: "6"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins WOHNZIMMER! Baut dort die Pyramide nach dem Plan — 2 legen Kugeln, 3 legen Stangen!”"
+  - "„Ab ins WOHNZIMMER, kleine Baumeister! Auf dem Teppich liegen fünf Geomag-Beutel und fünf Baukarten bereit — jeder schnappt sich einen Beutel und die passende Karte und baut sein Bauwerk genau nach dem Plan!”"
+  - "„Wenn alle fertig sind, legt die ÜBRIG gebliebenen Teile aus allen Beuteln zusammen in die Mitte und zählt sie. Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "Geomag + a terv a nappaliban, a nagy kanapé melletti szőnyegen (legyen hely építeni)."]
-    - [Megoldás, "Tetraéder = 4 golyó + **6** pálca → 6", sol]
-# The BLUE lock's unlock celebration is now its own codeless OK-gated scene
-# (c6-unlock).
+    - [Elrejtés, "5 Geomag-zacskó + 5 építőkártya a nappali szőnyegén, a nagy kanapé mellett (legyen hely építeni). Minden zacskóban a saját modellhez szükséges alkatrészek ÉS pontosan 2 extra darab."]
+    - ["Mind az 5", "Mindenki kiépíti a kártyája szerinti modellt: 1) Ikozaéder · 2) Tetraéder XL · 3) Hatszög-piramis · 4) Kocka · 5) Ötszög-piramis. A nehezebbeket (ikozaéder, hatszög-piramis) a nagyobbaknak, a kockát / ötszög-piramist a legkisebbeknek."]
+    - [Megoldás, "Zacskónként 2 extra darab × 5 zacskó = **10** megmaradt alkatrész → Schatz-Tabelle: 10 → **6**", sol]
+# The BLUE lock's unlock celebration is its own codeless OK-gated scene (c6-unlock).
 ---

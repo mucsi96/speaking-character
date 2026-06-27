@@ -25,7 +25,7 @@ validation:
     - [C3, "Felolvasás", "4"]
     - [C4, "Tükör-matek (kivonás)", "5"]
     - [C5, "Számsor", "2"]
-    - [C6, "Geomag építés", "6"]
+    - [C6, "Geomag (5 zacskó)", "6"]
     - [C7, "LEGO Technic", "4"]
     - [C8, "Titkosírás", "6"]
     - [C9, "Puzzle", "8"]
