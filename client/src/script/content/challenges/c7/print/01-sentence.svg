@@ -6,7 +6,7 @@
   <!-- header -->
   <rect x="20" y="16" width="360" height="44" rx="10" fill="#1f5d3a"/>
   <text x="200" y="45" text-anchor="middle" fill="#fdf2d6" font-size="22" font-weight="700">Satz 1</text>
-  <text x="200" y="80" text-anchor="middle" fill="#1f5d3a" font-size="14" letter-spacing="2">VOKALE ZÄHLEN · a e i o u</text>
+  <text x="200" y="80" text-anchor="middle" fill="#1f5d3a" font-size="14" letter-spacing="2">VOKALE ZÄHLEN</text>
 
   <!-- the sentence -->
   <rect x="24" y="100" width="352" height="70" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>

@@ -14,7 +14,7 @@
   <!-- steps -->
   <g fill="#2a2118" font-size="13">
     <text x="34" y="106"><tspan fill="#1f5d3a" font-weight="700">1.</tspan>  Jeder nimmt eine <tspan font-weight="700">Satz-Karte</tspan>.</text>
-    <text x="34" y="128"><tspan fill="#1f5d3a" font-weight="700">2.</tspan>  Zählt die <tspan font-weight="700">Vokale</tspan> (<tspan fill="#1f5d3a" font-weight="700">a e i o u</tspan>) im Satz.</text>
+    <text x="34" y="128"><tspan fill="#1f5d3a" font-weight="700">2.</tspan>  Zählt die <tspan font-weight="700">Vokale</tspan> im Satz.</text>
     <text x="34" y="150"><tspan fill="#1f5d3a" font-weight="700">3.</tspan>  <tspan font-weight="700">Addiert</tspan> alle 5 Zahlen — das ist eure <tspan font-weight="700">Summe</tspan>.</text>
     <text x="34" y="172"><tspan fill="#1f5d3a" font-weight="700">4.</tspan>  Sucht die Summe in der <tspan font-weight="700">Schatz-Tabelle</tspan> — die Zahl daneben ist eure Zahl!</text>
   </g>
