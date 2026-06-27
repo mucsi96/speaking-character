@@ -59,6 +59,9 @@ body.script-mode {
 body.script-mode #root {
   height: auto;
   overflow: visible;
+  /* The app pins #root to the dark show background; let the parchment gradient
+     on <body> show through on the guide. */
+  background: transparent;
 }
 
 .script-root * { box-sizing: border-box; }
