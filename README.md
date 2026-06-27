@@ -16,13 +16,35 @@ driven by the remote's colored buttons.
    Coco **shakes his head** and they try again.
 5. Repeats through all scenes until the treasure is found.
 
-Each task scene has a single-digit `code` in
-[`server/src/scenes.ts`](server/src/scenes.ts) — hide the matching number as a
+Each task scene has a single-digit `code` — hide the matching number as a
 physical clue in your play area.
 
-Edit the whole German script in [`server/src/scenes.ts`](server/src/scenes.ts).
-The server owns the script: it serves it to the client over `GET /api/script`
-and pre-renders all of its TTS on startup (see below).
+## Admin UI & live state
+
+The server owns the script **and** the live show state (current phase + scene)
+and persists both to a JSON file (`STATE_FILE`, default `./data/state.json`),
+seeded on first run from [`server/src/scenes.ts`](server/src/scenes.ts).
+
+Open **`/admin`** (e.g. http://localhost:5173/admin in dev) to:
+
+- **Edit the script** on the fly — scene text, single-digit codes, and the
+  random praise / "try again" lines — then **Save**.
+- **Drive the screen** live — jump to any scene or set the phase (start screen,
+  speaking, code entry, celebrate, reject, end).
+
+Changes are pushed to every connected client over **Server-Sent Events**
+(`GET /api/events`), so the TV display updates **without reloading**. Saving a
+script also re-warms the TTS cache for the new lines in the background.
+
+**Reload behaviour:** if the TV display is reloaded it always shows the
+**Start / Weiter (resume)** screen first — a deliberate gate (the OK press is
+also what unlocks audio in the TV browser). *Start* begins from scene 1;
+*Weiter* resumes from the scene the server last saved. Only after that gesture
+does the display follow the admin's live show-state changes.
+
+State is read over `GET /api/state` (`{ script, show, rev }`); `GET /api/script`
+is kept for backwards compatibility. The server still pre-renders all TTS on
+startup (see below).
 
 ## Project layout
 

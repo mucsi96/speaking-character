@@ -21,6 +21,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
 ENV CACHE_DIR=/app/cache
+ENV STATE_FILE=/app/data/state.json
 
 # Server runtime + built artifacts.
 COPY --from=build /app/node_modules ./node_modules
@@ -29,7 +30,7 @@ COPY --from=build /app/server/package.json ./server/package.json
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
 
-RUN mkdir -p /app/cache
+RUN mkdir -p /app/cache /app/data
 EXPOSE 8080
 
 CMD ["node", "server/dist/index.js"]
