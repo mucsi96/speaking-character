@@ -5,6 +5,7 @@ title: Der große Piratenschwur
 room: "Láda előtt · csapatmunka"
 tags: ["Csapat (mind az 5)"]
 dial: "🟡 → 1"
+code: "1"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:

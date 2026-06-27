@@ -14,22 +14,19 @@
  *  local dev the server runs ephemerally (`EPHEMERAL_STATE=1`) and ignores the
  *  file entirely, so the markdown is always the source of truth.
  *
- *  The content is a *flat* list of challenges (`challenges/c1 … c13/`); the four
- *  locks ride along as metadata on the challenge that opens / closes each. Coco
- *  speaks before every challenge and never explains the task — the puzzle lives
- *  on the printable in the challenge's folder — so the challenge scene is the
- *  lead-in only, with no question appended.
- *
- *  Mapping (linear `Scene[]`), walking the challenges in `order`:
- *       `<anchor>-intro`   : a lock opener's intro lines (codeless). The red
- *                            lock's intro (`z1-intro`) is the prologue that opens
- *                            the whole hunt — greeting, birthday and the first
- *                            "find the chest" clue,
- *       `C1`..`C12`        : each challenge's spoken lead-in (no task), with the
- *                            single-digit answer from the codes table,
- *       `<id>-unlock`      : a lock closer's unlock narration (codeless),
- *       `<id>-break`       : the break narration (codeless, when present),
- *       `finale`           : the gold finale lines (codeless climax).
+ *  The content is a *flat* list of challenges (`challenges/<id>/`), one per
+ *  scene, walked in `order`. Every scene maps 1:1 onto a `challenge.md`:
+ *       * a challenge with a `code` is a code gate — the kids enter the single
+ *         digit to advance (`C1`..`C12`);
+ *       * a challenge without a `code` is an OK gate — Coco speaks and the show
+ *         waits for a grown-up to press OK (the C0 prologue, every lock's
+ *         unlock celebration `<id>-unlock`, the breaks `<id>-break`). The very
+ *         last codeless scene (the gold finale) simply ends the show.
+ *  Coco speaks before every challenge and never explains the task — the puzzle
+ *  lives on the printable in the challenge's folder — so the scene is the
+ *  spoken lead-in only, with no question appended. The four locks ride along as
+ *  printable-only metadata (`lock:`) on the challenge that opens each; their
+ *  lead-in narration is folded into that challenge's own `lines`.
  *
  *  The reaction lines (`correctLines`/`wrongLines`) are generic and stay curated
  *  here — the markdown has no equivalent and the gentle, encouraging tone for
@@ -126,18 +123,13 @@ interface ChallengeData {
   id: string;
   lines?: unknown[];
   dial?: string;
-  variant?: string;
-  /** Carried by the C0 prologue (`variant: intro`): the greeting/remote lines
-   *  spoken before the OK-gated pause; `lines` carry the post-OK chest reveal. */
-  intro?: { lines?: unknown[] };
-  /** Carried by a lock's first challenge: its anchor + intro narration. */
-  lock?: { anchor?: string; intro?: { lines?: unknown[] } };
-  /** Carried by a lock's last challenge: the unlock / break narration. */
-  unlock?: { text?: string };
-  break?: { text?: string };
+  /** Single-digit answer the kids enter. Absent ⇒ a codeless, OK-gated scene. */
+  code?: string | number;
 }
 
-/** Build the `{ C1: '3', … }` answer lookup from `sections/02-codes.md`. */
+/** Build the `{ C1: '3', … }` answer lookup from the parent printable's
+ *  validation table — the source of truth is each `challenge.md`'s `code`; this
+ *  lookup only exists to cross-check the printable against it (drift guard). */
 function buildDigitLookup(files: Record<string, Record<string, unknown>>): Record<string, string> {
   const codes = pick(files, 'sections/02-codes.md');
   const validation = codes.validation as { rows?: unknown[][]; digitColumn?: number } | undefined;
@@ -173,74 +165,55 @@ function buildChallenges(files: Record<string, Record<string, unknown>>): Challe
     .sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
 }
 
-/** Assemble the default `Script` from the markdown content directory. */
+/** Assemble the default `Script` from the markdown content directory. Each
+ *  `challenge.md` becomes exactly one scene, in `order`: a `code` makes it a
+ *  code gate, its absence an OK gate (the store ends the show on the last one). */
 export function buildDefaultScript(): Script {
   const files = collect(CONTENT_DIR);
   const digits = buildDigitLookup(files);
   const scenes: Scene[] = [];
 
-  // The hunt opens with the codeless C0 prologue (`variant: intro`): Coco's
-  // greeting + the remote explanation, an OK-gated pause while the kids fetch
-  // the chest and carry it to the living room, then the chest reveal. After
-  // that each lock opens with its own intro, then its challenges; the unlock /
-  // break narration closes each lock.
-  let finale: Scene | null = null;
-
   for (const challenge of buildChallenges(files)) {
-    // C0 — the codeless prologue. Two scenes: the greeting/remote lines, gated
-    // with `pause` so the show waits for OK while the chest is fetched, then the
-    // post-OK chest reveal. No code, no lock processing.
-    if (challenge.variant === 'intro') {
-      if (challenge.intro?.lines) {
-        scenes.push({
-          id: `${challenge.id}-intro`,
-          text: speak(challenge.intro.lines),
-          pause: true,
-        });
-      }
-      scenes.push({ id: challenge.id, text: speak(challenge.lines) });
-      continue;
-    }
-
-    // A lock opener carries the lock's intro — spoken before its challenge.
-    if (challenge.lock?.intro?.lines) {
-      const anchor = challenge.lock.anchor ?? challenge.id;
-      scenes.push({ id: `${anchor}-intro`, text: speak(challenge.lock.intro.lines) });
-    }
-
-    if (challenge.variant === 'finale') {
-      // The climax has no answer; emit it once at the very end.
-      finale = { id: 'finale', text: speak(challenge.lines) };
-      continue;
-    }
-
     // Coco speaks the lead-in only — the task itself lives on the printable, so
     // there is no `question` to append.
-    const code = digits[challenge.id];
-    if (!code) throw new Error(`challenge ${challenge.id}: no answer in 02-codes.md`);
-    if (!/^\d$/.test(code)) throw new Error(`challenge ${challenge.id}: bad answer "${code}"`);
+    const text = speak(challenge.lines);
+    if (challenge.code === undefined || challenge.code === null || challenge.code === '') {
+      // Codeless ⇒ an OK-gated scene (the prologue, an unlock, a break) or the
+      // finale. The client waits for OK, or ends the show on the last scene.
+      scenes.push({ id: challenge.id, text });
+      continue;
+    }
+
+    const code = String(challenge.code).trim();
+    if (!/^\d$/.test(code)) throw new Error(`challenge ${challenge.id}: bad code "${code}"`);
     assertDialMatches(challenge, code);
-    scenes.push({ id: challenge.id, text: speak(challenge.lines), code });
-
-    // A lock closer celebrates the unlock and (sometimes) sends them to a break.
-    if (challenge.unlock?.text) {
-      scenes.push({ id: `${challenge.id}-unlock`, text: speak(challenge.unlock.text) });
-    }
-    if (challenge.break?.text) {
-      scenes.push({ id: `${challenge.id}-break`, text: speak(challenge.break.text) });
-    }
+    assertCodesTableMatches(challenge, code, digits);
+    scenes.push({ id: challenge.id, text, code });
   }
-
-  if (finale) scenes.push(finale);
 
   return { scenes, correctLines, wrongLines };
 }
 
-/** Guard against drift: the challenge's `dial` digit must match the codes table. */
+/** Guard against drift: the challenge's `dial` digit must match its `code`. */
 function assertDialMatches(challenge: ChallengeData, code: string): void {
   if (!challenge.dial) return;
   const digit = challenge.dial.match(/(\d)\s*$/)?.[1];
   if (digit && digit !== code) {
     throw new Error(`challenge ${challenge.id}: dial "${challenge.dial}" disagrees with code ${code}`);
+  }
+}
+
+/** Guard against drift: the parent printable's validation table must agree with
+ *  the challenge's own `code` (the source of truth). */
+function assertCodesTableMatches(
+  challenge: ChallengeData,
+  code: string,
+  digits: Record<string, string>
+): void {
+  const listed = digits[challenge.id];
+  if (listed !== undefined && listed !== code) {
+    throw new Error(
+      `challenge ${challenge.id}: code ${code} disagrees with 02-codes.md ("${listed}")`
+    );
   }
 }

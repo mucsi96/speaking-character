@@ -23,15 +23,12 @@ import { buildDefaultScript } from './content.js';
 export interface Scene {
   id: string;
   text: string;
-  /** Single-digit answer the kids must enter to continue (optional). */
-  code?: string;
   /**
-   * When true, the show does NOT auto-advance after this codeless scene's
-   * narration — it waits for a grown-up to press OK/Enter. Used by the C0
-   * prologue so the kids have time to fetch the chest and carry it to the
-   * living room before Coco reveals the locks.
+   * Single-digit answer the kids must enter to continue. When absent the scene
+   * is OK-gated: Coco speaks and the show waits for a grown-up to press
+   * OK/Enter before advancing (and the very last scene just ends the show).
    */
-  pause?: boolean;
+  code?: string;
 }
 
 export interface Script {

@@ -5,6 +5,7 @@ title: Zahlenfolge
 room: "Dolgozószoba · matek/logika"
 tags: [Számsor]
 dial: "🔵 → 2"
+code: "2"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:

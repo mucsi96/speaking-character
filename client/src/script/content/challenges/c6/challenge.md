@@ -5,6 +5,7 @@ title: Geomag-Pyramide
 room: "Nappali · térbeli építés"
 tags: [Geomag, Közös]
 dial: "🔵 → 6"
+code: "6"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
@@ -14,8 +15,6 @@ parent:
   entries:
     - [Elrejtés, "Geomag + a terv a nappaliban, a nagy kanapé melletti szőnyegen (legyen hely építeni)."]
     - [Megoldás, "Tetraéder = 4 golyó + **6** pálca → 6", sol]
-unlock:
-  title: "🔵 BLAU LAKAT LE! (2/4)"
-  text: "Coco: „5-2-6 — das blaue Schloss fällt! Weiter zur WERKSTATT!”"
-  gradient: "linear-gradient(90deg,#3a82c9,var(--lock-blue))"
+# The BLUE lock's unlock celebration is now its own codeless OK-gated scene
+# (c6-unlock).
 ---

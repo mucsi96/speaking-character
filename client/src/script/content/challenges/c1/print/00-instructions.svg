@@ -29,11 +29,12 @@
   </g>
 
   <!-- cannonball pile motif -->
-  <circle cx="318" cy="246" r="22" fill="url(#c1-00-ball)"/>
-  <circle cx="296" cy="262" r="22" fill="url(#c1-00-ball)"/>
-  <circle cx="340" cy="262" r="22" fill="url(#c1-00-ball)"/>
+  <circle cx="356" cy="244" r="17" fill="url(#c1-00-ball)"/>
+  <circle cx="338" cy="258" r="17" fill="url(#c1-00-ball)"/>
+  <circle cx="374" cy="258" r="17" fill="url(#c1-00-ball)"/>
 
-  <!-- footer chip -->
-  <circle cx="44" cy="258" r="7" fill="#d6463a"/>
-  <text x="58" y="263" fill="#7a6a4a" font-size="13">C1 · 5 Aufgaben</text>
+  <!-- answer slot -->
+  <rect x="34" y="234" width="252" height="46" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="50" y="263" fill="#8c2b22" font-size="16">Erste Zahl =</text>
+  <line x1="158" y1="267" x2="270" y2="267" stroke="#c2a76a" stroke-width="2" stroke-dasharray="4 5"/>
 </svg>

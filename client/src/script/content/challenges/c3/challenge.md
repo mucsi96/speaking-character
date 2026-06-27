@@ -5,6 +5,7 @@ title: Die Papageien-Geschichte
 room: "Nappali · felolvasás"
 tags: [Olvasás]
 dial: "🔴 → 4"
+code: "4"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:
@@ -14,14 +15,6 @@ parent:
   entries:
     - [Elrejtés, "A kinyomtatott lap a nagy étkezőasztalon, „pecséttel”."]
     - [Megoldás, "PAPAGEI 4×szerepel → **4**", sol]
-# Last challenge of the RED lock: once C3's code is entered, Coco celebrates the
-# unlock and sends the crew to the break.
-unlock:
-  title: "🔴 ROT LAKAT LE! (1/4)"
-  text: "Coco: „Der Code ist 3-7-4 — öffnet das ROTE Schloss und nehmt es ab! ARRR!”"
-  gradient: "linear-gradient(90deg,#d6463a,var(--lock-red))"
-break:
-  emoji: "🍪"
-  title: SZÜNET 1
-  text: "Snack + 1 Tom & Jerry rész. Készítsd elő a hálót."
+# The RED lock's unlock celebration and the break that follows are now their own
+# codeless OK-gated scenes (c3-unlock, c3-break).
 ---

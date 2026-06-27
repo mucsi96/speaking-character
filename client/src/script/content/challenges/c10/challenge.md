@@ -5,6 +5,7 @@ title: Logik-Rätsel
 room: "Nappali · logika/matek"
 tags: [Logika, "5 kártya"]
 dial: "🟡 → 9"
+code: "9"
 lockColor: var(--lock-gold)
 lock:
   anchor: z4
@@ -14,12 +15,9 @@ lock:
   title: "Lakat 4 — Gold · Schatzkammer"
   subtitle: "Nappali → előszoba → láda · C10 C11 C12 · logika + térkép + csapatmunka"
   code: "9 - 3 - 1"
-  intro:
-    who: "Coco · Intro"
-    lines:
-      - "„Das große Finale, Mannschaft! Das letzte — das GOLDENE Schloss. Drei Aufgaben, dann gehört der Schatz EUCH!”"
 who: Coco mondja
 lines:
+  - "„Das große Finale, Mannschaft! Das letzte — das GOLDENE Schloss. Drei Aufgaben, dann gehört der Schatz EUCH!”"
   - "„Ab ins WOHNZIMMER zum großen Finale! Fünf knifflige Rätsel liegen bereit — jeder schnappt sich eine Karte!”"
 parent:
   ph: Szülőknek

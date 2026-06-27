@@ -208,8 +208,8 @@ export default function ScriptPage() {
           ) : null}
         </section>
 
-        {/* Flat challenge list — each challenge renders its own lock header,
-            intro, and unlock / break bars where it opens or closes a lock. */}
+        {/* Flat challenge list — each challenge renders its own lock header and
+            unlock / break bars where it opens or closes a lock. */}
         <section id="kihivasok">
           {challenges.map((challenge) => (
             <Challenge key={challenge.id} challenge={challenge} />

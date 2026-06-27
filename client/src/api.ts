@@ -11,11 +11,10 @@
 export interface Scene {
   id: string;
   text: string;
-  /** Single-digit answer the kids must enter to continue (optional). */
+  /** Single-digit answer the kids must enter to continue. When absent the scene
+   *  is OK-gated: it waits for an OK/Enter press before advancing (and the very
+   *  last scene just ends the show). */
   code?: string;
-  /** When true, the show pauses after this codeless scene and waits for an
-   *  OK/Enter press instead of auto-advancing (the C0 chest-fetch gate). */
-  pause?: boolean;
 }
 
 export interface Script {

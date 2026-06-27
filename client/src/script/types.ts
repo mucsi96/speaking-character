@@ -93,17 +93,10 @@ export interface PrintIntro {
 /** One `[term, description, "sol"?]` row of a challenge's parent note list. */
 export type ParentEntry = [string, string] | [string, string, string];
 
-/** Coco's spoken lead-in for a lock — the narration before its first
- *  challenge (the red lock's intro doubles as the prologue). */
-export interface LockIntro {
-  who: string;
-  lines: string[];
-  hint?: string;
-}
-
 /** Lock header carried by the *first* challenge of each lock. The hunt's four
- *  colored locks are no longer their own directory; their styling, code and
- *  intro narration ride along with the challenge that opens them. */
+ *  colored locks are no longer their own directory; their styling and code ride
+ *  along with the challenge that opens them. The lock's lead-in narration is
+ *  part of that challenge's own `lines`. */
 export interface ChallengeLock {
   anchor: string;
   emoji: string;
@@ -113,39 +106,44 @@ export interface ChallengeLock {
   title: string;
   subtitle: string;
   code: string;
-  intro: LockIntro;
 }
 
-/** One task in the flat challenge list (C1–C12, plus the gold finale). Coco
- *  speaks the `lines` *before* the challenge to set the scene and never
- *  explains the task itself — the puzzle lives on the printable in the same
- *  challenge folder. `lock` opens a new lock; `unlock`/`break` close one. */
+/** One task in the flat challenge list (C0–C12, plus the gold finale). Coco
+ *  speaks the single `lines` block *before* the challenge to set the scene
+ *  (and, where it opens a lock, to reveal that lock) and never explains the
+ *  task itself — the puzzle lives on the printable in the same challenge
+ *  folder. `lock` opens a new lock; `unlock`/`break` close one. */
 export interface Challenge {
   order: number;
   id: string;
   title: string;
-  room: string;
+  room?: string;
   tags?: string[];
   dial?: string;
+  /** Single-digit answer the kids enter on the remote. Absent ⇒ an OK-gated
+   *  scene (the C0 prologue, a lock's unlock celebration, a break, the finale). */
+  code?: string;
   /** Accent color for the challenge card's left border (its lock's color). */
   lockColor?: string;
-  who: string;
+  who?: string;
   lines: string[];
-  parent: { ph: string; entries: ParentEntry[] };
-  /** "finale" renders the climax card; "intro" renders the codeless C0
-   *  prologue (greeting + remote + chest reveal, no lock, no answer). */
-  variant?: 'finale' | 'intro';
-  /** Present on the C0 prologue: the greeting/remote lines spoken *before* the
-   *  OK-gated pause. `lines` then carry the post-OK chest reveal. */
-  intro?: LockIntro;
+  /** Optional Hungarian hint for the parent, shown under Coco's bubble. */
+  hint?: string;
+  parent?: { ph: string; entries: ParentEntry[] };
+  /** Picks the printable card style. Absent ⇒ a normal task card.
+   *  "intro" also renders as a task card; "unlock"/"break" render the colored
+   *  unlock / break bars; "finale" renders the gold climax card. */
+  variant?: 'intro' | 'unlock' | 'break' | 'finale';
   icon?: string;
   headGradient?: string;
-  /** Present on the first challenge of a lock: its header + intro narration. */
+  /** Present on the first challenge of a lock: its header (printable only). */
   lock?: ChallengeLock;
-  /** Present on the last challenge of a lock: the unlock celebration. */
-  unlock?: { title: string; text: string; gradient?: string };
-  /** Present where a break follows a completed lock. */
-  break?: { emoji: string; title: string; text: string };
+  /** "unlock"/"break" bar fields: a heading, plus a gradient (unlock) or an
+   *  emoji (break). An unlock bar's body is the scene's spoken `lines`; a break
+   *  bar shows the parent-only `note` (its `lines` are Coco's spoken break cue). */
+  gradient?: string;
+  emoji?: string;
+  note?: string;
 }
 
 /** All print-ready cards of one challenge, grouped so each challenge prints

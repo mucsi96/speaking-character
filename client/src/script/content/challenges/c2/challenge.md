@@ -5,6 +5,7 @@ title: Goldmünzen-Suche
 room: "Fürdőszoba · keresés + összehasonlítás"
 tags: [Keresés]
 dial: "🔴 → 7"
+code: "7"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:

@@ -5,6 +5,7 @@ title: Spiegelschrift
 room: "Háló · olvasás + tükör"
 tags: [Tükör, "5 kártya"]
 dial: "🔵 → 5"
+code: "5"
 lockColor: var(--lock-blue)
 lock:
   anchor: z2
@@ -15,12 +16,9 @@ lock:
   title: "Lakat 2 — Blau · Kapitänskajüte"
   subtitle: "Háló → dolgozó → nappali · C4 C5 C6 · tükör + számsor + Geomag"
   code: "5 - 2 - 6"
-  intro:
-    who: "Coco · Intro"
-    lines:
-      - "„Ein Schloss ist gefallen — bravo! Jetzt kommt das BLAUE Schloss. Eure erste Aufgabe wartet in der KAPITÄNSKAJÜTE (Schlafzimmer) — vergesst den Spiegel nicht!”"
 who: Coco mondja
 lines:
+  - "„Ein Schloss ist gefallen — bravo! Jetzt kommt das BLAUE Schloss. Eure erste Aufgabe wartet in der KAPITÄNSKAJÜTE (Schlafzimmer) — vergesst den Spiegel nicht!”"
   - "„Haltet die Karten vor den Spiegel hinter der Tür, kleine Piraten — gemeinsam wird daraus etwas!”"
 parent:
   ph: Szülőknek

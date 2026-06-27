@@ -5,12 +5,12 @@ title: Kanonenkugel-Mathe
 room: "Konyha · vegyes matek"
 tags: [Matek, "5 párhuzamos"]
 dial: "🔴 → 3"
+code: "3"
 lockColor: var(--lock-red)
-# First challenge of the RED lock — carries the lock header and Coco's
-# red-lock lead-in, spoken before the challenge. The greeting, the remote
-# explanation and the chest reveal now live in C0 (the codeless prologue);
-# here Coco only opens the RED lock and points to the kitchen. Coco never
-# explains the task itself; the puzzle lives on the printable.
+# First challenge of the RED lock — carries the lock header. Coco's `lines` are
+# spoken right after the C0 OK press: he reveals the chest + the four locks,
+# opens the RED lock and points to the kitchen. Coco never explains the task
+# itself; the puzzle lives on the printable.
 lock:
   anchor: z1
   emoji: "🔴"
@@ -20,14 +20,12 @@ lock:
   title: "Lakat 1 — Rot · Kombüse"
   subtitle: "Konyha → fürdő → nappali · C1 C2 C3 · matek + keresés + felolvasás"
   code: "3 - 7 - 4"
-  intro:
-    who: "Coco · Intro"
-    lines:
-      - "„Fangen wir an, kleine Piraten — das erste Schloss ist **ROT**, die Kombüse! Eure allererste Aufgabe wartet in der **KÜCHE**: dort liegen fünf Aufgaben-Karten für euch bereit. Auf geht's!”"
-    hint: "💡 A piros lakat indul: a feladatkártyák a konyhaszigeten. (A láda ekkor már a nappaliban van — lásd C0.)"
 who: Coco mondja
 lines:
-  - "„Fünf Aufgaben-Karten liegen bereit, kleine Piraten — jeder schnappt sich eine und rechnet los! Die Karten verraten euch, was zu tun ist.”"
+  - "„Yo-ho-ho! Da ist sie ja — unsere **Schatztruhe**, mitten im Wohnzimmer! Schaut sie euch ganz genau an: Sie hat **VIER** Schlösser, und jedes hat eine **eigene Farbe** — **ROT**, **BLAU**, **GRÜN** und **GOLD**. Achtet immer auf die Farbe, denn die verrät euch, welches Schloss ihr gerade knackt! Jedes Schloss hat **drei Drehräder** mit Zahlen. Nach jeder Aufgabe bekommt ihr eine Zahl — die drückt ihr mir auf der Fernbedienung, und dann dreht ihr das nächste Rad von **oben nach unten** auf die richtige Zahl. Wenn alle drei Räder eines Schlosses stimmen, fällt es ab!”"
+  - "„Fangen wir an, kleine Piraten — das erste Schloss ist **ROT**, die Kombüse! Eure allererste Aufgabe wartet in der **KÜCHE**: dort liegen fünf Aufgaben-Karten für euch bereit — jeder schnappt sich eine und rechnet los!”"
+  - "„Die Karten verraten euch, was zu tun ist. Wenn ihr die erste Aufgabe gelöst habt, kommt wieder zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein — dann sage ich euch, ob sie stimmt. Auf geht's!”"
+hint: "💡 A piros lakat indul: a feladatkártyák a konyhaszigeten. (A láda ekkor már a nappaliban van — lásd C0.)"
 parent:
   ph: Szülőknek
   entries:

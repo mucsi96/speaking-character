@@ -116,7 +116,6 @@ export function sanitizeScript(input: unknown): Script {
       if (!/^\d$/.test(code)) throw new Error(`scene ${i} code must be a single digit`);
       out.code = code;
     }
-    if (scene.pause === true) out.pause = true;
     return out;
   });
 

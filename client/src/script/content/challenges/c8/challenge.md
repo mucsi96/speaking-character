@@ -5,6 +5,7 @@ title: Geheimcode
 room: "Kis WC / zuhanyzó · jelfejtés"
 tags: [Coding, "5 kártya"]
 dial: "🟢 → 6"
+code: "6"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:

@@ -5,6 +5,7 @@ title: LEGO-Technic-Maschine
 room: "Gyerekszoba · LEGO építés"
 tags: ["LEGO Technic", Közös]
 dial: "🟢 → 4"
+code: "4"
 lockColor: var(--lock-green)
 lock:
   anchor: z3
@@ -15,12 +16,9 @@ lock:
   title: "Lakat 3 — Grün · Werkstatt"
   subtitle: "Gyerekszoba → kis WC → dolgozó · C7 C8 C9 · LEGO + jelfejtés + puzzle"
   code: "4 - 6 - 8"
-  intro:
-    who: "Coco · Intro"
-    lines:
-      - "„Auf zum GRÜNEN Schloss! Eure erste Aufgabe wartet in der WERKSTATT (Kinderzimmer) — eure beschrifteten LEGO-Boxen helfen euch. Drei Aufgaben, dann fällt das GRÜNE Schloss!”"
 who: Coco mondja
 lines:
+  - "„Auf zum GRÜNEN Schloss! Eure erste Aufgabe wartet in der WERKSTATT (Kinderzimmer) — eure beschrifteten LEGO-Boxen helfen euch. Drei Aufgaben, dann fällt das GRÜNE Schloss!”"
   - "„Baut die kleine Technic-Maschine nach dem Plan — holt die Teile aus den beschrifteten Boxen!”"
 parent:
   ph: Szülőknek

@@ -127,20 +127,13 @@ export const useShow = create<ShowState>((set, get) => ({
       // A scene with a `code` gates progress behind the kids entering it.
       set({ phase: 'entering', mouthOpen: 0 });
       push('entering', sceneIndex);
-    } else if (scene?.pause) {
-      // A `pause` scene (the C0 prologue) waits for a grown-up to press OK once
-      // the kids have carried the chest into the living room — only then does
-      // Coco reveal the locks. Hold here instead of auto-advancing.
+    } else {
+      // A codeless scene (the C0 prologue, an unlock celebration, a break) has
+      // nothing to enter — it waits for a grown-up to press OK on the remote
+      // before advancing, so the crew can move rooms / fetch the chest / take a
+      // break at their own pace. Every non-code scene is OK-gated.
       set({ phase: 'waiting', mouthOpen: 0 });
       push('waiting', sceneIndex);
-    } else {
-      // A codeless mid-show narration (a lock's intro, an unlock celebration or
-      // a break) has nothing to enter — roll straight on to the next scene once
-      // Coco finishes speaking. Without this the chest reveal that sends the
-      // kids to the kitchen would end the show before C1 is asked.
-      const next = sceneIndex + 1;
-      set({ phase: 'playing', sceneIndex: next, mouthOpen: 0 });
-      push('playing', next);
     }
   },
 

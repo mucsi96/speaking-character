@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <radialGradient id="c1-04-ball" cx="34%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#6a6a6a"/>
+      <stop offset="0.7" stop-color="#141414"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+
   <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
   <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
 
@@ -6,22 +14,30 @@
   <text x="200" y="45" text-anchor="middle" fill="#fdf2d6" font-size="22" font-weight="700">Aufgabe 4</text>
   <text x="200" y="82" text-anchor="middle" fill="#8c2b22" font-size="14" letter-spacing="2">WELCHE ZAHL FEHLT?</text>
 
+  <!-- cannonball badge -->
+  <circle cx="50" cy="143" r="24" fill="url(#c1-04-ball)"/>
+  <text x="50" y="150" text-anchor="middle" fill="#fdf2d6" font-size="20" font-weight="700">4</text>
+
   <!-- number sequence tiles -->
-  <g font-size="26" font-weight="700" text-anchor="middle">
-    <rect x="60"  y="118" width="48" height="58" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
-    <text x="84"  y="156" fill="#2a2118">2</text>
-    <rect x="118" y="118" width="48" height="58" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
-    <text x="142" y="156" fill="#2a2118">5</text>
-    <rect x="176" y="118" width="48" height="58" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
-    <text x="200" y="156" fill="#2a2118">8</text>
-    <rect x="234" y="118" width="48" height="58" rx="8" fill="#ffffff" stroke="#d6463a" stroke-width="3" stroke-dasharray="5 4"/>
-    <text x="258" y="156" fill="#d6463a">?</text>
-    <rect x="292" y="118" width="48" height="58" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
-    <text x="316" y="156" fill="#2a2118">14</text>
+  <g font-size="24" font-weight="700" text-anchor="middle">
+    <rect x="96"  y="116" width="44" height="54" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
+    <text x="118" y="151" fill="#2a2118">2</text>
+    <rect x="148" y="116" width="44" height="54" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
+    <text x="170" y="151" fill="#2a2118">5</text>
+    <rect x="200" y="116" width="44" height="54" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
+    <text x="222" y="151" fill="#2a2118">8</text>
+    <rect x="252" y="116" width="44" height="54" rx="8" fill="#ffffff" stroke="#d6463a" stroke-width="3" stroke-dasharray="5 4"/>
+    <text x="274" y="151" fill="#d6463a">?</text>
+    <rect x="304" y="116" width="44" height="54" rx="8" fill="#fdf6e3" stroke="#b08a3a" stroke-width="2"/>
+    <text x="326" y="151" fill="#2a2118">14</text>
   </g>
 
-  <text x="200" y="210" text-anchor="middle" fill="#2a2118" font-size="13">Die Reihe steigt immer um den gleichen Schritt.</text>
-  <text x="200" y="238" text-anchor="middle" fill="#8c2b22" font-size="15" font-weight="700">Ergebnis = die fehlende Zahl</text>
+  <text x="200" y="204" text-anchor="middle" fill="#2a2118" font-size="12">Die Reihe steigt immer um den gleichen Schritt. Ergebnis = die fehlende Zahl.</text>
+
+  <!-- answer slot -->
+  <rect x="90" y="216" width="220" height="44" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="108" y="244" fill="#8c2b22" font-size="17">Ergebnis =</text>
+  <line x1="210" y1="248" x2="292" y2="248" stroke="#c2a76a" stroke-width="2" stroke-dasharray="4 5"/>
 
   <circle cx="44" cy="284" r="6" fill="#d6463a"/>
   <text x="56" y="289" fill="#7a6a4a" font-size="12">C1</text>

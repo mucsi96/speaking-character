@@ -5,6 +5,7 @@ title: Schatzkarten-Route
 room: "Előszoba · térkép"
 tags: [Mapping]
 dial: "🟡 → 3"
+code: "3"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
