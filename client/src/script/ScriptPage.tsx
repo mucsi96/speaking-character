@@ -243,13 +243,21 @@ export default function ScriptPage() {
             <h2>{printIntro.heading}</h2>
             <Inline as="p" md={printIntro.lead} />
           </div>
-          {printGroups.map((g) => (
-            <div key={g.challengeId} className="printgroup">
-              {g.cards.map((svg, i) => (
-                <div key={i} className="svg-card" dangerouslySetInnerHTML={{ __html: svg }} />
-              ))}
-            </div>
-          ))}
+          {printGroups.map((g) => {
+            // Full-page (A4) cards — e.g. C8's cut-apart number puzzles — each
+            // get their own printed page instead of tiling 2-up.
+            const fullpage = g.cards.some((c) => c.includes('width="210mm"'));
+            return (
+              <div
+                key={g.challengeId}
+                className={`printgroup${fullpage ? ' fullpage' : ''}`}
+              >
+                {g.cards.map((svg, i) => (
+                  <div key={i} className="svg-card" dangerouslySetInnerHTML={{ __html: svg }} />
+                ))}
+              </div>
+            );
+          })}
         </section>
       </div>
 

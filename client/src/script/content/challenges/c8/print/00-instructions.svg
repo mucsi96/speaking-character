@@ -1,58 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 594" width="210mm" height="297mm" font-family="Georgia, 'Times New Roman', serif">
   <!-- parchment + cut frame -->
-  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
-  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
-
+  <rect x="0" y="0" width="420" height="594" rx="22" fill="#f6eccf"/>
+  <rect x="12" y="12" width="396" height="570" rx="16" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="9 7"/>
   <!-- header band -->
-  <rect x="20" y="14" width="360" height="46" rx="10" fill="#1f5d3a"/>
-  <text x="200" y="36" text-anchor="middle" fill="#bdeccb" font-size="13" letter-spacing="2">GRÜNES SCHLOSS</text>
-  <text x="200" y="53" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">So bekommt ihr eure Zahl</text>
+  <rect x="32" y="28" width="356" height="70" rx="14" fill="#1f5d3a"/>
+  <text x="210" y="60" text-anchor="middle" fill="#bdeccb" font-size="16" letter-spacing="3">GRÜNES SCHLOSS</text>
+  <text x="210" y="84" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">So bekommt ihr eure Zahl</text>
 
   <!-- title -->
-  <text x="200" y="82" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">Geheimcode</text>
+  <text x="210" y="146" text-anchor="middle" fill="#1f5d3a" font-size="34" font-weight="700">Geheimcode</text>
 
   <!-- steps -->
-  <g fill="#2a2118" font-size="13">
-    <text x="34" y="104"><tspan fill="#1f5d3a" font-weight="700">1.</tspan>  Jeder nimmt <tspan font-weight="700">eine Symbol-Karte</tspan>.</text>
-    <text x="34" y="125"><tspan fill="#1f5d3a" font-weight="700">2.</tspan>  Entschlüsselt euer <tspan font-weight="700">Wort</tspan> mit dem <tspan font-weight="700">Geheim-Alphabet</tspan> — es ist eine Zahl!</text>
-    <text x="34" y="146"><tspan fill="#1f5d3a" font-weight="700">3.</tspan>  Schreibt eure Zahl auf und <tspan font-weight="700">zählt alle 5 zusammen</tspan>.</text>
-    <text x="34" y="167"><tspan fill="#1f5d3a" font-weight="700">4.</tspan>  Sucht die <tspan font-weight="700">Summe</tspan> in der Schatz-Tabelle — die Zahl daneben ist euer Code!</text>
+  <g fill="#2a2118" font-size="15">
+    <text x="40" y="194"><tspan fill="#1f5d3a" font-weight="700">1.</tspan>  Jeder nimmt sich <tspan font-weight="700">eine Karte</tspan> voller Puzzleteile.</text>
+    <text x="40" y="226"><tspan fill="#1f5d3a" font-weight="700">2.</tspan>  Setzt die Teile zusammen — eine <tspan font-weight="700">Geheimzahl</tspan></text>
+    <text x="58" y="246">erscheint! Schreibt sie auf.</text>
+    <text x="40" y="278"><tspan fill="#1f5d3a" font-weight="700">3.</tspan>  Sammelt alle <tspan font-weight="700">5 Geheimzahlen</tspan> ein.</text>
+    <text x="40" y="310"><tspan fill="#1f5d3a" font-weight="700">4.</tspan>  Zählt: Wie viele sind <tspan font-weight="700">GRÖSSER als 50</tspan>?</text>
+    <text x="40" y="342"><tspan fill="#1f5d3a" font-weight="700">5.</tspan>  Anzahl in der <tspan font-weight="700">Schatz-Tabelle</tspan> suchen — die</text>
+    <text x="58" y="362">Zahl daneben ist eure Zahl!</text>
   </g>
 
-  <!-- treasure mapping table: Summe -> Code -->
-  <text x="200" y="204" text-anchor="middle" fill="#1f5d3a" font-size="13" font-weight="700" letter-spacing="1">SCHATZ-TABELLE</text>
-  <g font-size="12" fill="#7a6a4a" text-anchor="end">
-    <text x="40" y="230">Summe</text>
-    <text x="40" y="258">Code</text>
+  <!-- treasure mapping table: Anzahl -> Zahl -->
+  <text x="210" y="398" text-anchor="middle" fill="#1f5d3a" font-size="16" font-weight="700" letter-spacing="1">SCHATZ-TABELLE</text>
+  <g font-size="13" fill="#7a6a4a" text-anchor="end">
+    <text x="62" y="437">Anzahl</text>
+    <text x="62" y="470">Zahl</text>
   </g>
-  <g text-anchor="middle">
-    <!-- column 1: 18 -> 4 -->
-    <rect x="52" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
-    <line x1="52" y1="240" x2="112" y2="240" stroke="#c2a76a" stroke-width="1"/>
-    <text x="82" y="234" fill="#2a2118" font-size="16" font-weight="700">18</text>
-    <text x="82" y="259" fill="#1f5d3a" font-size="16" font-weight="700">4</text>
-    <!-- column 2: 19 -> 2 -->
-    <rect x="118" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
-    <line x1="118" y1="240" x2="178" y2="240" stroke="#c2a76a" stroke-width="1"/>
-    <text x="148" y="234" fill="#2a2118" font-size="16" font-weight="700">19</text>
-    <text x="148" y="259" fill="#1f5d3a" font-size="16" font-weight="700">2</text>
-    <!-- column 3: 20 -> 6 (the answer) -->
-    <rect x="184" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
-    <line x1="184" y1="240" x2="244" y2="240" stroke="#c2a76a" stroke-width="1"/>
-    <text x="214" y="234" fill="#2a2118" font-size="16" font-weight="700">20</text>
-    <text x="214" y="259" fill="#1f5d3a" font-size="16" font-weight="700">6</text>
-    <!-- column 4: 21 -> 3 -->
-    <rect x="250" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
-    <line x1="250" y1="240" x2="310" y2="240" stroke="#c2a76a" stroke-width="1"/>
-    <text x="280" y="234" fill="#2a2118" font-size="16" font-weight="700">21</text>
-    <text x="280" y="259" fill="#1f5d3a" font-size="16" font-weight="700">3</text>
-    <!-- column 5: 22 -> 8 -->
-    <rect x="316" y="216" width="60" height="50" rx="8" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
-    <line x1="316" y1="240" x2="376" y2="240" stroke="#c2a76a" stroke-width="1"/>
-    <text x="346" y="234" fill="#2a2118" font-size="16" font-weight="700">22</text>
-    <text x="346" y="259" fill="#1f5d3a" font-size="16" font-weight="700">8</text>
+  <g>
+    <rect x="72" y="414" width="60" height="64" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="72" y1="446" x2="132" y2="446" stroke="#c2a76a" stroke-width="1"/>
+    <text x="102" y="437" text-anchor="middle" fill="#2a2118" font-size="22" font-weight="700">1</text>
+    <text x="102" y="470" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">4</text>
+    <rect x="138" y="414" width="60" height="64" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="138" y1="446" x2="198" y2="446" stroke="#c2a76a" stroke-width="1"/>
+    <text x="168" y="437" text-anchor="middle" fill="#2a2118" font-size="22" font-weight="700">2</text>
+    <text x="168" y="470" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">9</text>
+    <rect x="204" y="414" width="60" height="64" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="204" y1="446" x2="264" y2="446" stroke="#c2a76a" stroke-width="1"/>
+    <text x="234" y="437" text-anchor="middle" fill="#2a2118" font-size="22" font-weight="700">3</text>
+    <text x="234" y="470" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">6</text>
+    <rect x="270" y="414" width="60" height="64" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="270" y1="446" x2="330" y2="446" stroke="#c2a76a" stroke-width="1"/>
+    <text x="300" y="437" text-anchor="middle" fill="#2a2118" font-size="22" font-weight="700">4</text>
+    <text x="300" y="470" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">2</text>
+    <rect x="336" y="414" width="60" height="64" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+    <line x1="336" y1="446" x2="396" y2="446" stroke="#c2a76a" stroke-width="1"/>
+    <text x="366" y="437" text-anchor="middle" fill="#2a2118" font-size="22" font-weight="700">5</text>
+    <text x="366" y="470" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">8</text>
   </g>
 
   <!-- footer -->
-  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C8 · 5 Karten</text>
+  <text x="210" y="564" text-anchor="middle" fill="#7a6a4a" font-size="16">C8 · 5 Karten</text>
 </svg>
