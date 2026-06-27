@@ -49,9 +49,8 @@ startup (see below).
 ## Parent guide (`/script`)
 
 The printable host's playbook — *"Coco & die 4 Schlösser"*, the bilingual
-treasure-hunt guide that used to live as the hand-written static `script.html`
-at the repo root — is now a **dynamic page at `/script`** (e.g.
-http://localhost:5173/script in dev).
+treasure-hunt guide (originally a hand-written static `script.html`) — is a
+**dynamic page at `/script`** (e.g. http://localhost:5173/script in dev).
 
 Its content lives as a **structured markdown directory** under
 [`client/src/script/content/`](client/src/script/content):
@@ -70,8 +69,6 @@ components in [`client/src/script/`](client/src/script) that reuse the original
 look & feel (see `script.css`). To change task text, codes, hints or printables,
 edit the markdown — no component changes needed. The route is lazy-loaded, so
 its bundle and parchment styles never reach the TV display or `/admin`.
-
-`script.html` is kept as the original design reference.
 
 ## Project layout
 
