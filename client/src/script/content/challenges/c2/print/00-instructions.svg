@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <radialGradient id="c2-00-coin" cx="34%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#f0d27a"/>
+      <stop offset="0.6" stop-color="#c9972b"/>
+      <stop offset="1" stop-color="#8a6510"/>
+    </radialGradient>
+  </defs>
+
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="20" y="16" width="360" height="48" rx="10" fill="#8c2b22"/>
+  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS · KÜCHE</text>
+  <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="15" font-style="italic">So bekommt ihr eure Zahl</text>
+
+  <!-- title -->
+  <text x="200" y="92" text-anchor="middle" fill="#8c2b22" font-size="26" font-weight="700">Goldmünzen-Suche</text>
+
+  <!-- steps -->
+  <g fill="#2a2118" font-size="14">
+    <text x="42" y="124"><tspan fill="#8c2b22" font-weight="700">1.</tspan>  <tspan font-weight="700">5 Goldmünzen</tspan> sind in der Küche versteckt.</text>
+    <text x="42" y="148"><tspan fill="#8c2b22" font-weight="700">2.</tspan>  Jeder findet <tspan font-weight="700">EINE Münze</tspan>.</text>
+    <text x="42" y="172"><tspan fill="#8c2b22" font-weight="700">3.</tspan>  Legt alle Münzen nebeneinander.</text>
+    <text x="42" y="196"><tspan fill="#8c2b22" font-weight="700">4.</tspan>  Welche Zahl ist die <tspan font-weight="700">KLEINSTE</tspan>?</text>
+    <text x="42" y="220"><tspan fill="#8c2b22" font-weight="700">5.</tspan>  Diese Zahl ist eure <tspan font-weight="700">nächste Zahl</tspan>!</text>
+  </g>
+
+  <!-- pile-of-gold-coins motif -->
+  <circle cx="318" cy="246" r="22" fill="url(#c2-00-coin)" stroke="#8a6510" stroke-width="2"/>
+  <circle cx="296" cy="262" r="22" fill="url(#c2-00-coin)" stroke="#8a6510" stroke-width="2"/>
+  <circle cx="340" cy="262" r="22" fill="url(#c2-00-coin)" stroke="#8a6510" stroke-width="2"/>
+
+  <!-- footer chip -->
+  <circle cx="44" cy="258" r="7" fill="#d6463a"/>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">Küche · C2 · 5 Münzen</text>
+</svg>

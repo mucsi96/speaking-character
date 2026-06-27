@@ -4,7 +4,6 @@ import { scriptDoc } from './content';
 import type { CodeTable } from './types';
 import { Block, Inline, Raw } from './components/Html';
 import { Challenge } from './components/Challenge';
-import { PrintableSheet } from './components/Visual';
 
 const SUBHEAD: CSSProperties = {
   fontFamily: 'var(--head)',
@@ -245,9 +244,9 @@ export default function ScriptPage() {
             <Inline as="p" md={printIntro.lead} />
           </div>
           {printGroups.map((g) => (
-            <div key={g.challengeId} className={g.svg ? 'printgroup printgroup--svg' : 'printgroup'}>
-              {g.sheets.map((sheet, i) => (
-                <PrintableSheet key={i} printable={sheet} />
+            <div key={g.challengeId} className="printgroup">
+              {g.cards.map((svg, i) => (
+                <div key={i} className="svg-card" dangerouslySetInnerHTML={{ __html: svg }} />
               ))}
             </div>
           ))}

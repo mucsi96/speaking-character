@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" width="190mm" height="135mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="760" height="540" rx="22" fill="#f6eccf"/>
+  <rect x="12" y="12" width="736" height="516" rx="16" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="9 7"/>
+
+  <!-- header band -->
+  <rect x="40" y="28" width="680" height="70" rx="12" fill="#1f5d3a"/>
+  <text x="380" y="60" text-anchor="middle" fill="#bdeccb" font-size="16" letter-spacing="3">GRÜNES SCHLOSS · KINDERZIMMER</text>
+  <text x="380" y="84" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">Legende → Wort entschlüsseln</text>
+
+  <!-- title -->
+  <text x="380" y="142" text-anchor="middle" fill="#1f5d3a" font-size="34" font-weight="700">Geheimcode</text>
+
+  <!-- legend: 8 chips, 4 columns x 2 rows -->
+  <g>
+    <!-- row 1 -->
+    <g>
+      <rect x="58" y="170" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="92" y="207" text-anchor="middle" font-size="26">⚓</text>
+      <text x="150" y="208" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">A</text>
+    </g>
+    <g>
+      <rect x="228" y="170" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="262" y="207" text-anchor="middle" font-size="26">🦴</text>
+      <text x="320" y="208" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">E</text>
+    </g>
+    <g>
+      <rect x="398" y="170" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="432" y="207" text-anchor="middle" font-size="26">🗡️</text>
+      <text x="490" y="208" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">S</text>
+    </g>
+    <g>
+      <rect x="568" y="170" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="602" y="207" text-anchor="middle" font-size="26">👑</text>
+      <text x="660" y="208" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">C</text>
+    </g>
+    <!-- row 2 -->
+    <g>
+      <rect x="58" y="240" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="92" y="277" text-anchor="middle" font-size="26">🪙</text>
+      <text x="150" y="278" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">H</text>
+    </g>
+    <g>
+      <rect x="228" y="240" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="262" y="277" text-anchor="middle" font-size="26">🐚</text>
+      <text x="320" y="278" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">I</text>
+    </g>
+    <g>
+      <rect x="398" y="240" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="432" y="277" text-anchor="middle" font-size="26">🦜</text>
+      <text x="490" y="278" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">R</text>
+    </g>
+    <g>
+      <rect x="568" y="240" width="150" height="56" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="602" y="277" text-anchor="middle" font-size="26">☠️</text>
+      <text x="660" y="278" text-anchor="middle" fill="#1f5d3a" font-size="28" font-weight="700">N</text>
+    </g>
+  </g>
+
+  <!-- prompt -->
+  <text x="380" y="346" text-anchor="middle" fill="#1f5d3a" font-size="24" font-weight="700">Das geheime Wort:</text>
+
+  <!-- cipher boxes: 🗡️ 🦴 👑 🪙 🗡️ -->
+  <g>
+    <g>
+      <rect x="158" y="368" width="76" height="76" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2.5"/>
+      <text x="196" y="420" text-anchor="middle" font-size="38">🗡️</text>
+      <line x1="166" y1="468" x2="226" y2="468" stroke="#1f5d3a" stroke-width="2"/>
+    </g>
+    <g>
+      <rect x="248" y="368" width="76" height="76" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2.5"/>
+      <text x="286" y="420" text-anchor="middle" font-size="38">🦴</text>
+      <line x1="256" y1="468" x2="316" y2="468" stroke="#1f5d3a" stroke-width="2"/>
+    </g>
+    <g>
+      <rect x="338" y="368" width="76" height="76" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2.5"/>
+      <text x="376" y="420" text-anchor="middle" font-size="38">👑</text>
+      <line x1="346" y1="468" x2="406" y2="468" stroke="#1f5d3a" stroke-width="2"/>
+    </g>
+    <g>
+      <rect x="428" y="368" width="76" height="76" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2.5"/>
+      <text x="466" y="420" text-anchor="middle" font-size="38">🪙</text>
+      <line x1="436" y1="468" x2="496" y2="468" stroke="#1f5d3a" stroke-width="2"/>
+    </g>
+    <g>
+      <rect x="518" y="368" width="76" height="76" rx="14" fill="#fffaf0" stroke="#c2a76a" stroke-width="2.5"/>
+      <text x="556" y="420" text-anchor="middle" font-size="38">🗡️</text>
+      <line x1="526" y1="468" x2="586" y2="468" stroke="#1f5d3a" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- footer chip -->
+  <circle cx="44" cy="506" r="8" fill="#2e7d4f"/>
+  <text x="60" y="512" fill="#7a6a4a" font-size="16">Kinderzimmer · C8</text>
+</svg>

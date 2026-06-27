@@ -7,7 +7,6 @@ import type {
   OverviewSection,
   PrintGroup,
   PrintIntro,
-  Printable,
   ScriptDoc,
   TvSection,
 } from './types';
@@ -56,33 +55,22 @@ function buildChallenges(): Challenge[] {
     .sort((a, b) => a.order - b.order);
 }
 
-/** Group every challenge's printables so each prints onto one A4 page. A
- *  challenge's sheets are either SVG cards (challenges/<id>/print/*.svg, tiled
- *  into a grid) or a classic HTML sheet (challenges/<id>/*.md). Groups follow
- *  challenge order; cards sort by filename. */
+/** Group every challenge's print-ready SVG cards so each challenge prints onto
+ *  one A4 page. Every card is a self-contained SVG (challenges/<id>/print/*.svg)
+ *  that carries all its own styling — the guide just inlines the raw markup.
+ *  Groups follow challenge order; cards sort by filename. */
 function buildPrintGroups(challenges: Challenge[]): PrintGroup[] {
   const order = new Map(challenges.map((c) => [c.id.toLowerCase(), c.order]));
   const groups = new Map<string, PrintGroup>();
-  const groupFor = (id: string): PrintGroup => {
+
+  for (const [path, svg] of Object.entries(svgFiles).sort(([a], [b]) => a.localeCompare(b))) {
+    const id = challengeIdOf(path);
     let g = groups.get(id);
     if (!g) {
-      g = { challengeId: id, svg: false, sheets: [] };
+      g = { challengeId: id, cards: [] };
       groups.set(id, g);
     }
-    return g;
-  };
-
-  // Markdown printable sheets — every challenge file except challenge.md.
-  for (const { path, sheet } of Object.entries(parsed)
-    .filter(([p]) => p.includes('/challenges/') && p.endsWith('.md') && !p.endsWith('/challenge.md'))
-    .map(([path, f]) => ({ path, sheet: f.data as unknown as Printable })))
-    groupFor(challengeIdOf(path)).sheets.push(sheet);
-
-  // SVG cards — the raw markup rides along on the visual so Visual can inline it.
-  for (const [path, svg] of Object.entries(svgFiles).sort(([a], [b]) => a.localeCompare(b))) {
-    const g = groupFor(challengeIdOf(path));
-    g.svg = true;
-    g.sheets.push({ order: 0, title: '', visual: { type: 'svg', svg } });
+    g.cards.push(svg);
   }
 
   return [...groups.values()].sort(
