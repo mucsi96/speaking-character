@@ -18,7 +18,7 @@ setup:
     - "Dolgozószoba: 5 számsor-kártya + anleitő kártya az íróasztalon (C5), puzzle borítékban az egyik egyszemélyes ágyon (C9)."
     - "Gyerekszoba: LEGO útmutató az asztalon + címkézett dobozok (C7)."
     - "Kis WC / zuhanyzó: jelmagyarázat a falra/ajtóra ragasztva + szimbólum-kártyák a polcon (C8)."
-    - "Előszoba: térkép a cipőszekrényen (C11)."
+    - "Előszoba: 5 iránytű-kártya + anleitő kártya a cipőszekrényen / a bejárati ajtón (C11)."
     - "Finálé: 5 Bibot-kártya (rács) + anleitő kártya a láda elé kiterítve (C12)."
     - "Kincs becsomagolva; snack + 2 Tom & Jerry epizód előkészítve."
 ---

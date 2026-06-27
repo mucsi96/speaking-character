@@ -12,6 +12,6 @@ columns:
 
       <span class="lang-de">Coco / kártyák (német)</span> = a gyerekeknek. Ne fordítsd le!
 
-      <span style="font-size:.92em">Talentumok: matek · felolvasás · logika · jelfejtés · térbeli építés · LEGO Technic · puzzle · keresés · térkép · csapatmunka.</span>
+      <span style="font-size:.92em">Talentumok: matek · felolvasás · logika · jelfejtés · térbeli építés · LEGO Technic · puzzle · keresés · iránytű · programozás.</span>
 ---
 **A nagy ötlet:** egy **kincsesládát** négy lakat zár (piros, kék, zöld, arany). Mindegyik lakaton **3 tárcsa** → összesen **12 számjegy** kell. **12 feladat = 12 számjegy.** 3 feladat megoldása → 1 lakat nyílik → a gyerekek **leveszik**. Négy lakat esik le egyenként → látható haladás → maximális izgalom.
