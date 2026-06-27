@@ -26,6 +26,7 @@ export type { Scene, Script };
 export type Phase =
   | 'idle'
   | 'playing'
+  | 'waiting'
   | 'entering'
   | 'celebrating'
   | 'rejecting'
@@ -34,6 +35,7 @@ export type Phase =
 export const PHASES: Phase[] = [
   'idle',
   'playing',
+  'waiting',
   'entering',
   'celebrating',
   'rejecting',
@@ -62,6 +64,15 @@ export interface StateChange {
 const STATE_FILE = resolve(
   process.env.STATE_FILE ?? join(process.cwd(), 'data', 'state.json')
 );
+
+/**
+ * Ephemeral mode: never read or write `state.json`. The script is always seeded
+ * fresh from the markdown content (`scenes.ts` → `content.ts`) and runtime edits
+ * live only in memory, so a restart always reflects the latest content. Enabled
+ * in local dev (`EPHEMERAL_STATE=1`, set by the server's `dev` script) so the
+ * persisted file never shadows changes to the markdown.
+ */
+const EPHEMERAL = ['1', 'true'].includes((process.env.EPHEMERAL_STATE ?? '').toLowerCase());
 
 const DEFAULT_SHOW: ShowState = { phase: 'idle', sceneIndex: 0 };
 
@@ -105,6 +116,7 @@ export function sanitizeScript(input: unknown): Script {
       if (!/^\d$/.test(code)) throw new Error(`scene ${i} code must be a single digit`);
       out.code = code;
     }
+    if (scene.pause === true) out.pause = true;
     return out;
   });
 
@@ -136,6 +148,7 @@ export function sanitizeShow(input: unknown, script: Script = state.script): Sho
 }
 
 async function persist(): Promise<void> {
+  if (EPHEMERAL) return; // dev: keep state in memory only, never touch disk
   await mkdir(dirname(STATE_FILE), { recursive: true });
   const tmp = `${STATE_FILE}.tmp`;
   await writeFile(tmp, JSON.stringify(state, null, 2), 'utf8');
@@ -147,6 +160,12 @@ async function persist(): Promise<void> {
  * it seeds the defaults (script from `scenes.ts`, idle show) and writes them.
  */
 export async function loadState(): Promise<void> {
+  if (EPHEMERAL) {
+    // Always start from the markdown-built default; ignore any file on disk.
+    state = { script: defaultScript, show: DEFAULT_SHOW, rev: 0 };
+    console.log('[state] ephemeral mode: seeded from markdown, persistence disabled');
+    return;
+  }
   try {
     const parsed = JSON.parse(await readFile(STATE_FILE, 'utf8')) as Partial<AppState>;
     state = {

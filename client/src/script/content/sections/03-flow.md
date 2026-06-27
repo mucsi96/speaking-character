@@ -5,9 +5,9 @@ note: "3 menet + Tom & Jerry szünetek"
 sessions:
   - when: "⏱ ~35 perc"
     title: "1. menet"
-    lead: "Prológus + a láda megtalálása + 🔴 Rot lakat"
+    lead: "Prológus + távirányító + a láda + 🔴 Rot lakat"
     items:
-      - "Coco köszöntő → nyom a ládához"
+      - "C0: Coco köszöntő + távirányító → láda a gardróbból a nappaliba → OK → Coco mesél a lakatokról"
       - "C1 (konyha) → C2 (fürdő) → C3 (nappali)"
       - "Kód 3-7-4 → 🔴 le!"
     foot: "🍪 Szünet 1"

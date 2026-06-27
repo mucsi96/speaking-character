@@ -132,8 +132,12 @@ export interface Challenge {
   who: string;
   lines: string[];
   parent: { ph: string; entries: ParentEntry[] };
-  /** "finale" renders the special climax card that closes the hunt. */
-  variant?: 'finale';
+  /** "finale" renders the climax card; "intro" renders the codeless C0
+   *  prologue (greeting + remote + chest reveal, no lock, no answer). */
+  variant?: 'finale' | 'intro';
+  /** Present on the C0 prologue: the greeting/remote lines spoken *before* the
+   *  OK-gated pause. `lines` then carry the post-OK chest reveal. */
+  intro?: LockIntro;
   icon?: string;
   headGradient?: string;
   /** Present on the first challenge of a lock: its header + intro narration. */

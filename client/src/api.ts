@@ -13,6 +13,9 @@ export interface Scene {
   text: string;
   /** Single-digit answer the kids must enter to continue (optional). */
   code?: string;
+  /** When true, the show pauses after this codeless scene and waits for an
+   *  OK/Enter press instead of auto-advancing (the C0 chest-fetch gate). */
+  pause?: boolean;
 }
 
 export interface Script {
@@ -24,6 +27,7 @@ export interface Script {
 export type Phase =
   | 'idle'
   | 'playing'
+  | 'waiting'
   | 'entering'
   | 'celebrating'
   | 'rejecting'

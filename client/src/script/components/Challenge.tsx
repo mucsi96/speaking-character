@@ -76,6 +76,50 @@ function LockHead({ lock }: { lock: NonNullable<ChallengeData['lock']> }) {
  *  challenge renders its own lock header/intro (when it opens a lock) and its
  *  unlock / break bars (when it closes one). */
 export function Challenge({ challenge }: { challenge: ChallengeData }) {
+  if (challenge.variant === 'intro' && challenge.intro) {
+    // The codeless prologue (C0): Coco greets and explains the remote, the kids
+    // fetch the chest and carry it to the living room, a grown-up presses OK,
+    // and only then does Coco reveal the four locks. Rendered as a plain
+    // station (no colored lock bar) with the two spoken beats split by the OK
+    // gate.
+    return (
+      <div className="station" style={{ borderLeftColor: 'var(--rope)' }}>
+        <div className="head">
+          <span className="cid">{challenge.id}</span>
+          <div>
+            <h4>{challenge.title}</h4>
+            <span className="room">{challenge.room}</span>
+          </div>
+          {challenge.tags?.length ? (
+            <div className="tags">
+              {challenge.tags.map((tag, i) => (
+                <span key={i} className="tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+        <div className="body">
+          <CocoBubble who={challenge.intro.who} lines={challenge.intro.lines} hint={challenge.intro.hint} />
+          <div
+            style={{
+              textAlign: 'center',
+              fontFamily: 'var(--head)',
+              color: 'var(--sea-deep)',
+              fontSize: '.9em',
+              margin: '6px 0',
+            }}
+          >
+            ⏸ A láda a nappaliban → <strong>OK / Enter</strong> ↓
+          </div>
+          <CocoBubble who={challenge.who} lines={challenge.lines} />
+          <ParentBox ph={challenge.parent.ph} entries={challenge.parent.entries} />
+        </div>
+      </div>
+    );
+  }
+
   if (challenge.variant === 'finale') {
     return (
       <div

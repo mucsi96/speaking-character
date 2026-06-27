@@ -25,6 +25,13 @@ export interface Scene {
   text: string;
   /** Single-digit answer the kids must enter to continue (optional). */
   code?: string;
+  /**
+   * When true, the show does NOT auto-advance after this codeless scene's
+   * narration — it waits for a grown-up to press OK/Enter. Used by the C0
+   * prologue so the kids have time to fetch the chest and carry it to the
+   * living room before Coco reveals the locks.
+   */
+  pause?: boolean;
 }
 
 export interface Script {

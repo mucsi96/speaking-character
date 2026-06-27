@@ -7,7 +7,9 @@ tags: [Matek, "5 párhuzamos"]
 dial: "🔴 → 3"
 lockColor: var(--lock-red)
 # First challenge of the RED lock — carries the lock header and Coco's
-# prologue, spoken before the challenge. Coco sets the scene but never
+# red-lock lead-in, spoken before the challenge. The greeting, the remote
+# explanation and the chest reveal now live in C0 (the codeless prologue);
+# here Coco only opens the RED lock and points to the kitchen. Coco never
 # explains the task itself; the puzzle lives on the printable.
 lock:
   anchor: z1
@@ -19,12 +21,10 @@ lock:
   subtitle: "Konyha → fürdő → nappali · C1 C2 C3 · matek + keresés + felolvasás"
   code: "3 - 7 - 4"
   intro:
-    who: "Coco · Prológus + a láda"
+    who: "Coco · Intro"
     lines:
-      - "Ahoi, ihr tapferen kleinen Piraten! Ich bin Käpten Coco, der schlauste Papagei der sieben Weltmeere! Herzlichen Glückwunsch zum Geburtstag! Heute gehen wir gemeinsam auf eine große Schatzsuche. Irgendwo in diesem Schiff liegt eine Schatztruhe — verschlossen mit **VIER** Schlössern. Sucht dort, wo der Kapitän schläft und seine Sachen versteckt: **hinter einer großen Tür, wo Kleider hängen**."
-      - "Gefunden? YO-HO! Schaut euch die Schlösser genau an — jedes hat eine **eigene Farbe**: **ROT**, **BLAU**, **GRÜN** und **GOLD**. Achtet immer auf die Farbe, denn die verrät euch, welches Schloss ihr gerade knackt!"
-      - "Jedes Schloss hat **drei Drehräder**. Nach jeder Aufgabe bekommt ihr eine Zahl — dreht das nächste Rad von **oben nach unten** auf die richtige Zahl. Wenn alle drei Räder stimmen, könnt ihr das Schloss abnehmen! Eure allererste Aufgabe findet ihr in der **Küche** — dort liegen fünf Aufgaben-Karten für euch bereit. Auf geht's, kleine Piraten!"
-    hint: "💡 A láda a hálószobai nagy gardróbban van; az indító térképfecni a nappali kanapépárnája alatt."
+      - "„Fangen wir an, kleine Piraten — das erste Schloss ist **ROT**, die Kombüse! Eure allererste Aufgabe wartet in der **KÜCHE**: dort liegen fünf Aufgaben-Karten für euch bereit. Auf geht's!”"
+    hint: "💡 A piros lakat indul: a feladatkártyák a konyhaszigeten. (A láda ekkor már a nappaliban van — lásd C0.)"
 who: Coco mondja
 lines:
   - "„Fünf Aufgaben-Karten liegen bereit, kleine Piraten — jeder schnappt sich eine und rechnet los! Die Karten verraten euch, was zu tun ist.”"

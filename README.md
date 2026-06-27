@@ -98,6 +98,12 @@ npm install                 # installs all workspaces
 npm run dev                 # client on :5173, server on :3000 (proxied)
 ```
 
+In dev the server runs in **ephemeral mode** (`EPHEMERAL_STATE=1`, set by its
+`dev` script): it never reads or writes `data/state.json`, so the script is
+always seeded fresh from the markdown content and a restart reflects the latest
+edits. Runtime admin changes live only in memory. (Production — `npm start` —
+persists to `STATE_FILE` as before.)
+
 Open http://localhost:5173. Without ElevenLabs configured the visuals still
 work; narration just won't play.
 

@@ -10,7 +10,9 @@
  *  This only produces the *default* used to seed a fresh state file. Admins can
  *  still replace the live script at runtime via the admin page
  *  (`PUT /api/state/script`); that edit is persisted and wins on later boots.
- *  Delete `data/state.json` to regenerate the default from the markdown.
+ *  Delete `data/state.json` to regenerate the default from the markdown. In
+ *  local dev the server runs ephemerally (`EPHEMERAL_STATE=1`) and ignores the
+ *  file entirely, so the markdown is always the source of truth.
  *
  *  The content is a *flat* list of challenges (`challenges/c1 … c13/`); the four
  *  locks ride along as metadata on the challenge that opens / closes each. Coco
@@ -125,6 +127,9 @@ interface ChallengeData {
   lines?: unknown[];
   dial?: string;
   variant?: string;
+  /** Carried by the C0 prologue (`variant: intro`): the greeting/remote lines
+   *  spoken before the OK-gated pause; `lines` carry the post-OK chest reveal. */
+  intro?: { lines?: unknown[] };
   /** Carried by a lock's first challenge: its anchor + intro narration. */
   lock?: { anchor?: string; intro?: { lines?: unknown[] } };
   /** Carried by a lock's last challenge: the unlock / break narration. */
@@ -174,13 +179,29 @@ export function buildDefaultScript(): Script {
   const digits = buildDigitLookup(files);
   const scenes: Scene[] = [];
 
-  // The hunt opens straight with the red lock's intro (`z1-intro`), which
-  // doubles as the prologue: greeting, birthday and the first clue. Coco speaks
-  // before each challenge (a codeless lead-in where a lock opens, then the
-  // challenge itself); the unlock / break narration closes each lock.
+  // The hunt opens with the codeless C0 prologue (`variant: intro`): Coco's
+  // greeting + the remote explanation, an OK-gated pause while the kids fetch
+  // the chest and carry it to the living room, then the chest reveal. After
+  // that each lock opens with its own intro, then its challenges; the unlock /
+  // break narration closes each lock.
   let finale: Scene | null = null;
 
   for (const challenge of buildChallenges(files)) {
+    // C0 — the codeless prologue. Two scenes: the greeting/remote lines, gated
+    // with `pause` so the show waits for OK while the chest is fetched, then the
+    // post-OK chest reveal. No code, no lock processing.
+    if (challenge.variant === 'intro') {
+      if (challenge.intro?.lines) {
+        scenes.push({
+          id: `${challenge.id}-intro`,
+          text: speak(challenge.intro.lines),
+          pause: true,
+        });
+      }
+      scenes.push({ id: challenge.id, text: speak(challenge.lines) });
+      continue;
+    }
+
     // A lock opener carries the lock's intro — spoken before its challenge.
     if (challenge.lock?.intro?.lines) {
       const anchor = challenge.lock.anchor ?? challenge.id;

@@ -14,6 +14,7 @@ import {
 const PHASE_LABELS: Record<Phase, string> = {
   idle: 'Start screen',
   playing: 'Speaking / Scene',
+  waiting: 'Waiting (OK gate)',
   entering: 'Code entry',
   celebrating: 'Celebrating',
   rejecting: 'Rejecting',
@@ -226,6 +227,7 @@ export function Admin() {
         <div className="admin__phase-buttons">
           <button onClick={() => drive('idle', 0)}>Start screen</button>
           <button onClick={() => drive('playing')}>Play scene</button>
+          <button onClick={() => drive('waiting')}>Wait (OK gate)</button>
           <button onClick={() => drive('entering')}>Code entry</button>
           <button onClick={() => drive('celebrating')}>Celebrate</button>
           <button onClick={() => drive('rejecting')}>Reject</button>
