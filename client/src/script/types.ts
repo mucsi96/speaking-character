@@ -73,8 +73,8 @@ export interface FlowSection {
 }
 
 /** §iv — the parent setup / preparation checklist. (Coco's connecting
- *  narration is no longer duplicated here; the zones, the gold finale and the
- *  server's reaction lines are the single source for what Coco speaks.) */
+ *  narration is no longer duplicated here; the challenges, the gold finale and
+ *  the server's reaction lines are the single source for what Coco speaks.) */
 export interface TvSection {
   id?: string;
   num: string;
@@ -90,35 +90,21 @@ export interface PrintIntro {
   lead: string;
 }
 
-/** One `[term, description, "sol"?]` row of a station's parent note list. */
+/** One `[term, description, "sol"?]` row of a challenge's parent note list. */
 export type ParentEntry = [string, string] | [string, string, string];
 
-export interface Station {
-  order: number;
-  id: string;
-  title: string;
-  room: string;
-  tags?: string[];
-  dial?: string;
-  who: string;
-  lines: string[];
-  question?: string;
-  parent: { ph: string; entries: ParentEntry[] };
-  print?: string;
-  /** "finale" renders the special climax card at the end of the gold zone. */
-  variant?: 'finale';
-  icon?: string;
-  headGradient?: string;
-}
-
-export interface ZoneIntro {
+/** Coco's spoken lead-in for a lock — the narration before its first
+ *  challenge (the red lock's intro doubles as the prologue). */
+export interface LockIntro {
   who: string;
   lines: string[];
   hint?: string;
 }
 
-export interface Zone {
-  order: number;
+/** Lock header carried by the *first* challenge of each lock. The hunt's four
+ *  colored locks are no longer their own directory; their styling, code and
+ *  intro narration ride along with the challenge that opens them. */
+export interface ChallengeLock {
   anchor: string;
   emoji: string;
   color: string;
@@ -127,10 +113,35 @@ export interface Zone {
   title: string;
   subtitle: string;
   code: string;
-  intro: ZoneIntro;
-  unlock?: { title: string; text: string };
+  intro: LockIntro;
+}
+
+/** One task in the flat challenge list (C1–C12, plus the gold finale). Coco
+ *  speaks the `lines` *before* the challenge to set the scene and never
+ *  explains the task itself — the puzzle lives on the printable in the same
+ *  challenge folder. `lock` opens a new lock; `unlock`/`break` close one. */
+export interface Challenge {
+  order: number;
+  id: string;
+  title: string;
+  room: string;
+  tags?: string[];
+  dial?: string;
+  /** Accent color for the challenge card's left border (its lock's color). */
+  lockColor?: string;
+  who: string;
+  lines: string[];
+  parent: { ph: string; entries: ParentEntry[] };
+  /** "finale" renders the special climax card that closes the hunt. */
+  variant?: 'finale';
+  icon?: string;
+  headGradient?: string;
+  /** Present on the first challenge of a lock: its header + intro narration. */
+  lock?: ChallengeLock;
+  /** Present on the last challenge of a lock: the unlock celebration. */
+  unlock?: { title: string; text: string; gradient?: string };
+  /** Present where a break follows a completed lock. */
   break?: { emoji: string; title: string; text: string };
-  stations: Station[];
 }
 
 export interface Printable {
@@ -147,7 +158,7 @@ export interface ScriptDoc {
   overview: OverviewSection;
   codes: CodesSection;
   flow: FlowSection;
-  zones: Zone[];
+  challenges: Challenge[];
   tv: TvSection;
   printIntro: PrintIntro;
   printables: Printable[];

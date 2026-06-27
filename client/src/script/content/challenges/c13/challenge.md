@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 13
 variant: finale
 id: "🏁"
 icon: "🏁"
@@ -15,5 +15,4 @@ parent:
   entries:
     - [Reveal, "Tompítsd a fényt; konfetti/füst; Coco visszaszámol és „kiált”. Csoki tallérok + fejenként **loot-zacskó**, a **fő ajándék** (új LEGO Technic), **„Echter Pirat” oklevél**, a szülinaposnak kapitány-kalap/sál — Coco „lovaggá üti”."]
     - [Záró, "Mindenki: „ARRR!” + közös fotó a nyitott ládával és a 4 levett lakattal."]
-print: "Lakatcímkék + Oklevelek"
 ---

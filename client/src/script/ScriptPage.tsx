@@ -3,7 +3,7 @@ import './script.css';
 import { scriptDoc } from './content';
 import type { CodeTable } from './types';
 import { Block, Inline, Raw } from './components/Html';
-import { Zone } from './components/Zone';
+import { Challenge } from './components/Challenge';
 import { PrintableSheet } from './components/Visual';
 
 const SUBHEAD: CSSProperties = {
@@ -53,7 +53,7 @@ function DataTable({
  * `script.html`; reachable at `/script`.
  */
 export default function ScriptPage() {
-  const { meta, overview, codes, flow, zones, tv, printIntro, printables } = scriptDoc;
+  const { meta, overview, codes, flow, challenges, tv, printIntro, printables } = scriptDoc;
 
   useEffect(() => {
     // The app's global styles pin html/body to a full-screen, non-scrolling
@@ -209,10 +209,13 @@ export default function ScriptPage() {
           ) : null}
         </section>
 
-        {/* Lock zones */}
-        {zones.map((zone) => (
-          <Zone key={zone.anchor} zone={zone} />
-        ))}
+        {/* Flat challenge list — each challenge renders its own lock header,
+            intro, and unlock / break bars where it opens or closes a lock. */}
+        <section id="kihivasok">
+          {challenges.map((challenge) => (
+            <Challenge key={challenge.id} challenge={challenge} />
+          ))}
+        </section>
 
         {/* Parent setup checklist */}
         <section id={tv.id}>

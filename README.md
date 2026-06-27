@@ -9,14 +9,17 @@ driven by the remote's colored buttons.
 ## How the show works
 
 1. **Start** (click or remote OK) → the parrot appears on its island.
-2. It speaks a German **intro + first task**, then a **code field** appears.
-3. The kids find the task's secret number in the real world and press it on the
-   remote's **number buttons** — it's checked the instant they press it.
-4. Right code → Coco **celebrates** and the **next task** plays. Wrong code →
-   Coco **shakes his head** and they try again.
-5. Repeats through all scenes until the treasure is found.
+2. Coco speaks a short German **lead-in** before each challenge — he sets the
+   scene but **never explains the task itself**: the actual puzzle is printed on
+   the challenge's **printable sheet**. Then a **code field** appears.
+3. The kids solve the printed task, find its secret number in the real world and
+   press it on the remote's **number buttons** — it's checked the instant they
+   press it.
+4. Right code → Coco **celebrates** and **navigates to the next challenge**.
+   Wrong code → Coco **shakes his head** and they try again.
+5. Repeats through all challenges until the treasure is found.
 
-Each task scene has a single-digit `code` — hide the matching number as a
+Each challenge scene has a single-digit `code` — hide the matching number as a
 physical clue in your play area.
 
 ## Admin UI & live state
@@ -59,9 +62,16 @@ Its content lives as a **structured markdown directory** under
 content/
   index.md              # hero, top nav, footer
   sections/             # overview, secret codes, game flow, TV script, printables intro
-  zones/<n>-<color>/    # each lock zone: zone.md + one file per station (c1.md …)
-  printables/           # one file per cut-out sheet (cards, cipher, map, diplomas, …)
+  challenges/<id>/      # one folder per challenge (c1 … c13):
+                        #   challenge.md  — Coco's lead-in + parent notes
+                        #   <sheet>.md    — its printable cut-out(s)
 ```
+
+The challenges are a **flat list** — there are no zone folders. The hunt's four
+colored locks ride along as metadata on the challenge that **opens** each
+(`lock:` — header + Coco's intro) and the one that **closes** it (`unlock:` /
+`break:`). Coco's lead-in sets the scene but never poses the task; the puzzle
+lives entirely on the challenge's printable sheet in the same folder.
 
 Each file is YAML frontmatter (structured data) plus a markdown body (prose).
 The files are bundled at build time (`import.meta.glob`) and rendered by React

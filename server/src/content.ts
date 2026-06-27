@@ -12,18 +12,22 @@
  *  (`PUT /api/state/script`); that edit is persisted and wins on later boots.
  *  Delete `data/state.json` to regenerate the default from the markdown.
  *
- *  Mapping (linear `Scene[]`):
- *   - per zone (red→blue→green→gold):
- *       `<anchor>-intro`  : the zone's intro lines (codeless). The first zone's
- *                            intro (red · `z1-intro`) is the prologue that opens
+ *  The content is a *flat* list of challenges (`challenges/c1 … c13/`); the four
+ *  locks ride along as metadata on the challenge that opens / closes each. Coco
+ *  speaks before every challenge and never explains the task — the puzzle lives
+ *  on the printable in the challenge's folder — so the challenge scene is the
+ *  lead-in only, with no question appended.
+ *
+ *  Mapping (linear `Scene[]`), walking the challenges in `order`:
+ *       `<anchor>-intro`   : a lock opener's intro lines (codeless). The red
+ *                            lock's intro (`z1-intro`) is the prologue that opens
  *                            the whole hunt — greeting, birthday and the first
- *                            "find the chest" clue — so there is no separate
- *                            `intro` scene,
- *       `C1`..`C12`       : each station's spoken lines + question, with the
+ *                            "find the chest" clue,
+ *       `C1`..`C12`        : each challenge's spoken lead-in (no task), with the
  *                            single-digit answer from the codes table,
- *       `<anchor>-unlock` : the unlock narration (codeless, when present),
- *       `<anchor>-break`  : the break narration (codeless, when present).
- *   - `finale`         : the gold finale lines (codeless climax).
+ *       `<id>-unlock`      : a lock closer's unlock narration (codeless),
+ *       `<id>-break`       : the break narration (codeless, when present),
+ *       `finale`           : the gold finale lines (codeless climax).
  *
  *  The reaction lines (`correctLines`/`wrongLines`) are generic and stay curated
  *  here — the markdown has no equivalent and the gentle, encouraging tone for
@@ -115,21 +119,17 @@ function speak(lines: unknown): string {
 
 // --- assembly ----------------------------------------------------------------
 
-interface ZoneData {
-  order: number;
-  anchor: string;
-  intro?: { lines?: unknown[] };
-  unlock?: { text?: string };
-  break?: { text?: string };
-}
-
-interface StationData {
+interface ChallengeData {
   order: number;
   id: string;
   lines?: unknown[];
-  question?: string;
   dial?: string;
   variant?: string;
+  /** Carried by a lock's first challenge: its anchor + intro narration. */
+  lock?: { anchor?: string; intro?: { lines?: unknown[] } };
+  /** Carried by a lock's last challenge: the unlock / break narration. */
+  unlock?: { text?: string };
+  break?: { text?: string };
 }
 
 /** Build the `{ C1: '3', … }` answer lookup from `sections/02-codes.md`. */
@@ -156,28 +156,16 @@ function pick(
   return files[key];
 }
 
-/** Group zones with their stations, sorted by `order`. */
-function buildZones(files: Record<string, Record<string, unknown>>): Array<{
-  zone: ZoneData;
-  stations: StationData[];
-}> {
-  const zoneDirs = new Set(
-    Object.keys(files)
-      .filter((p) => p.replace(/\\/g, '/').includes('/zones/') && p.endsWith('zone.md'))
-      .map((p) => p.replace(/[/\\]zone\.md$/, ''))
-  );
-
-  return [...zoneDirs]
-    .map((dir) => {
-      const zone = files[join(dir, 'zone.md')] as unknown as ZoneData;
-      const stations = Object.entries(files)
-        .filter(([p]) => p.startsWith(dir + '/') || p.startsWith(dir + '\\'))
-        .filter(([p]) => !p.endsWith('zone.md'))
-        .map(([, data]) => data as unknown as StationData)
-        .sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
-      return { zone, stations };
+/** The flat list of challenges (`challenges/<id>/challenge.md`), sorted by
+ *  `order`. Printables in the same folders are ignored here. */
+function buildChallenges(files: Record<string, Record<string, unknown>>): ChallengeData[] {
+  return Object.entries(files)
+    .filter(([p]) => {
+      const norm = p.replace(/\\/g, '/');
+      return norm.includes('/challenges/') && norm.endsWith('/challenge.md');
     })
-    .sort((a, b) => Number(a.zone.order ?? 0) - Number(b.zone.order ?? 0));
+    .map(([, data]) => data as unknown as ChallengeData)
+    .sort((a, b) => Number(a.order ?? 0) - Number(b.order ?? 0));
 }
 
 /** Assemble the default `Script` from the markdown content directory. */
@@ -186,35 +174,39 @@ export function buildDefaultScript(): Script {
   const digits = buildDigitLookup(files);
   const scenes: Scene[] = [];
 
-  // The hunt opens straight with the first zone's intro (red · `z1-intro`),
-  // which doubles as the prologue: greeting, birthday and the first clue.
+  // The hunt opens straight with the red lock's intro (`z1-intro`), which
+  // doubles as the prologue: greeting, birthday and the first clue. Coco speaks
+  // before each challenge (a codeless lead-in where a lock opens, then the
+  // challenge itself); the unlock / break narration closes each lock.
   let finale: Scene | null = null;
 
-  for (const { zone, stations } of buildZones(files)) {
-    if (zone.intro?.lines) {
-      scenes.push({ id: `${zone.anchor}-intro`, text: speak(zone.intro.lines) });
+  for (const challenge of buildChallenges(files)) {
+    // A lock opener carries the lock's intro — spoken before its challenge.
+    if (challenge.lock?.intro?.lines) {
+      const anchor = challenge.lock.anchor ?? challenge.id;
+      scenes.push({ id: `${anchor}-intro`, text: speak(challenge.lock.intro.lines) });
     }
 
-    for (const station of stations) {
-      if (station.variant === 'finale') {
-        // The climax has no answer; emit it once at the very end.
-        finale = { id: 'finale', text: speak(station.lines) };
-        continue;
-      }
-      const code = digits[station.id];
-      if (!code) throw new Error(`station ${station.id}: no answer in 02-codes.md`);
-      if (!/^\d$/.test(code)) throw new Error(`station ${station.id}: bad answer "${code}"`);
-      assertDialMatches(station, code);
-      const parts = [...((station.lines as unknown[]) ?? [])];
-      if (station.question) parts.push(station.question);
-      scenes.push({ id: station.id, text: speak(parts), code });
+    if (challenge.variant === 'finale') {
+      // The climax has no answer; emit it once at the very end.
+      finale = { id: 'finale', text: speak(challenge.lines) };
+      continue;
     }
 
-    if (zone.unlock?.text) {
-      scenes.push({ id: `${zone.anchor}-unlock`, text: speak(zone.unlock.text) });
+    // Coco speaks the lead-in only — the task itself lives on the printable, so
+    // there is no `question` to append.
+    const code = digits[challenge.id];
+    if (!code) throw new Error(`challenge ${challenge.id}: no answer in 02-codes.md`);
+    if (!/^\d$/.test(code)) throw new Error(`challenge ${challenge.id}: bad answer "${code}"`);
+    assertDialMatches(challenge, code);
+    scenes.push({ id: challenge.id, text: speak(challenge.lines), code });
+
+    // A lock closer celebrates the unlock and (sometimes) sends them to a break.
+    if (challenge.unlock?.text) {
+      scenes.push({ id: `${challenge.id}-unlock`, text: speak(challenge.unlock.text) });
     }
-    if (zone.break?.text) {
-      scenes.push({ id: `${zone.anchor}-break`, text: speak(zone.break.text) });
+    if (challenge.break?.text) {
+      scenes.push({ id: `${challenge.id}-break`, text: speak(challenge.break.text) });
     }
   }
 
@@ -223,11 +215,11 @@ export function buildDefaultScript(): Script {
   return { scenes, correctLines, wrongLines };
 }
 
-/** Guard against drift: the station's `dial` digit must match the codes table. */
-function assertDialMatches(station: StationData, code: string): void {
-  if (!station.dial) return;
-  const digit = station.dial.match(/(\d)\s*$/)?.[1];
+/** Guard against drift: the challenge's `dial` digit must match the codes table. */
+function assertDialMatches(challenge: ChallengeData, code: string): void {
+  if (!challenge.dial) return;
+  const digit = challenge.dial.match(/(\d)\s*$/)?.[1];
   if (digit && digit !== code) {
-    throw new Error(`station ${station.id}: dial "${station.dial}" disagrees with code ${code}`);
+    throw new Error(`challenge ${challenge.id}: dial "${challenge.dial}" disagrees with code ${code}`);
   }
 }
