@@ -2,17 +2,19 @@
 order: 8
 id: C8
 title: Geheimcode
-room: "Kis WC / zuhanyzó · jelfejtés"
-tags: [Coding, "5 kártya"]
+room: "Kis WC / zuhanyzó · puzzle-számok"
+tags: [Coding, "5 párhuzamos"]
 dial: "🟢 → 6"
 code: "6"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:
-  - "„Lauft ins kleine GÄSTE-WC mit der Dusche! Mit der Legende entschlüsselt ihr dort ein geheimes Wort — jeder nimmt sich ein Symbol vor!”"
+  - "„Lauft ins kleine GÄSTE-WC mit der Dusche, kleine Piraten! Dort liegen fünf Puzzle-Karten bereit — jeder schnappt sich eine Tüte mit Teilen und setzt sie zusammen. So erscheint eure geheime zweistellige Zahl!”"
+  - "„Wenn alle fünf ihre Zahl haben, zählt zusammen: Wie viele sind GRÖSSER als 50? Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A jelmagyarázat a kis WC / zuhanyzó falára vagy ajtajára ragasztva; az 5 szimbólum-kártya az ablakpárkányon / polcon."]
-    - [Megoldás, "🗡️🦴👑🪙🗡️ → S-E-C-H-S = „SECHS” → **6**", sol]
+    - [Elrejtés, "Az anleitő kártya (Schatz-Tabellával) + az 5 puzzle-kártya a kis WC / zuhanyzó polcán, ablakpárkányán. Minden A4-es kártyán egy nagy kétjegyű szám van puzzle-darabokra szabva (a szaggatott vonalak mentén). Vágd szét ELŐRE a darabokra, és tedd külön tasakba / borítékba mindegyiket — a gyerekek a kész darabokból rakják ki."]
+    - ["Mind az 5", "Mindenki összerakja a saját puzzle-ját → előbukkan a kétjegyű szám, és beírja. Szám / darabszám: 1) 82 (20 db) · 2) 35 (12 db) · 3) 61 (20 db) · 4) 19 (9 db) · 5) 73 (12 db). A több darabos kártyákat (1, 3) a nagyobbaknak, a 9 darabosat (4) a legkisebbnek."]
+    - [Megoldás, "50 felett: 82, 61, 73 → 3 db → Schatz-Tabelle: 3 → **6**", sol]
 ---
