@@ -1,0 +1,814 @@
+<!-- Käpt'n Rotbarts Schatz — Coco & die 4 Schlösser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Käpt'n Rotbarts Schatz — 4 Schlösser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --parch:#f3e7ce;--parch-2:#ecdcbb;--parch-deep:#e3cf9f;
+    --ink:#2a2218;--ink-soft:#4b4032;--sea:#1f6f6b;--sea-deep:#134d4a;
+    --brass:#b8860b;--gold:#c9972b;--oxblood:#8c2b22;--rope:#9c7b4a;--shadow:rgba(42,34,24,.18);
+    --lock-red:#c2362b;--lock-blue:#2b6cb0;--lock-green:#2e7d4f;--lock-gold:#c9972b;
+    --display:"Pirata One","Cinzel",serif;--head:"Cinzel",Georgia,serif;
+    --body:"EB Garamond",Georgia,serif;--type:"Special Elite","Courier New",monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);font-size:18px;line-height:1.55;
+    background:radial-gradient(120% 80% at 50% -10%, #f7eed8 0%, var(--parch) 45%, var(--parch-deep) 100%) fixed;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+
+  .topbar{position:sticky;top:0;z-index:50;background:var(--sea-deep);border-bottom:3px solid var(--gold);box-shadow:0 2px 14px var(--shadow)}
+  .topbar .wrap{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 22px}
+  .topbar a{color:#f4ecd6;text-decoration:none;font-family:var(--head);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;padding:6px 9px;border-radius:4px}
+  .topbar a:hover{background:rgba(255,255,255,.12)}
+  .topbar .brand{font-family:var(--display);font-size:22px;color:var(--gold);margin-right:auto;letter-spacing:.02em}
+  .printbtn{background:var(--gold);color:var(--sea-deep)!important;font-weight:700;border:none;cursor:pointer;font-family:var(--head)}
+
+  header.hero{text-align:center;padding:60px 22px 36px;position:relative}
+  .eyebrow{font-family:var(--head);text-transform:uppercase;letter-spacing:.32em;font-size:13px;color:var(--sea);margin-bottom:10px}
+  h1.title{font-family:var(--display);font-size:clamp(44px,9vw,100px);line-height:.92;margin:.06em 0;color:var(--ink);text-shadow:2px 3px 0 rgba(184,134,11,.35)}
+  .subtitle{font-style:italic;font-size:clamp(17px,2.4vw,23px);color:var(--ink-soft);max-width:700px;margin:6px auto 0}
+  .lockrow-hero{display:flex;gap:12px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .lockpill{display:flex;align-items:center;gap:7px;background:var(--parch-2);border:2px solid var(--rope);border-radius:30px;padding:6px 14px;font-family:var(--head);font-size:14px;color:var(--ink)}
+  .dot{width:16px;height:16px;border-radius:50%;border:2px solid rgba(0,0,0,.2)}
+
+  section{padding:28px 0}
+  h2.sec{font-family:var(--head);font-weight:700;letter-spacing:.05em;font-size:clamp(25px,4vw,38px);color:var(--sea-deep);margin:.2em 0 .1em;display:flex;align-items:baseline;gap:14px}
+  h2.sec .num{font-family:var(--type);font-size:.55em;color:var(--gold);border:2px solid var(--gold);border-radius:50%;width:1.9em;height:1.9em;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .sec-lead{font-style:italic;color:var(--ink-soft);max-width:780px;margin-top:.2em}
+  .rule{height:3px;background:repeating-linear-gradient(90deg,var(--rope) 0 14px,transparent 14px 22px);opacity:.5;margin:8px 0 20px;border:none}
+  p{margin:.6em 0}
+  .lang-de{font-size:.78em;color:var(--sea);font-family:var(--head);letter-spacing:.08em;text-transform:uppercase}
+  .lang-hu{font-size:.78em;color:var(--oxblood);font-family:var(--head);letter-spacing:.08em;text-transform:uppercase}
+
+  .grid{display:grid;gap:16px}.grid.two{grid-template-columns:1fr 1fr}
+  @media(max-width:760px){.grid.two{grid-template-columns:1fr}}
+
+  /* secret cheat box */
+  .secret{background:#23201a;color:#f1e6c9;border:2px solid var(--gold);border-radius:14px;padding:20px 22px;box-shadow:0 6px 18px var(--shadow)}
+  .secret .ph{font-family:var(--head);color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-size:14px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  table.codes{width:100%;border-collapse:collapse;font-size:.95em}
+  .secret table.codes th,.secret table.codes td{border-bottom:1px solid #4a4334;padding:9px 10px;text-align:left}
+  .secret table.codes th{color:var(--gold);font-family:var(--head);font-weight:500;letter-spacing:.04em}
+  .secret td.code{font-family:var(--type);color:#ffd87a;font-size:1.25em;font-weight:700;letter-spacing:.18em}
+  .secret tr:last-child td{border-bottom:none}
+
+  table.val{width:100%;border-collapse:collapse;font-size:.92em;background:var(--parch-2);border-radius:8px;overflow:hidden;box-shadow:0 3px 10px var(--shadow)}
+  table.val th,table.val td{padding:8px 11px;border-bottom:1px solid #d7c294;text-align:left}
+  table.val th{background:var(--sea-deep);color:#f4ecd6;font-family:var(--head);font-weight:500;letter-spacing:.04em}
+  table.val td.d{font-family:var(--type);font-weight:700;color:var(--oxblood);text-align:center;font-size:1.1em}
+  table.val tr:last-child td{border-bottom:none}
+
+  .sessions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+  .session{background:var(--parch-2);border:1px solid var(--rope);border-radius:10px;padding:16px;box-shadow:0 3px 10px var(--shadow)}
+  .session h4{font-family:var(--head);color:var(--oxblood);margin:.1em 0 .3em}
+  .session .when{font-family:var(--type);font-size:13px;color:var(--ink-soft)}
+  .session ul{margin:.5em 0 0;padding-left:18px;font-size:.92em}
+  @media(max-width:760px){.sessions{grid-template-columns:1fr}}
+
+  .checklist{columns:2;column-gap:34px;font-size:.95em}
+  .checklist li{margin:.25em 0;break-inside:avoid}
+  @media(max-width:600px){.checklist{columns:1}}
+
+  /* lock zone */
+  .zonehead{display:flex;align-items:center;gap:14px;margin:26px 0 6px;padding:14px 20px;border-radius:12px;color:#fff;box-shadow:0 5px 16px var(--shadow)}
+  .zonehead .zlk{font-size:34px;line-height:1}
+  .zonehead h3{font-family:var(--head);font-size:24px;margin:0;letter-spacing:.04em}
+  .zonehead .zsub{font-style:italic;font-size:14px;opacity:.9;display:block}
+  .zonehead .zcode{margin-left:auto;font-family:var(--type);background:rgba(255,255,255,.22);padding:6px 14px;border-radius:8px;font-weight:700;letter-spacing:.16em}
+
+  .station{background:var(--parch-2);border:1px solid var(--rope);border-left-width:6px;border-radius:10px;box-shadow:0 4px 14px var(--shadow);overflow:hidden;margin:14px 0}
+  .station > .head{padding:12px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fbf2dc}
+  .station .cid{font-family:var(--type);font-weight:700;color:var(--sea-deep);background:#fff5dd;border:1.5px solid var(--rope);border-radius:6px;padding:3px 9px;font-size:14px}
+  .station .head h4{font-family:var(--head);font-size:19px;margin:0}
+  .station .head .room{font-style:italic;font-size:13px;color:var(--ink-soft);display:block}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .tag{font-family:var(--head);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;background:#efe2c0;border:1px solid var(--rope);padding:3px 8px;border-radius:20px;color:var(--ink-soft)}
+  .dialbadge{font-family:var(--type);background:var(--gold);color:var(--sea-deep);padding:4px 11px;border-radius:6px;font-weight:700;letter-spacing:.12em;font-size:14px}
+  .station .body{padding:14px 20px}
+
+  .coco{display:flex;gap:12px;align-items:flex-start;background:#fbf4e0;border:2px dashed var(--gold);border-radius:12px;padding:12px 16px;margin:10px 0}
+  .coco .bird{font-size:28px;line-height:1;flex:0 0 auto}
+  .coco .said{flex:1}
+  .coco .said .who{font-family:var(--head);color:var(--brass);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+  .coco .said p{margin:.3em 0;font-size:1.0em}
+  .coco .q{font-style:italic;color:var(--sea-deep)}
+
+  .parent{border-left:5px solid var(--oxblood);background:#f7eed6;border-radius:0 10px 10px 0;padding:12px 16px;margin:10px 0}
+  .parent .ph{font-family:var(--head);color:var(--oxblood);letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;margin-bottom:5px}
+  .parent dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:4px 14px}
+  .parent dt{font-family:var(--head);font-size:12.5px;color:var(--sea-deep);padding-top:2px}
+  .parent dd{margin:0}
+  .parent .sol{font-family:var(--type);color:var(--oxblood)}
+
+  .unlock{border-radius:12px;padding:13px 18px;margin:8px 0 4px;display:flex;gap:14px;align-items:center;color:#fff;box-shadow:0 5px 16px var(--shadow)}
+  .unlock .ic{font-size:28px}
+  .unlock h5{margin:0;font-family:var(--head);letter-spacing:.04em;font-size:17px}
+  .unlock p{margin:.2em 0 0;font-size:.93em}
+
+  .breakbar{background:linear-gradient(90deg,var(--oxblood),#a8392e);color:#fbe6c8;border-radius:12px;padding:15px 22px;margin:20px 0;display:flex;gap:14px;align-items:center;box-shadow:0 5px 16px var(--shadow)}
+  .breakbar .ic{font-size:30px}
+  .breakbar h4{margin:0;font-family:var(--head);letter-spacing:.05em}
+  .breakbar p{margin:.2em 0 0;font-size:.95em;opacity:.95}
+
+  .scriptbox{background:var(--parch-2);border:1px solid var(--rope);border-radius:12px;padding:18px 22px;box-shadow:0 3px 10px var(--shadow)}
+  .scriptline{margin:10px 0;padding-left:14px;border-left:3px solid var(--gold)}
+  .scriptline b{font-family:var(--head);color:var(--sea-deep);letter-spacing:.03em;display:block;font-size:13px;text-transform:uppercase}
+
+  .print-intro{background:var(--sea-deep);color:#f4ecd6;border-radius:14px;padding:22px 24px;margin:24px 0}
+  .print-intro h2{font-family:var(--display);color:var(--gold);margin:0 0 .2em;font-size:34px}
+  .print-intro p{margin:.4em 0;opacity:.95}
+
+  .sheet{background:#fbf4e0;border:2px dashed var(--ink-soft);border-radius:14px;padding:24px;margin:20px 0;position:relative;box-shadow:0 4px 14px var(--shadow)}
+  .sheet::before{content:"✂ ausschneiden / kivágni";position:absolute;top:-11px;left:18px;background:var(--parch);padding:0 8px;font-family:var(--type);font-size:12px;color:var(--ink-soft)}
+  .sheet h3{font-family:var(--display);color:var(--oxblood);font-size:28px;margin:0 0 .1em;text-align:center}
+  .sheet .de-note{text-align:center;font-style:italic;color:var(--ink-soft);margin-top:0}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+  .pcard{background:#fffaf0;border:2px solid var(--rope);border-radius:10px;padding:12px;text-align:center;box-shadow:1px 2px 6px var(--shadow)}
+  .pcard .lab{font-family:var(--head);font-size:10.5px;letter-spacing:.07em;color:var(--sea);text-transform:uppercase}
+  .pcard .emoji{font-size:26px;display:block;margin:4px 0}
+  .pcard .prob{font-family:var(--type);font-size:20px;color:var(--ink)}
+  .pcard .ans{margin-top:7px;border-top:1px dashed var(--rope);padding-top:5px;font-size:11.5px;color:#b9a06a}
+
+  .ball{width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5b5b5b,#161616 70%);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--type);font-size:20px;margin:0 auto;box-shadow:0 3px 7px var(--shadow)}
+  .coin{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0d27a,var(--gold) 55%,#8a6510);border:3px solid #8a6510;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:34px;color:#5a3f08;margin:0 auto;box-shadow:0 3px 8px var(--shadow)}
+
+  .mirror{transform:scaleX(-1);display:inline-block}
+  .mcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:14px}
+  .mcard{background:#eef4f3;border:2px solid var(--sea);border-radius:10px;padding:14px 8px;text-align:center}
+  .mcard .word{font-family:var(--head);font-size:24px;letter-spacing:.06em;color:var(--sea-deep)}
+  .mcard .pos{font-family:var(--type);font-size:10px;color:var(--ink-soft);margin-top:4px}
+
+  .scroll{background:#fdf6e3;border:1px solid var(--rope);border-radius:10px;padding:14px;font-family:var(--type);font-size:24px;text-align:center;letter-spacing:.1em}
+  .tiles{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .tile{background:#fffaf0;border:2px solid var(--rope);border-radius:8px;padding:8px 12px;font-family:var(--type);font-size:20px}
+
+  .log{background:#fdf6e3;border:1px solid var(--rope);border-radius:10px;padding:18px 22px;font-size:1.05em;line-height:1.7}
+  .log ol{margin:.3em 0;padding-left:22px}
+  .log .hi{color:var(--oxblood);font-weight:700;font-family:var(--head);letter-spacing:.03em}
+  .log .sig{text-align:right;font-family:var(--display);font-size:26px;color:var(--ink);margin-top:8px}
+
+  .riddle{background:#fffaf0;border:1px solid var(--rope);border-radius:10px;padding:11px 15px;margin:8px 0}
+  .riddle .a{font-family:var(--type);font-size:11.5px;color:#b9a06a;margin-top:4px}
+
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:7px;margin:10px 0}
+  .legitem{display:flex;align-items:center;gap:6px;background:#fffaf0;border:1px solid var(--rope);border-radius:8px;padding:5px 9px;font-family:var(--type);font-size:15px}
+  .cipher{display:flex;gap:8px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+  .csym{background:#fffaf0;border:2px solid var(--rope);border-radius:10px;width:64px;height:64px;display:flex;align-items:center;justify-content:center;font-size:30px}
+
+  .bluep svg{background:#0d3b56;border-radius:10px;padding:10px}
+  .gears{display:flex;gap:6px;justify-content:center;font-size:38px;margin:10px 0}
+
+  .jig{position:relative;width:260px;height:200px;margin:14px auto;background:linear-gradient(135deg,#1a1a1a,#333);border-radius:8px;display:flex;align-items:center;justify-content:center}
+  .jig .num{font-family:var(--display);font-size:120px;color:#f1e6c9}
+  .jig .grid{position:absolute;inset:0;background:
+    repeating-linear-gradient(0deg,transparent 0 65px,rgba(255,255,255,.5) 65px 67px),
+    repeating-linear-gradient(90deg,transparent 0 85px,rgba(255,255,255,.5) 85px 87px)}
+
+  .map{position:relative;background:repeating-linear-gradient(0deg,transparent 0 99px,rgba(156,123,74,.45) 99px 101px),repeating-linear-gradient(90deg,transparent 0 132px,rgba(156,123,74,.45) 132px 134px),radial-gradient(120% 120% at 70% 20%,#f1e3bf,#e3cf9f);border:6px double var(--rope);border-radius:6px;height:400px;max-width:560px;margin:14px auto}
+  .map .lbl{position:absolute;font-family:var(--head);font-size:12px;color:var(--ink-soft);background:rgba(255,250,240,.7);padding:1px 6px;border-radius:4px}
+  .map .route{position:absolute;inset:0}
+  .map .x{position:absolute;font-size:30px;color:var(--oxblood);font-family:var(--display)}
+
+  .ribbons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+  .ribbon{border-radius:8px;padding:12px 16px;color:#fff;font-family:var(--head);text-align:center;min-width:150px;box-shadow:0 3px 8px var(--shadow)}
+  .ribbon small{display:block;font-family:var(--type);font-size:13px;margin-top:3px;opacity:.95}
+
+  .diploma{background:#fffaf0;border:3px double var(--gold);border-radius:10px;padding:20px;text-align:center;margin:14px 0}
+  .diploma h4{font-family:var(--display);font-size:30px;color:var(--oxblood);margin:.1em}
+  .diploma .name-line{border-bottom:2px dotted var(--ink-soft);height:32px;max-width:330px;margin:12px auto 6px}
+  .diploma .small{font-size:.85em;color:var(--ink-soft);font-style:italic}
+
+  footer{padding:36px 22px 56px;text-align:center;color:var(--ink-soft);font-style:italic}
+
+  @media print{
+    .topbar,.printbtn,footer .noprint{display:none!important}
+    body{background:#fff;font-size:12pt}
+    .station,.sheet,.parent,.coco,.breakbar,.unlock,.diploma,.map,.print-intro,.secret,.scriptbox{box-shadow:none}
+    .sheet,.station,.diploma{break-inside:avoid}
+    .page-break{break-before:page}
+    a[href]{color:inherit;text-decoration:none}
+  }
+</style>
+
+<!-- ===== TOP BAR ===== -->
+<nav class="topbar">
+  <div class="wrap">
+    <span class="brand">🦜 Coco</span>
+    <a href="#attekintes">Áttekintés</a>
+    <a href="#kodok">Kódok 🤫</a>
+    <a href="#z1">🔴 Konyha</a>
+    <a href="#z2">🔵 Háló</a>
+    <a href="#z3">🟢 Gyerekszoba</a>
+    <a href="#z4">🟡 Finálé</a>
+    <a href="#skript">Coco-Skript</a>
+    <a href="#nyomtat">Nyomtatandó</a>
+    <a class="printbtn" href="#" onclick="window.print();return false;">🖨</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="eyebrow">Piraten-Schatzsuche · 7. Geburtstag · 5 Piraten</div>
+  <h1 class="title">Coco &amp; die<br>4 Schlösser</h1>
+  <p class="subtitle">Egy láda, négy lakat, tizenkét feladat. Minden 3. feladat egy lakatot levesz — a kupac szemmel láthatóan fogy, amíg a kincs ki nem nyílik.</p>
+  <div class="lockrow-hero">
+    <span class="lockpill"><span class="dot" style="background:var(--lock-red)"></span> Rot · 3-7-4</span>
+    <span class="lockpill"><span class="dot" style="background:var(--lock-blue)"></span> Blau · 5-2-6</span>
+    <span class="lockpill"><span class="dot" style="background:var(--lock-green)"></span> Grün · 4-6-8</span>
+    <span class="lockpill"><span class="dot" style="background:var(--lock-gold)"></span> Gold · 9-3-1</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ===== ÁTTEKINTÉS ===== -->
+<section id="attekintes">
+  <h2 class="sec"><span class="num">i</span>Áttekintés <span class="lang-hu">a szülőknek</span></h2>
+  <hr class="rule">
+  <p><strong>A nagy ötlet:</strong> egy <strong>kincsesládát</strong> négy lakat zár (piros, kék, zöld, arany). Mindegyik lakaton <strong>3 tárcsa</strong> → összesen <strong>12 számjegy</strong> kell. <strong>12 feladat = 12 számjegy.</strong> 3 feladat megoldása → 1 lakat nyílik → a gyerekek <strong>leveszik</strong>. Négy lakat esik le egyenként → látható haladás → maximális izgalom.</p>
+
+  <div class="grid two">
+    <div class="parent">
+      <div class="ph">A kör (minden feladatnál)</div>
+      <p style="margin:.3em 0">1) Coco a TV-n nyomot ad + szobába küld. 2) A gyerekek megoldják (5 párhuzamos dolog, senki sem vár). 3) Visszaszaladnak, a távirányítóval <strong>beírják a megoldás számát</strong>. 4) Coco ellenőrzi ✅, kimondja a tárcsa-számot. 5) 3 szám után → Coco a teljes kódot mutatja → <strong>leveszik a lakatot</strong>.</p>
+    </div>
+    <div class="parent">
+      <div class="ph">A két „hang"</div>
+      <p style="margin:.3em 0"><span class="lang-hu">Piros sáv (magyar)</span> = neked: rejtés, megoldás, előkészítés.</p>
+      <p style="margin:.3em 0"><span class="lang-de">Coco / kártyák (német)</span> = a gyerekeknek. Ne fordítsd le!</p>
+      <p style="margin:.3em 0;font-size:.92em">Talentumok: matek · felolvasás · logika · jelfejtés · térbeli építés · LEGO Technic · puzzle · keresés · térkép · csapatmunka.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECRET CODES ===== -->
+<section id="kodok">
+  <h2 class="sec"><span class="num">ii</span>A 4 lakat kódja <span class="lang-hu">titkos — tartsd magadnál 🤫</span></h2>
+  <hr class="rule">
+  <div class="secret">
+    <div class="ph">🔑 Szülői mesterkulcs — ne lássák a gyerekek</div>
+    <table class="codes">
+      <tr><th>Lakat</th><th>Szín · szoba</th><th>Kód</th><th>Feladatok</th></tr>
+      <tr><td>1</td><td>🔴 Rot · Konyha (Kombüse)</td><td class="code">3-7-4</td><td>C1 C2 C3</td></tr>
+      <tr><td>2</td><td>🔵 Blau · Háló (Kapitänskajüte)</td><td class="code">5-2-6</td><td>C4 C5 C6</td></tr>
+      <tr><td>3</td><td>🟢 Grün · Gyerekszoba (Werkstatt)</td><td class="code">4-6-8</td><td>C7 C8 C9</td></tr>
+      <tr><td>4</td><td>🟡 Gold · Előszoba + finálé</td><td class="code">9-3-1</td><td>C10 C11 C12</td></tr>
+    </table>
+    <p style="font-size:.85em;opacity:.85;margin-top:10px">Állítsd be mindegyik lakatot a kódjára, zárd be, majd <strong>keverd össze a tárcsákat</strong> a buli előtt. Köss színes szalagot mindegyikre (piros/kék/zöld/arany).</p>
+  </div>
+
+  <h3 style="font-family:var(--head);color:var(--sea-deep);margin:22px 0 8px">Coco ellenőrző-lista — amit a gyerekek beírnak</h3>
+  <table class="val">
+    <tr><th>Feladat</th><th>Típus</th><th>Beírják</th></tr>
+    <tr><td>C1</td><td>Matek (ágyúgolyók)</td><td class="d">3</td></tr>
+    <tr><td>C2</td><td>Keresés (érmék)</td><td class="d">7</td></tr>
+    <tr><td>C3</td><td>Felolvasás</td><td class="d">4</td></tr>
+    <tr><td>C4</td><td>Tükörírás</td><td class="d">5</td></tr>
+    <tr><td>C5</td><td>Számsor</td><td class="d">2</td></tr>
+    <tr><td>C6</td><td>Geomag építés</td><td class="d">6</td></tr>
+    <tr><td>C7</td><td>LEGO Technic</td><td class="d">4</td></tr>
+    <tr><td>C8</td><td>Titkosírás</td><td class="d">6</td></tr>
+    <tr><td>C9</td><td>Puzzle</td><td class="d">8</td></tr>
+    <tr><td>C10</td><td>Logikai rejtvények</td><td class="d">9</td></tr>
+    <tr><td>C11</td><td>Térkép / útvonal</td><td class="d">3</td></tr>
+    <tr><td>C12</td><td>Csapatmunka</td><td class="d">1</td></tr>
+  </table>
+</section>
+
+<!-- ===== GAME FLOW ===== -->
+<section>
+  <h2 class="sec"><span class="num">iii</span>Menetrend <span class="lang-hu">3 menet + Tom &amp; Jerry szünetek</span></h2>
+  <hr class="rule">
+  <div class="sessions">
+    <div class="session">
+      <span class="when">⏱ ~35 perc</span>
+      <h4>1. menet</h4>
+      <p style="font-size:.92em;margin:.2em 0">Prológus + a láda megtalálása + 🔴 Rot lakat</p>
+      <ul><li>Coco köszöntő → nyom a ládához</li><li>Konyha: C1 → C2 → C3</li><li>Kód 3-7-4 → 🔴 le!</li></ul>
+      <p style="font-size:.85em;color:var(--ink-soft);margin:.4em 0 0">🍪 Szünet 1</p>
+    </div>
+    <div class="session">
+      <span class="when">⏱ ~40 perc</span>
+      <h4>2. menet</h4>
+      <p style="font-size:.92em;margin:.2em 0">🔵 Blau + 🟢 Grün lakat</p>
+      <ul><li>Háló: C4 → C5 → C6 → 5-2-6 → 🔵 le!</li><li>Gyerekszoba: C7 → C8 → C9 → 4-6-8 → 🟢 le!</li></ul>
+      <p style="font-size:.85em;color:var(--ink-soft);margin:.4em 0 0">🍪 Szünet 2</p>
+    </div>
+    <div class="session">
+      <span class="when">⏱ ~30 perc</span>
+      <h4>3. menet (finálé)</h4>
+      <p style="font-size:.92em;margin:.2em 0">🟡 Gold lakat + KINCS!</p>
+      <ul><li>C10 (nappali) → C11 (térkép) → C12 (együtt)</li><li>Kód 9-3-1 → 🟡 le → 🪙 LÁDA NYÍLIK!</li></ul>
+    </div>
+  </div>
+  <p style="font-size:.9em;color:var(--ink-soft);margin-top:10px">Fizikailag mind a 4 lakat a ládán van az elejétől — ez a lényeg: a gyerekek látják, ahogy a lakatkupac fogy.</p>
+</section>
+
+<!-- ===== ZONE 1 — RED ===== -->
+<section id="z1">
+  <div class="zonehead" style="background:linear-gradient(180deg,#d6463a,var(--lock-red))">
+    <span class="zlk">🔴</span>
+    <div><h3>Lakat 1 — Rot · Kombüse</h3><span class="zsub">Konyha · C1 C2 C3 · matek + keresés + felolvasás</span></div>
+    <span class="zcode">3 - 7 - 4</span>
+  </div>
+
+  <div class="coco">
+    <span class="bird">🦜</span>
+    <div class="said"><div class="who">Coco · Prológus + a láda</div>
+      <p>„AHOI, kleine Piraten! 🦜 Ich bin Coco! Irgendwo schläft der Kapitän und versteckt seine Sachen — sucht <strong>hinter einer großen Tür, wo Kleider hängen</strong>. Dort wartet die Truhe mit VIER Schlössern!"</p>
+      <p>„Gefunden? YO-HO! Für jedes Schloss braucht ihr drei Zahlen. Auf in die <strong>KOMBÜSE</strong> — die Küche!"</p>
+      <p class="hint" style="font-size:.86em;color:var(--ink-soft);font-style:italic;border-top:1px dotted var(--rope);margin-top:6px;padding-top:5px">💡 A láda a hálószobai nagy gardróbban van; az indító térképfecni a nappali kanapépárnája alatt.</p>
+    </div>
+  </div>
+
+  <!-- C1 -->
+  <div class="station" style="border-left-color:var(--lock-red)">
+    <div class="head"><span class="cid">C1</span><div><h4>Kanonenkugel-Mathe</h4><span class="room">Konyha · szorzás</span></div><div class="tags"><span class="tag">Matek</span><span class="tag">5 párhuzamos</span></div><span class="dialbadge">🔴 → 3</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Fünf Kanonenkugeln, fünf Rechnungen — jeder löst eine! Legt sie in eine Reihe."</p>
+        <p class="q">Frage: „Wie viele Kugeln zeigen eine Zahl GRÖSSER als 20?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>Az 5 ágyúgolyó-kártya a konyhaszigeten, sorban, jól láthatóan (a feladat a számolás, nem a keresés).</dd>
+        <dt>Mind az 5</dt><dd>3×4=12 · 6×4=24 · 9×4=36 · 3×3=9 · 5×6=30. A nehezet (9×4, 5×6) a nagyobbnak, a 3×3-at a kisebbnek.</dd>
+        <dt>Megoldás</dt><dd class="sol">20 felett: 24, 36, 30 → <strong>3</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Kanonenkugeln</strong></p>
+    </div>
+  </div>
+
+  <!-- C2 -->
+  <div class="station" style="border-left-color:var(--lock-red)">
+    <div class="head"><span class="cid">C2</span><div><h4>Goldmünzen-Suche</h4><span class="room">Konyha · keresés + összehasonlítás</span></div><div class="tags"><span class="tag">Keresés</span></div><span class="dialbadge">🔴 → 7</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Fünf Goldmünzen sind in der Küche versteckt — jeder findet eine!"</p>
+        <p class="q">Frage: „Welche ist die KLEINSTE Zahl auf den Münzen?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>5 érme (csoki vagy nyomtatott) rejtve: vízforraló mögött, tálban, sziget alatt, komódfiókban, hűtőn mágnessel.</dd>
+        <dt>Hátoldal</dt><dd>7, 8, 11, 14, 20. (A csokit megtarthatják.)</dd>
+        <dt>Megoldás</dt><dd class="sol">legkisebb → <strong>7</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Münz-Zahlen</strong></p>
+    </div>
+  </div>
+
+  <!-- C3 -->
+  <div class="station" style="border-left-color:var(--lock-red)">
+    <div class="head"><span class="cid">C3</span><div><h4>Die Papageien-Geschichte</h4><span class="room">Konyha · felolvasás</span></div><div class="tags"><span class="tag">Olvasás</span></div><span class="dialbadge">🔴 → 4</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Eine echte Piraten-Geschichte! Jeder liest einen Absatz LAUT vor."</p>
+        <p class="q">Frage: „Wie oft kommt das Wort PAPAGEI vor?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A kinyomtatott lap a konyhai komód tetején, „pecséttel".</dd>
+        <dt>Megoldás</dt><dd class="sol">PAPAGEI 4×szerepel → <strong>4</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Geschichte</strong></p>
+    </div>
+  </div>
+
+  <div class="unlock" style="background:linear-gradient(90deg,#d6463a,var(--lock-red))">
+    <span class="ic">🔓</span><div><h5>🔴 ROT LAKAT LE! (1/4)</h5><p>Coco: „Der Code ist 3-7-4 — öffnet das ROTE Schloss und nehmt es ab! ARRR!"</p></div>
+  </div>
+  <div class="breakbar"><span class="ic">🍪</span><div><h4>SZÜNET 1</h4><p>Snack + 1 Tom &amp; Jerry rész. Készítsd elő a hálót.</p></div></div>
+</section>
+
+<!-- ===== ZONE 2 — BLUE ===== -->
+<section id="z2">
+  <div class="zonehead" style="background:linear-gradient(180deg,#3a82c9,var(--lock-blue))">
+    <span class="zlk">🔵</span>
+    <div><h3>Lakat 2 — Blau · Kapitänskajüte</h3><span class="zsub">Háló (tükörrel!) · C4 C5 C6 · tükör + számsor + Geomag</span></div>
+    <span class="zcode">5 - 2 - 6</span>
+  </div>
+
+  <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco · Intro</div>
+    <p>„Ein Schloss ist gefallen — bravo! Jetzt das BLAUE Schloss in der KAPITÄNSKAJÜTE (Schlafzimmer). Vergesst den Spiegel nicht!"</p></div></div>
+
+  <!-- C4 -->
+  <div class="station" style="border-left-color:var(--lock-blue)">
+    <div class="head"><span class="cid">C4</span><div><h4>Spiegelschrift</h4><span class="room">Háló · olvasás + tükör</span></div><div class="tags"><span class="tag">Tükör</span><span class="tag">5 kártya</span></div><span class="dialbadge">🔵 → 5</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Haltet die Karten vor den Spiegel hinter der Tür! Zusammen lest ihr einen Satz."</p>
+        <p class="q">„EIN MUTIGER PIRAT ZÄHLT FÜNF" — das letzte Wort ist die Zahl!</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>Az 5 tükörkártya (tükrözve nyomtatva) a dupla ágyon szétszórva. A tükör az ajtó mögött.</dd>
+        <dt>Megoldás</dt><dd class="sol">FÜNF → <strong>5</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Spiegel-Karten</strong></p>
+    </div>
+  </div>
+
+  <!-- C5 -->
+  <div class="station" style="border-left-color:var(--lock-blue)">
+    <div class="head"><span class="cid">C5</span><div><h4>Zahlenfolge</h4><span class="room">Háló · matek/logika</span></div><div class="tags"><span class="tag">Számsor</span></div><span class="dialbadge">🔵 → 2</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„2 · 4 · 6 · 8 · 10 · ? — legt die richtige Zahl-Kachel an die Reihe!"</p>
+        <p class="q">Frage: „Welche Ziffer steht am ENDE der nächsten Zahl?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A tekercs a könyvespolcon, a számlapkák (12,14,16,18,20) borítékban mellette.</dd>
+        <dt>Megoldás</dt><dd class="sol">Következő = 12, utolsó számjegye → <strong>2</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Zahlenfolge + Kacheln</strong></p>
+    </div>
+  </div>
+
+  <!-- C6 -->
+  <div class="station" style="border-left-color:var(--lock-blue)">
+    <div class="head"><span class="cid">C6</span><div><h4>Geomag-Pyramide</h4><span class="room">Háló · térbeli építés</span></div><div class="tags"><span class="tag">Geomag</span><span class="tag">Közös</span></div><span class="dialbadge">🔵 → 6</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Baut die Pyramide (Tetraeder) nach dem Plan! 2 legen Kugeln, 3 legen Stangen."</p>
+        <p class="q">Frage: „Wie viele STANGEN hast du gebraucht?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>Geomag + a terv a földön egy szőnyegen (legyen hely építeni).</dd>
+        <dt>Megoldás</dt><dd class="sol">Tetraéder = 4 golyó + <strong>6</strong> pálca → 6</dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Geomag-Tetraeder-Plan</strong></p>
+    </div>
+  </div>
+
+  <div class="unlock" style="background:linear-gradient(90deg,#3a82c9,var(--lock-blue))">
+    <span class="ic">🔓</span><div><h5>🔵 BLAU LAKAT LE! (2/4)</h5><p>Coco: „5-2-6 — das blaue Schloss fällt! Weiter zur WERKSTATT!"</p></div>
+  </div>
+</section>
+
+<!-- ===== ZONE 3 — GREEN ===== -->
+<section id="z3">
+  <div class="zonehead" style="background:linear-gradient(180deg,#3a9c66,var(--lock-green))">
+    <span class="zlk">🟢</span>
+    <div><h3>Lakat 3 — Grün · Werkstatt</h3><span class="zsub">Gyerekszoba (LEGO!) · C7 C8 C9 · LEGO + jelfejtés + puzzle</span></div>
+    <span class="zcode">4 - 6 - 8</span>
+  </div>
+
+  <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco · Intro</div>
+    <p>„In die WERKSTATT (Kinderzimmer)! Eure beschrifteten LEGO-Boxen helfen euch. Drei Aufgaben — dann fällt das GRÜNE Schloss!"</p></div></div>
+
+  <!-- C7 -->
+  <div class="station" style="border-left-color:var(--lock-green)">
+    <div class="head"><span class="cid">C7</span><div><h4>LEGO-Technic-Maschine</h4><span class="room">Gyerekszoba · LEGO építés</span></div><div class="tags"><span class="tag">LEGO Technic</span><span class="tag">Közös</span></div><span class="dialbadge">🟢 → 4</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Baut die kleine Technic-Maschine nach dem Plan! Holt die Teile aus den beschrifteten Boxen."</p>
+        <p class="q">Frage: „Wie viele ZAHNRÄDER hat deine Maschine?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>Az építési útmutató az íróasztalon; a dobozok címkéire hivatkozik (pl. „nyisd ki a fogaskerekes dobozt") — ez vezeti a keresést.</dd>
+        <dt>Szerepek</dt><dd>1 olvas, 2 hozza az alkatrészt, 2 épít.</dd>
+        <dt>Megoldás</dt><dd class="sol">4 fogaskerék → <strong>4</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Technic-Plan (4 Zahnräder)</strong></p>
+    </div>
+  </div>
+
+  <!-- C8 -->
+  <div class="station" style="border-left-color:var(--lock-green)">
+    <div class="head"><span class="cid">C8</span><div><h4>Geheimcode</h4><span class="room">Gyerekszoba · jelfejtés</span></div><div class="tags"><span class="tag">Coding</span><span class="tag">5 kártya</span></div><span class="dialbadge">🟢 → 6</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Mit der Legende entschlüsselt ihr das geheime Wort — jeder ein Symbol!"</p>
+        <p class="q">Frage: „Welche Zahl ergibt das geheime Wort?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A jelmagyarázat egy könyvespolcra ragasztva; az 5 szimbólum-kártya a kisszekrényen.</dd>
+        <dt>Megoldás</dt><dd class="sol">🗡️🦴👑🪙🗡️ → S-E-C-H-S = „SECHS" → <strong>6</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Cipher-Legende + Wort</strong></p>
+    </div>
+  </div>
+
+  <!-- C9 -->
+  <div class="station" style="border-left-color:var(--lock-green)">
+    <div class="head"><span class="cid">C9</span><div><h4>Schatz-Puzzle</h4><span class="room">Gyerekszoba · puzzle</span></div><div class="tags"><span class="tag">Puzzle</span><span class="tag">Csapat</span></div><span class="dialbadge">🟢 → 8</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Setzt das Flaggen-Puzzle zusammen — alle helfen mit!"</p>
+        <p class="q">Frage: „Welche Zahl siehst du auf dem Puzzle?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A felvágott négyzeteket egy kis kalózládikóban/borítékban add oda, vagy szórd szét az ágyon; az asztalon rakják össze.</dd>
+        <dt>Megoldás</dt><dd class="sol">A kép egy nagy „8" → <strong>8</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Puzzle „8"</strong></p>
+    </div>
+  </div>
+
+  <div class="unlock" style="background:linear-gradient(90deg,#3a9c66,var(--lock-green))">
+    <span class="ic">🔓</span><div><h5>🟢 GRÜN LAKAT LE! (3/4)</h5><p>Coco: „4-6-8 — nur noch EIN Schloss bis zum Schatz!"</p></div>
+  </div>
+  <div class="breakbar"><span class="ic">🧀</span><div><h4>SZÜNET 2</h4><p>Snack + 1 Tom &amp; Jerry rész. Készítsd elő a finálét (nappali, előszoba, láda köré).</p></div></div>
+</section>
+
+<!-- ===== ZONE 4 — GOLD ===== -->
+<section id="z4">
+  <div class="zonehead" style="background:linear-gradient(180deg,#dcae47,var(--lock-gold))">
+    <span class="zlk">🟡</span>
+    <div><h3>Lakat 4 — Gold · Schatzkammer</h3><span class="zsub">Finálé · C10 C11 C12 · logika + térkép + csapatmunka</span></div>
+    <span class="zcode">9 - 3 - 1</span>
+  </div>
+
+  <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco · Intro</div>
+    <p>„Das große Finale, Mannschaft! Das letzte — das GOLDENE Schloss. Drei Aufgaben, dann gehört der Schatz EUCH!"</p></div></div>
+
+  <!-- C10 -->
+  <div class="station" style="border-left-color:var(--lock-gold)">
+    <div class="head"><span class="cid">C10</span><div><h4>Logik-Rätsel</h4><span class="room">Nappali · logika/matek</span></div><div class="tags"><span class="tag">Logika</span><span class="tag">5 kártya</span></div><span class="dialbadge">🟡 → 9</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Fünf Rätsel, jeder löst eines!"</p>
+        <p class="q">Frage: „Welche Antwort ist UNGERADE?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>Az 5 rejtvénykártya a dohányzóasztalon, lefelé fordítva.</dd>
+        <dt>Válaszok</dt><dd>9, 4, 8, 6, 2 — egyetlen páratlan a 9.</dd>
+        <dt>Megoldás</dt><dd class="sol">páratlan → <strong>9</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Rätsel-Karten</strong></p>
+    </div>
+  </div>
+
+  <!-- C11 -->
+  <div class="station" style="border-left-color:var(--lock-gold)">
+    <div class="head"><span class="cid">C11</span><div><h4>Schatzkarten-Route</h4><span class="room">Előszoba · térkép</span></div><div class="tags"><span class="tag">Mapping</span></div><span class="dialbadge">🟡 → 3</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Folgt dem Weg auf der Karte — jeder fährt ein Zimmer mit dem Finger nach!"</p>
+        <p class="q">Frage: „Wie viele X liegen auf dem Weg?"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A lakás-térkép a bejárati előszobában, a cipőtartóra tűzve („a kalózok az ajtónál kötnek ki").</dd>
+        <dt>Megoldás</dt><dd class="sol">3 db X az úton → <strong>3</strong></dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Wohnungs-Karte</strong></p>
+    </div>
+  </div>
+
+  <!-- C12 -->
+  <div class="station" style="border-left-color:var(--lock-gold)">
+    <div class="head"><span class="cid">C12</span><div><h4>Der große Piratenschwur</h4><span class="room">Láda előtt · csapatmunka</span></div><div class="tags"><span class="tag">Csapat (mind az 5)</span></div><span class="dialbadge">🟡 → 1</span></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco mondja</div>
+        <p>„Die letzte Aufgabe — ALLE zusammen! Jeder legt eine Geomag-Stange, bis der Stern fertig ist."</p>
+        <p class="q">„Gemeinsam seid ihr EINE Crew — die EINS!"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek</div><dl>
+        <dt>Elrejtés</dt><dd>A Geomag-csillag/szalagok a láda köré előkészítve. Csak együtt megy. A kész csillag alatt rejtett arany „1".</dd>
+        <dt>Megoldás</dt><dd class="sol">a csillag elkészül → rejtett „1" → <strong>1</strong></dd>
+      </dl></div>
+    </div>
+  </div>
+
+  <!-- FINALE -->
+  <div class="station" style="border:2px solid var(--gold);border-left-width:6px;border-left-color:var(--gold)">
+    <div class="head" style="background:linear-gradient(180deg,#dcae47,var(--lock-gold));color:#3a2a05"><span class="cid" style="background:#fff7e0">🏁</span><div><h4>Die Schatztruhe öffnet sich!</h4><span class="room" style="color:#5a4310">Kód 9-3-1 → KINCS</span></div></div>
+    <div class="body">
+      <div class="coco"><span class="bird">🦜</span><div class="said"><div class="who">Coco · Finálé</div>
+        <p>„NEUN-DREI-EINS! Das letzte Schloss fällt! Drei… zwei… eins… <strong>ÖFFNEN!</strong> 🪙🎉"</p>
+        <p>„Ihr seid die mutigste Piraten-Crew der sieben Meere! Und du, Geburtstagskind, bist ab heute KAPITÄN! HURRA!"</p></div></div>
+      <div class="parent"><div class="ph">Szülőknek — a nagy pillanat</div><dl>
+        <dt>Reveal</dt><dd>Tompítsd a fényt; konfetti/füst; Coco visszaszámol és „kiált". Csoki tallérok + fejenként <strong>loot-zacskó</strong>, a <strong>fő ajándék</strong> (új LEGO Technic), <strong>„Echter Pirat" oklevél</strong>, a szülinaposnak kapitány-kalap/sál — Coco „lovaggá üti".</dd>
+        <dt>Záró</dt><dd>Mindenki: „ARRR!" + közös fotó a nyitott ládával és a 4 levett lakattal.</dd>
+      </dl></div>
+      <p class="printref" style="font-family:var(--head);font-size:12.5px;color:var(--sea);margin-top:6px">✂ Nyomtatandó: <strong>Lakatcímkék + Oklevelek</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COCO TV-SKRIPT ===== -->
+<section id="skript">
+  <h2 class="sec"><span class="num">iv</span>Coco TV-Skript <span class="lang-de">összekötő szövegek</span></h2>
+  <hr class="rule">
+  <p class="sec-lead">A feladat-szövegek a kártyáknál vannak; itt az összekötő narráció. A gyerekek minden feladat után <strong>beírják a számot</strong>, Coco ellenőrzi és továbbküld.</p>
+  <div class="scriptbox">
+    <div class="scriptline"><b>Begrüßung</b>„AHOI, ihr tapferen Piraten! 🦜 Ich bin Coco! Heute jagen wir einen ECHTEN Schatz! Vier Schlösser bewachen die Truhe. Findet zuerst die Truhe — los geht's, ARRR!"</div>
+    <div class="scriptline"><b>Truhe gefunden</b>„YO-HO! Vier Schlösser — Rot, Blau, Grün, Gold. Für jedes braucht ihr drei Zahlen. Auf in die KOMBÜSE!"</div>
+    <div class="scriptline"><b>Richtige Zahl</b>„RICHTIG! 🎉 Das ist eine Zahl vom Schloss!" — <em>(falsch:)</em> „Hm, ein Sturm! Versucht es nochmal, Piraten!"</div>
+    <div class="scriptline"><b>Schloss offen</b>„Der Code ist komplett — öffnet das Schloss und nehmt es ab! Ein Schloss weniger, ARRR!"</div>
+    <div class="scriptline"><b>Pause</b>„Zeit für eine Stärkung, Crew! Esst etwas und schaut Tom &amp; Jerry — danach geht die Jagd weiter!"</div>
+    <div class="scriptline"><b>Übergänge</b>Blau → „zur KAPITÄNSKAJÜTE — vergesst den Spiegel nicht!" · Grün → „in die WERKSTATT — eure LEGO-Boxen helfen!" · Gold → „die letzte Aufgabe — alle zusammen!"</div>
+    <div class="scriptline"><b>Finale</b>„NEUN-DREI-EINS! Das letzte Schloss fällt! ÖFFNET DIE TRUHE! 🪙🎉 Ihr seid die mutigste Crew der sieben Meere! Und du, Geburtstagskind, bist ab heute KAPITÄN! HURRA!"</div>
+  </div>
+
+  <h3 style="font-family:var(--head);color:var(--sea-deep);margin:22px 0 8px">Beállítási lista — szülőknek</h3>
+  <div class="parent"><div class="ph">Setup checklist</div>
+  <ul style="margin:.2em 0;padding-left:18px;font-size:.95em">
+    <li>4 lakat beállítása (3-7-4 / 5-2-6 / 4-6-8 / 9-3-1), majd a tárcsák összekeverése; színes szalag mindegyikre.</li>
+    <li>Mind a 4 lakat a ládára; a láda a hálószobai gardróbba.</li>
+    <li>Coco appja a TV-n; a 12 helyes szám betöltve (lásd §ii).</li>
+    <li>Konyha: ágyúgolyók kitéve, 5 érme elrejtve, történet a komódon.</li>
+    <li>Háló: tükörkártyák az ágyon, számsor + lapkák a polcon, Geomag a földön.</li>
+    <li>Gyerekszoba: LEGO útmutató az asztalon, titkosírás + magyarázat, puzzle borítékban.</li>
+    <li>Előszoba/nappali: rejtvénykártyák lefordítva, térkép a cipőszekrényen.</li>
+    <li>Finálé: Geomag-csillag/szalagok a láda köré, alá rejtett „1".</li>
+    <li>Kincs becsomagolva; snack + 2 Tom &amp; Jerry epizód előkészítve.</li>
+  </ul></div>
+</section>
+
+</div><!-- /wrap -->
+
+<!-- ===== PRINTABLES ===== -->
+<div class="wrap">
+<section id="nyomtat" class="page-break">
+  <div class="print-intro">
+    <h2>✂ Nyomtatandó kellékek</h2>
+    <p>Minden a gyerekeknek <strong>németül</strong>. Színes nyomtatás, vágd a szaggatott vonal mentén. A megoldások halványan — a gyerekek úgysem fordítják meg.</p>
+  </div>
+
+  <!-- Prologue -->
+  <div class="sheet">
+    <h3>Coco · erstes Rätsel (Prolog)</h3>
+    <div class="log"><p>AHOI, kleine Piraten! Ich bin Coco, der schlauste Papagei der sieben Meere. 🦜 Irgendwo in diesem Schiff (eurer Wohnung!) liegt eine Schatztruhe — verschlossen mit <strong>VIER</strong> Schlössern. Sucht dort, wo der Kapitän schläft und seine Sachen versteckt: <strong>hinter einer großen Tür, wo Kleider hängen</strong>. ARRR!</p></div>
+  </div>
+
+  <!-- C1 cannonballs -->
+  <div class="sheet">
+    <h3>C1 · Kanonenkugeln</h3>
+    <p class="de-note">🔴 Küche · je eine pro Kind · in eine Reihe legen</p>
+    <div class="cards">
+      <div><div class="ball">3 × 4</div><div class="ans" style="text-align:center">= 12</div></div>
+      <div><div class="ball">6 × 4</div><div class="ans" style="text-align:center">= 24</div></div>
+      <div><div class="ball">9 × 4</div><div class="ans" style="text-align:center">= 36</div></div>
+      <div><div class="ball">3 × 3</div><div class="ans" style="text-align:center">= 9</div></div>
+      <div><div class="ball">5 × 6</div><div class="ans" style="text-align:center">= 30</div></div>
+    </div>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep);margin-top:12px">Wie viele Zahlen sind GRÖSSER als 20? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(24, 36, 30 → 3)</p>
+  </div>
+
+  <!-- C2 coins -->
+  <div class="sheet">
+    <h3>C2 · Goldmünzen</h3>
+    <p class="de-note">🔴 Küche · verstecken · Zahl auf der Rückseite</p>
+    <div class="cards" style="grid-template-columns:repeat(5,1fr)">
+      <div class="coin">7</div><div class="coin">8</div><div class="coin">11</div><div class="coin">14</div><div class="coin">20</div>
+    </div>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep);margin-top:12px">Welche ist die KLEINSTE? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(7)</p>
+  </div>
+
+  <!-- C3 story -->
+  <div class="sheet">
+    <h3>C3 · Käpt'n Rotbart und der Schatz</h3>
+    <p class="de-note">🔴 Küche · jeder liest eine Zeile laut · „PAPAGEI" zählen</p>
+    <div class="log"><ol>
+      <li>Vor langer Zeit segelte Käpt'n Rotbart über das wilde Meer. Auf seiner Schulter saß ein bunter <span class="hi">PAPAGEI</span>.</li>
+      <li>Der <span class="hi">PAPAGEI</span> rief jeden Morgen laut: „Land in Sicht!"</li>
+      <li>Eines Tages fand die Crew eine geheimnisvolle Insel mit Palmen und goldenem Sand.</li>
+      <li>Der schlaue <span class="hi">PAPAGEI</span> flog voraus und zeigte den Weg zu einer dunklen Höhle.</li>
+      <li>In der Höhle glitzerte eine große Truhe voller Gold. Alle jubelten, und der <span class="hi">PAPAGEI</span> tanzte vor Freude!</li>
+    </ol></div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(PAPAGEI 4× → 4)</p>
+  </div>
+
+  <!-- C4 mirror -->
+  <div class="sheet">
+    <h3>C4 · Spiegel-Karten</h3>
+    <p class="de-note">🔵 Schlafzimmer · gespiegelt drucken · vor den Spiegel halten</p>
+    <div class="mcards">
+      <div class="mcard"><div class="word mirror">EIN</div><div class="pos">①</div></div>
+      <div class="mcard"><div class="word mirror">MUTIGER</div><div class="pos">②</div></div>
+      <div class="mcard"><div class="word mirror">PIRAT</div><div class="pos">③</div></div>
+      <div class="mcard"><div class="word mirror">ZÄHLT</div><div class="pos">④</div></div>
+      <div class="mcard"><div class="word mirror">FÜNF</div><div class="pos">⑤</div></div>
+    </div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(Im Spiegel: „EIN MUTIGER PIRAT ZÄHLT FÜNF" → 5)</p>
+  </div>
+
+  <!-- C5 sequence -->
+  <div class="sheet">
+    <h3>C5 · Zahlenfolge</h3>
+    <p class="de-note">🔵 Schlafzimmer · die nächste Zahl anlegen</p>
+    <div class="scroll">2 · 4 · 6 · 8 · 10 · ?</div>
+    <div class="tiles"><span class="tile">12</span><span class="tile">14</span><span class="tile">16</span><span class="tile">18</span><span class="tile">20</span></div>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep);margin-top:10px">Letzte Ziffer der nächsten Zahl? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(12 → 2)</p>
+  </div>
+
+  <!-- C6 geomag tetra -->
+  <div class="sheet">
+    <h3>C6 · Geomag-Pyramide (Tetraeder)</h3>
+    <p class="de-note">🔵 Schlafzimmer · nachbauen · Stangen zählen</p>
+    <div class="bluep" style="display:flex;justify-content:center">
+      <svg width="220" height="190" viewBox="0 0 220 190" aria-label="Tetraeder">
+        <polygon points="40,150 170,150 105,120" fill="none" stroke="#9fd6ff" stroke-width="2"/>
+        <line x1="40" y1="150" x2="105" y2="40" stroke="#9fd6ff" stroke-width="2"/>
+        <line x1="170" y1="150" x2="105" y2="40" stroke="#9fd6ff" stroke-width="2"/>
+        <line x1="105" y1="120" x2="105" y2="40" stroke="#9fd6ff" stroke-width="2" stroke-dasharray="4 4"/>
+        <circle cx="40" cy="150" r="10" fill="#d9d9d9" stroke="#fff"/>
+        <circle cx="170" cy="150" r="10" fill="#d9d9d9" stroke="#fff"/>
+        <circle cx="105" cy="120" r="10" fill="#d9d9d9" stroke="#fff"/>
+        <circle cx="105" cy="40" r="10" fill="#ffd76a" stroke="#fff"/>
+      </svg>
+    </div>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep)">4 Kugeln · wie viele Stangen? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(6 Stangen → 6)</p>
+  </div>
+
+  <!-- C7 technic -->
+  <div class="sheet">
+    <h3>C7 · Technic-Maschine</h3>
+    <p class="de-note">🟢 Kinderzimmer · aus den beschrifteten Boxen bauen</p>
+    <div class="gears">⚙️ ⚙️ ⚙️ ⚙️</div>
+    <p style="text-align:center">Baue die Maschine mit <strong>4 Zahnrädern</strong>. Hol die Teile aus der „Zahnrad-Box" und der „Achsen-Box".</p>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep)">Wie viele Zahnräder? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(4) — <span style="font-style:italic">Tipp: írd rá a saját dobozcímkéid neveit.</span></p>
+  </div>
+
+  <!-- C8 cipher -->
+  <div class="sheet">
+    <h3>C8 · Geheimcode</h3>
+    <p class="de-note">🟢 Kinderzimmer · Legende → Wort entschlüsseln</p>
+    <div class="legend">
+      <div class="legitem">⚓ = A</div><div class="legitem">🦴 = E</div><div class="legitem">🗡️ = S</div><div class="legitem">👑 = C</div>
+      <div class="legitem">🪙 = H</div><div class="legitem">🐚 = I</div><div class="legitem">🦜 = R</div><div class="legitem">☠️ = N</div>
+    </div>
+    <p style="text-align:center;font-family:var(--head);color:var(--oxblood);margin:10px 0 0">Das geheime Wort:</p>
+    <div class="cipher"><div class="csym">🗡️</div><div class="csym">🦴</div><div class="csym">👑</div><div class="csym">🪙</div><div class="csym">🗡️</div></div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(S-E-C-H-S = „SECHS" → 6)</p>
+  </div>
+
+  <!-- C9 puzzle -->
+  <div class="sheet">
+    <h3>C9 · Schatz-Puzzle</h3>
+    <p class="de-note">🟢 Kinderzimmer · in ~12 Quadrate schneiden · zusammensetzen</p>
+    <div class="jig"><span class="num">8</span><div class="grid"></div></div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(Welche Zahl? → 8)</p>
+  </div>
+
+  <!-- C10 riddles -->
+  <div class="sheet">
+    <h3>C10 · Logik-Rätsel</h3>
+    <p class="de-note">🟡 Wohnzimmer · je eine Karte · welche Antwort ist ungerade?</p>
+    <div class="riddle"><b>1)</b> 3 Truhen, in jeder 3 Münzen. Wie viele Münzen? <span class="a">(9 ✦ ungerade)</span></div>
+    <div class="riddle"><b>2)</b> 2 Piraten und nochmal 2 Piraten. Wie viele? <span class="a">(4)</span></div>
+    <div class="riddle"><b>3)</b> Wie viele Beine hat ein Tintenfisch? <span class="a">(8)</span></div>
+    <div class="riddle"><b>4)</b> Was ist 2 mal 3? <span class="a">(6)</span></div>
+    <div class="riddle"><b>5)</b> Was ist 10 minus 8? <span class="a">(2)</span></div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(ungerade → 9)</p>
+  </div>
+
+  <!-- C11 map -->
+  <div class="sheet">
+    <h3>C11 · Wohnungs-Karte</h3>
+    <p class="de-note">🟡 Flur · dem Weg folgen · die X auf dem Weg zählen</p>
+    <div class="map">
+      <svg class="route" viewBox="0 0 560 400" preserveAspectRatio="none">
+        <polyline points="60,60 200,60 200,200 380,200 380,330 480,330" fill="none" stroke="#8c2b22" stroke-width="4" stroke-dasharray="10 8"/>
+      </svg>
+      <div class="lbl" style="top:10px;left:14px">Küche</div>
+      <div class="lbl" style="top:10px;left:44%">Flur</div>
+      <div class="lbl" style="top:46%;left:14px">Schlafzimmer</div>
+      <div class="lbl" style="top:46%;left:44%">Kinderzimmer</div>
+      <div class="lbl" style="top:80%;left:14px">Bad</div>
+      <div class="lbl" style="top:80%;left:64%;color:var(--oxblood)">Truhe</div>
+      <div class="x" style="top:9%;left:33%">✗</div>
+      <div class="x" style="top:46%;left:34%">✗</div>
+      <div class="x" style="top:79%;left:64%">✗</div>
+    </div>
+    <p style="text-align:center;font-family:var(--head);color:var(--sea-deep);margin-top:8px">Wie viele X liegen auf dem Weg? → _</p>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a">(3)</p>
+  </div>
+
+  <!-- Lock ribbons -->
+  <div class="sheet">
+    <h3>Schloss-Marken &amp; Bänder</h3>
+    <p class="de-note">je eine auf ein Schloss · Farbe = Station</p>
+    <div class="ribbons">
+      <div class="ribbon" style="background:var(--lock-red)">🔴 ROT<small>Kombüse · 3-7-4</small></div>
+      <div class="ribbon" style="background:var(--lock-blue)">🔵 BLAU<small>Kajüte · 5-2-6</small></div>
+      <div class="ribbon" style="background:var(--lock-green)">🟢 GRÜN<small>Werkstatt · 4-6-8</small></div>
+      <div class="ribbon" style="background:var(--lock-gold);color:#3a2a05">🟡 GOLD<small>Schatzkammer · 9-3-1</small></div>
+    </div>
+    <p style="text-align:center;font-size:.85em;color:#b9a06a;margin-top:8px">(A kódokat letakarhatod — Coco amúgy is bemondja, amikor egy lakat „kész".)</p>
+  </div>
+
+  <!-- Diplomas -->
+  <div class="sheet page-break">
+    <h3>Piraten-Diplom</h3>
+    <p class="de-note">für jeden · Namen eintragen · 5× drucken</p>
+    <div class="diploma">
+      <h4>🏴‍☠️ Echter Pirat 🏴‍☠️</h4>
+      <p style="font-family:var(--head);letter-spacing:.05em">von Käpt'n Rotbarts Crew</p>
+      <div class="name-line"></div><p class="small">Name des tapferen Seeräubers</p>
+      <p style="margin-top:12px">Hat alle vier Schlösser geknackt und den Schatz gefunden. Arrr!</p>
+      <p style="font-family:var(--display);font-size:22px;color:var(--oxblood);margin-top:12px">🦜 Käpt'n Coco</p>
+    </div>
+    <div class="diploma">
+      <h4>🏴‍☠️ Echter Pirat 🏴‍☠️</h4>
+      <p style="font-family:var(--head);letter-spacing:.05em">von Käpt'n Rotbarts Crew</p>
+      <div class="name-line"></div><p class="small">Name des tapferen Seeräubers</p>
+      <p style="margin-top:12px">Hat alle vier Schlösser geknackt und den Schatz gefunden. Arrr!</p>
+      <p style="font-family:var(--display);font-size:22px;color:var(--oxblood);margin-top:12px">🦜 Käpt'n Coco</p>
+    </div>
+  </div>
+
+</section>
+</div>
+
+<footer>
+  <p>🏴‍☠️ Coco &amp; die 4 Schlösser · Gute Jagd, kleine Piraten! 🦜</p>
+  <p class="noprint" style="font-size:.85em">Tipp: a számokat/szövegeket a böngészőben Ctrl/Cmd+F-fel megkeresheted és átírhatod nyomtatás előtt.</p>
+</footer>
