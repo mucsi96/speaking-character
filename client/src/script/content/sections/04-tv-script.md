@@ -19,6 +19,6 @@ setup:
     - "Gyerekszoba: 5 mondat-kártya + anleitő kártya a Schatz-Tabellával jól láthatóan az asztalon / polcon (C7)."
     - "Kis WC / zuhanyzó: jelmagyarázat a falra/ajtóra ragasztva + szimbólum-kártyák a polcon (C8)."
     - "Előszoba: 5 iránytű-kártya + anleitő kártya a cipőszekrényen / a bejárati ajtón (C11)."
-    - "Finálé: Geomag-csillag/szalagok a láda köré, alá rejtett „1” (C12)."
+    - "Finálé: 5 Bibot-kártya (rács) + anleitő kártya a láda elé kiterítve (C12)."
     - "Kincs becsomagolva; snack + 2 Tom & Jerry epizód előkészítve."
 ---

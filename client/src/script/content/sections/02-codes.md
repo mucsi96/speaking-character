@@ -31,5 +31,5 @@ validation:
     - [C9, "Puzzle", "8"]
     - [C10, "Logikai rejtvények", "9"]
     - [C11, "Iránytű / égtájak", "3"]
-    - [C12, "Csapatmunka", "1"]
+    - [C12, "Bibot robot (rács-koordináták)", "1"]
 ---
