@@ -11,8 +11,8 @@ code: "3 - 7 - 4"
 intro:
   who: "Coco · Prológus + a láda"
   lines:
-    - "„AHOI, kleine Piraten! 🦜 Ich bin Coco! Irgendwo schläft der Kapitän und versteckt seine Sachen — sucht **hinter einer großen Tür, wo Kleider hängen**. Dort wartet die Truhe mit VIER Schlössern!”"
-    - "„Gefunden? YO-HO! Für jedes Schloss braucht ihr drei Zahlen. Auf in die **KOMBÜSE** — die Küche!”"
+    - "Ahoi, ihr tapferen kleinen Piraten! Ich bin Käpten Coco, der schlauste Papagei der sieben Weltmeere! Herzlichen Glückwunsch zum Geburtstag! Heute gehen wir gemeinsam auf eine große Schatzsuche. Irgendwo in diesem Schiff liegt eine Schatztruhe — verschlossen mit **VIER** Schlössern. Sucht dort, wo der Kapitän schläft und seine Sachen versteckt: **hinter einer großen Tür, wo Kleider hängen**."
+    - "Gefunden? YO-HO! Für jedes Schloss braucht ihr drei Zahlen. Auf in die **KOMBÜSE** — die Küche! ARRR!"
   hint: "💡 A láda a hálószobai nagy gardróbban van; az indító térképfecni a nappali kanapépárnája alatt."
 unlock:
   title: "🔴 ROT LAKAT LE! (1/4)"
