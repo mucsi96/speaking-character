@@ -23,7 +23,7 @@ validation:
     - [C1, "Matek (ágyúgolyók)", "3"]
     - [C2, "Keresés (érmék)", "7"]
     - [C3, "Felolvasás", "4"]
-    - [C4, "Tükörírás", "5"]
+    - [C4, "Tükör-matek (kivonás)", "5"]
     - [C5, "Számsor", "2"]
     - [C6, "Geomag építés", "6"]
     - [C7, "LEGO Technic", "4"]

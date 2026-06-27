@@ -14,7 +14,7 @@ setup:
     - "Konyha: ágyúgolyók a szigeten (C1)."
     - "Fürdőszoba: 5 érme elrejtve — kád széle, mosdó, WC mögött, ablakpárkány, pohár (C2)."
     - "Nappali: történet a nagy étkezőasztalon (C3), Geomag + terv a kanapé melletti szőnyegen (C6), rejtvénykártyák lefelé a TV-szekrényen (C10)."
-    - "Háló: tükörkártyák a franciaágyon + tükör az ajtó mögött (C4)."
+    - "Háló: 5 tükör-rechen-kártya (tükrözött kivonás) + anleitő kártya a franciaágyon + tükör az ajtó mögött (C4)."
     - "Dolgozószoba: számsor-tekercs + lapkák az íróasztalon (C5), puzzle borítékban az egyik egyszemélyes ágyon (C9)."
     - "Gyerekszoba: LEGO útmutató az asztalon + címkézett dobozok (C7)."
     - "Kis WC / zuhanyzó: jelmagyarázat a falra/ajtóra ragasztva + szimbólum-kártyák a polcon (C8)."
