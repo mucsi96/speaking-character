@@ -29,6 +29,8 @@ COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/server/package.json ./server/package.json
 COPY --from=build /app/server/dist ./server/dist
 COPY --from=build /app/client/dist ./client/dist
+# Markdown show content: the server builds the default script from it at boot.
+COPY --from=build /app/client/src/script/content ./client/src/script/content
 
 RUN mkdir -p /app/cache /app/data
 EXPOSE 8080
