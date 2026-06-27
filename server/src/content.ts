@@ -13,9 +13,12 @@
  *  Delete `data/state.json` to regenerate the default from the markdown.
  *
  *  Mapping (linear `Scene[]`):
- *   - `intro`          : TV-script Begrüßung + "Truhe gefunden".
  *   - per zone (red→blue→green→gold):
- *       `<anchor>-intro`  : the zone's intro lines (codeless),
+ *       `<anchor>-intro`  : the zone's intro lines (codeless). The first zone's
+ *                            intro (red · `z1-intro`) is the prologue that opens
+ *                            the whole hunt — greeting, birthday and the first
+ *                            "find the chest" clue — so there is no separate
+ *                            `intro` scene,
  *       `C1`..`C12`       : each station's spoken lines + question, with the
  *                            single-digit answer from the codes table,
  *       `<anchor>-unlock` : the unlock narration (codeless, when present),
@@ -183,15 +186,8 @@ export function buildDefaultScript(): Script {
   const digits = buildDigitLookup(files);
   const scenes: Scene[] = [];
 
-  // Intro: the TV-script connecting narration that opens the hunt.
-  const tv = pick(files, 'sections/04-tv-script.md');
-  const tvLines = (tv.lines as Array<{ label?: string; text?: string }>) ?? [];
-  const byLabel = (label: string) => tvLines.find((l) => l.label === label)?.text ?? '';
-  scenes.push({
-    id: 'intro',
-    text: speak([byLabel('Begrüßung'), byLabel('Truhe gefunden')]),
-  });
-
+  // The hunt opens straight with the first zone's intro (red · `z1-intro`),
+  // which doubles as the prologue: greeting, birthday and the first clue.
   let finale: Scene | null = null;
 
   for (const { zone, stations } of buildZones(files)) {
