@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <radialGradient id="c1-00-ball" cx="34%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#6a6a6a"/>
+      <stop offset="0.7" stop-color="#141414"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="20" y="16" width="360" height="48" rx="10" fill="#8c2b22"/>
+  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS · KÜCHE</text>
+  <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="15" font-style="italic">So bekommt ihr eure Zahl</text>
+
+  <!-- title -->
+  <text x="200" y="92" text-anchor="middle" fill="#8c2b22" font-size="26" font-weight="700">Kanonenkugel-Mathe</text>
+
+  <!-- steps -->
+  <g fill="#2a2118" font-size="14">
+    <text x="42" y="124"><tspan fill="#8c2b22" font-weight="700">1.</tspan>  Jeder schnappt sich <tspan font-weight="700">eine Karte</tspan>.</text>
+    <text x="42" y="148"><tspan fill="#8c2b22" font-weight="700">2.</tspan>  Rechne deine Aufgabe aus.</text>
+    <text x="42" y="172"><tspan fill="#8c2b22" font-weight="700">3.</tspan>  Sammelt alle <tspan font-weight="700">5 Ergebnisse</tspan>.</text>
+    <text x="42" y="196"><tspan fill="#8c2b22" font-weight="700">4.</tspan>  Zählt: Wie viele sind <tspan font-weight="700">GRÖSSER als 20</tspan>?</text>
+    <text x="42" y="220"><tspan fill="#8c2b22" font-weight="700">5.</tspan>  Diese Anzahl ist eure <tspan font-weight="700">erste Zahl</tspan>!</text>
+  </g>
+
+  <!-- cannonball pile motif -->
+  <circle cx="318" cy="246" r="22" fill="url(#c1-00-ball)"/>
+  <circle cx="296" cy="262" r="22" fill="url(#c1-00-ball)"/>
+  <circle cx="340" cy="262" r="22" fill="url(#c1-00-ball)"/>
+
+  <!-- footer chip -->
+  <circle cx="44" cy="258" r="7" fill="#d6463a"/>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">Küche · C1 · 5 Aufgaben</text>
+</svg>

@@ -20,6 +20,13 @@ const headStyle = (marginTop?: string): CSSProperties => ({
  *  `visual.type`. Each branch mirrors the markup of the original script.html. */
 function Visual({ visual }: { visual: Record<string, any> }) {
   switch (visual.type) {
+    case 'svg':
+      // A self-contained print-ready card; the raw markup is inlined verbatim
+      // so the same asset drives both the screen and the A4 printout.
+      return (
+        <div className="svg-card" dangerouslySetInnerHTML={{ __html: visual.svg as string }} />
+      );
+
     case 'log':
       return <Block className="log" md={visual.text} />;
 
@@ -253,8 +260,13 @@ function Visual({ visual }: { visual: Record<string, any> }) {
   }
 }
 
-/** A printable cut-out sheet: dashed frame, title, optional German note, art. */
+/** A printable cut-out sheet: dashed frame, title, optional German note, art.
+ *  SVG cards are self-contained (frame + title baked in), so they skip the
+ *  HTML chrome and render the artwork alone. */
 export function PrintableSheet({ printable }: { printable: Printable }) {
+  if (printable.visual.type === 'svg') {
+    return <Visual visual={printable.visual} />;
+  }
   return (
     <div className={printable.pageBreak ? 'sheet page-break' : 'sheet'}>
       <h3>{printable.title}</h3>

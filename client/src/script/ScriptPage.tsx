@@ -53,7 +53,7 @@ function DataTable({
  * `script.html`; reachable at `/script`.
  */
 export default function ScriptPage() {
-  const { meta, overview, codes, flow, challenges, tv, printIntro, printables } = scriptDoc;
+  const { meta, overview, codes, flow, challenges, tv, printIntro, printGroups } = scriptDoc;
 
   useEffect(() => {
     // The app's global styles pin html/body to a full-screen, non-scrolling
@@ -244,8 +244,12 @@ export default function ScriptPage() {
             <h2>{printIntro.heading}</h2>
             <Inline as="p" md={printIntro.lead} />
           </div>
-          {printables.map((printable, i) => (
-            <PrintableSheet key={i} printable={printable} />
+          {printGroups.map((g) => (
+            <div key={g.challengeId} className={g.svg ? 'printgroup printgroup--svg' : 'printgroup'}>
+              {g.sheets.map((sheet, i) => (
+                <PrintableSheet key={i} printable={sheet} />
+              ))}
+            </div>
           ))}
         </section>
       </div>
