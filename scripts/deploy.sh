@@ -44,6 +44,7 @@ helm upgrade $RELEASE_NAME mucsi96/node-app \
     --set env.CACHE_DIR=/app/cache \
     --set persistentVolumeClaims[0].name=party-audio-cache \
     --set persistentVolumeClaims[0].mountPath=/app/cache \
+    --set persistentVolumeClaims[0].volumeName=party-app \
     --set persistentVolumeClaims[0].storage=1Gi \
     --set persistentVolumeClaims[0].accessMode=ReadWriteMany \
     --set persistentVolumeClaims[0].storageClassName=azurefile-csi \

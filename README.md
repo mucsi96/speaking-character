@@ -195,9 +195,13 @@ against ElevenLabs on the next warm-up. `deploy.sh` provisions one claim via the
 | ------------------ | ------------------- |
 | `name`             | `party-audio-cache` |
 | `mountPath`        | `/app/cache`        |
+| `volumeName`       | `party-app`         |
 | `storage`          | `1Gi`               |
 | `accessMode`       | `ReadWriteMany`     |
 | `storageClassName` | `azurefile-csi`     |
+
+The claim binds to the pre-provisioned `party-app` PersistentVolume via
+`volumeName`.
 
 `ReadWriteMany` (Azure Files) is used so the chart's default `RollingUpdate`
 strategy works cleanly — the old and new pod can hold the volume at the same
