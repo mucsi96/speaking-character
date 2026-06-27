@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import {
   fetchState,
   putScript,
@@ -24,6 +25,27 @@ const PHASE_LABELS: Record<Phase, string> = {
  * state. Everything is kept in sync with the server over SSE, so changes here
  * reach the TV display instantly — no reload on either side.
  */
+/** Serialize a script to readable YAML for the paste/edit textarea. */
+function scriptToYaml(script: Script): string {
+  return stringifyYaml(script, { lineWidth: 0 });
+}
+
+/** Light client-side parse of pasted YAML. The server does the authoritative
+ *  validation (see `sanitizeScript`); here we only guard against YAML that is
+ *  obviously not a script so the form can't be fed nonsense. */
+function parseScript(text: string): Script {
+  let data: unknown;
+  try {
+    data = parseYaml(text);
+  } catch (err) {
+    throw new Error(err instanceof Error ? err.message : 'Invalid YAML.');
+  }
+  if (!data || typeof data !== 'object' || !Array.isArray((data as Script).scenes)) {
+    throw new Error('YAML must define a "scenes" list.');
+  }
+  return data as Script;
+}
+
 export function Admin() {
   const [server, setServer] = useState<AppState | null>(null);
   const [draft, setDraft] = useState<Script | null>(null);
@@ -31,6 +53,9 @@ export function Admin() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [connected, setConnected] = useState(false);
+  const [mode, setMode] = useState<'form' | 'yaml'>('form');
+  const [yamlText, setYamlText] = useState('');
+  const [yamlError, setYamlError] = useState<string | null>(null);
 
   useEffect(() => {
     let dropped = false;
@@ -55,8 +80,14 @@ export function Admin() {
   // When the server pushes a script change and we have no unsaved edits, adopt
   // it so two admins don't fight. (Kept out of the SSE callback to read `dirty`.)
   useEffect(() => {
-    if (server && !dirty) setDraft(server.script);
-  }, [server, dirty]);
+    if (server && !dirty) {
+      setDraft(server.script);
+      if (mode === 'yaml') {
+        setYamlText(scriptToYaml(server.script));
+        setYamlError(null);
+      }
+    }
+  }, [server, dirty, mode]);
 
   if (!draft || !server) {
     return <div className="admin admin--loading">Loading …</div>;
@@ -88,11 +119,53 @@ export function Admin() {
     setDraft({ ...draft, [key]: value.split('\n') });
   };
 
+  // Live-parse the YAML textarea so the form stays in sync and Save can rely on
+  // a valid `draft`. Invalid YAML just shows an error and leaves `draft` at the
+  // last good value.
+  const editYaml = (text: string) => {
+    setYamlText(text);
+    setDirty(true);
+    try {
+      setDraft(parseScript(text));
+      setYamlError(null);
+    } catch (err) {
+      setYamlError(err instanceof Error ? err.message : 'Invalid YAML.');
+    }
+  };
+
+  const showYaml = () => {
+    setYamlText(scriptToYaml(draft));
+    setYamlError(null);
+    setMode('yaml');
+  };
+
+  const showForm = () => {
+    // Commit any pending YAML edits before leaving the text view.
+    try {
+      if (yamlText) setDraft(parseScript(yamlText));
+      setYamlError(null);
+      setMode('form');
+    } catch (err) {
+      setYamlError(err instanceof Error ? err.message : 'Invalid YAML.');
+    }
+  };
+
   const save = async () => {
+    // In YAML mode parse fresh from the textarea so we never persist a stale draft.
+    let toSave = draft;
+    if (mode === 'yaml') {
+      try {
+        toSave = parseScript(yamlText);
+      } catch (err) {
+        setYamlError(err instanceof Error ? err.message : 'Invalid YAML.');
+        return;
+      }
+    }
     setSaving(true);
     setError(null);
     try {
-      await putScript(draft);
+      await putScript(toSave);
+      setDraft(toSave);
       setDirty(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Save failed.');
@@ -103,6 +176,8 @@ export function Admin() {
 
   const revert = () => {
     setDraft(server.script);
+    setYamlText(scriptToYaml(server.script));
+    setYamlError(null);
     setDirty(false);
     setError(null);
   };
@@ -165,15 +240,53 @@ export function Admin() {
           <div className="admin__actions">
             {error && <span className="admin__error">{error}</span>}
             {dirty && <span className="admin__unsaved">unsaved changes</span>}
+            <div className="admin__modes" role="tablist">
+              <button
+                className={`admin__mode ${mode === 'form' ? 'is-active' : ''}`}
+                onClick={showForm}
+                disabled={mode === 'form'}
+              >
+                Form
+              </button>
+              <button
+                className={`admin__mode ${mode === 'yaml' ? 'is-active' : ''}`}
+                onClick={showYaml}
+                disabled={mode === 'yaml'}
+              >
+                YAML
+              </button>
+            </div>
             <button onClick={revert} disabled={!dirty || saving}>
               Reset
             </button>
-            <button className="admin__save" onClick={save} disabled={!dirty || saving}>
+            <button
+              className="admin__save"
+              onClick={save}
+              disabled={!dirty || saving || (mode === 'yaml' && !!yamlError)}
+            >
               {saving ? 'Saving …' : 'Save'}
             </button>
           </div>
         </div>
 
+        {mode === 'yaml' ? (
+          <div className="admin__yaml">
+            <p className="admin__hint">
+              Paste or edit the entire script as YAML. The form above stays in
+              sync; press Save to apply.
+            </p>
+            {yamlError && <p className="admin__error">{yamlError}</p>}
+            <textarea
+              className="admin__yaml-text"
+              value={yamlText}
+              rows={24}
+              spellCheck={false}
+              aria-label="Script as YAML"
+              onChange={(e) => editYaml(e.target.value)}
+            />
+          </div>
+        ) : (
+          <>
         {draft.scenes.map((scene, i) => (
           <div className="admin__scene" key={i}>
             <div className="admin__scene-head">
@@ -237,6 +350,8 @@ export function Admin() {
             />
           </label>
         </div>
+          </>
+        )}
       </section>
     </div>
   );
