@@ -11,12 +11,12 @@ import {
 } from '../api';
 
 const PHASE_LABELS: Record<Phase, string> = {
-  idle: 'Startbildschirm',
-  playing: 'Spricht / Szene',
-  entering: 'Code-Eingabe',
-  celebrating: 'Jubeln',
-  rejecting: 'Ablehnen',
-  finished: 'Ende',
+  idle: 'Start screen',
+  playing: 'Speaking / Scene',
+  entering: 'Code entry',
+  celebrating: 'Celebrating',
+  rejecting: 'Rejecting',
+  finished: 'End',
 };
 
 /**
@@ -59,7 +59,7 @@ export function Admin() {
   }, [server, dirty]);
 
   if (!draft || !server) {
-    return <div className="admin admin--loading">Lädt …</div>;
+    return <div className="admin admin--loading">Loading …</div>;
   }
 
   const editScene = (index: number, patch: Partial<Scene>) => {
@@ -95,7 +95,7 @@ export function Admin() {
       await putScript(draft);
       setDirty(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Speichern fehlgeschlagen.');
+      setError(err instanceof Error ? err.message : 'Save failed.');
     } finally {
       setSaving(false);
     }
@@ -117,23 +117,23 @@ export function Admin() {
   return (
     <div className="admin">
       <header className="admin__bar">
-        <h1>🦜 Admin — Schatzsuche</h1>
-        <span className={`admin__dot ${connected ? 'is-on' : ''}`} title="Live-Verbindung">
+        <h1>🦜 Admin — Treasure Hunt</h1>
+        <span className={`admin__dot ${connected ? 'is-on' : ''}`} title="Live connection">
           {connected ? 'live' : 'offline'}
         </span>
       </header>
 
       {/* ---- Live show control ------------------------------------------- */}
       <section className="admin__panel">
-        <h2>Bildschirm steuern</h2>
+        <h2>Control screen</h2>
         <p className="admin__status">
-          Aktuell: <strong>{PHASE_LABELS[show.phase]}</strong> · Szene{' '}
+          Current: <strong>{PHASE_LABELS[show.phase]}</strong> · Scene{' '}
           <strong>{show.sceneIndex + 1}</strong> ({currentSceneId}) · rev {server.rev}
         </p>
         <p className="admin__hint">
-          Die TV-Anzeige folgt diesen Schaltern sofort — sobald dort jemand
-          „Start" oder „Weiter" gedrückt hat. Nach einem Neuladen zeigt die
-          Anzeige immer zuerst den Start-/Weiter-Bildschirm.
+          The TV display follows these controls instantly — as soon as someone
+          there has pressed “Start” or “Next”. After a reload, the display always
+          shows the Start/Next screen first.
         </p>
 
         <div className="admin__scenes-jump">
@@ -149,27 +149,27 @@ export function Admin() {
         </div>
 
         <div className="admin__phase-buttons">
-          <button onClick={() => drive('idle', 0)}>Startbildschirm</button>
-          <button onClick={() => drive('playing')}>Szene abspielen</button>
-          <button onClick={() => drive('entering')}>Code-Eingabe</button>
-          <button onClick={() => drive('celebrating')}>Jubeln</button>
-          <button onClick={() => drive('rejecting')}>Ablehnen</button>
-          <button onClick={() => drive('finished')}>Ende</button>
+          <button onClick={() => drive('idle', 0)}>Start screen</button>
+          <button onClick={() => drive('playing')}>Play scene</button>
+          <button onClick={() => drive('entering')}>Code entry</button>
+          <button onClick={() => drive('celebrating')}>Celebrate</button>
+          <button onClick={() => drive('rejecting')}>Reject</button>
+          <button onClick={() => drive('finished')}>End</button>
         </div>
       </section>
 
       {/* ---- Script editor ------------------------------------------------ */}
       <section className="admin__panel">
         <div className="admin__panel-head">
-          <h2>Skript bearbeiten</h2>
+          <h2>Edit script</h2>
           <div className="admin__actions">
             {error && <span className="admin__error">{error}</span>}
-            {dirty && <span className="admin__unsaved">ungespeicherte Änderungen</span>}
+            {dirty && <span className="admin__unsaved">unsaved changes</span>}
             <button onClick={revert} disabled={!dirty || saving}>
-              Zurücksetzen
+              Reset
             </button>
             <button className="admin__save" onClick={save} disabled={!dirty || saving}>
-              {saving ? 'Speichert …' : 'Speichern'}
+              {saving ? 'Saving …' : 'Save'}
             </button>
           </div>
         </div>
@@ -177,11 +177,11 @@ export function Admin() {
         {draft.scenes.map((scene, i) => (
           <div className="admin__scene" key={i}>
             <div className="admin__scene-head">
-              <span className="admin__scene-no">Szene {i + 1}</span>
+              <span className="admin__scene-no">Scene {i + 1}</span>
               <input
                 className="admin__id"
                 value={scene.id}
-                aria-label="Szenen-ID"
+                aria-label="Scene ID"
                 onChange={(e) => editScene(i, { id: e.target.value })}
               />
               <label className="admin__code">
@@ -202,7 +202,7 @@ export function Admin() {
                 className="admin__remove"
                 onClick={() => removeScene(i)}
                 disabled={draft.scenes.length <= 1}
-                title="Szene entfernen"
+                title="Remove scene"
               >
                 ✕
               </button>
@@ -216,12 +216,12 @@ export function Admin() {
           </div>
         ))}
         <button className="admin__add" onClick={addScene}>
-          + Szene hinzufügen
+          + Add scene
         </button>
 
         <div className="admin__lines">
           <label>
-            <span>Lob-Sätze (richtig) — eine Zeile pro Satz</span>
+            <span>Praise lines (correct) — one sentence per line</span>
             <textarea
               rows={4}
               value={draft.correctLines.join('\n')}
@@ -229,7 +229,7 @@ export function Admin() {
             />
           </label>
           <label>
-            <span>Aufmunter-Sätze (falsch) — eine Zeile pro Satz</span>
+            <span>Encouragement lines (wrong) — one sentence per line</span>
             <textarea
               rows={4}
               value={draft.wrongLines.join('\n')}
