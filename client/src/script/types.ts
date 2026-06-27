@@ -144,23 +144,13 @@ export interface Challenge {
   break?: { emoji: string; title: string; text: string };
 }
 
-export interface Printable {
-  order: number;
-  title: string;
-  note?: string;
-  pageBreak?: boolean;
-  /** Discriminated by `visual.type`; rendered by the Visual dispatcher. The
-   *  `svg` type carries the raw markup of a self-contained A4-composable card. */
-  visual: Record<string, unknown> & { type: string };
-}
-
-/** All printable sheets of one challenge, grouped so each challenge prints onto
- *  a single A4 page: SVG cards tile into a grid, classic HTML sheets stand
- *  alone. `svg` flags the SVG-card layout. */
+/** All print-ready cards of one challenge, grouped so each challenge prints
+ *  onto a single A4 page. Each card is the raw markup of a self-contained,
+ *  A4-composable SVG (challenges/<id>/print/*.svg) — every card carries its own
+ *  frame, header and styling, so the guide only has to inline it. */
 export interface PrintGroup {
   challengeId: string;
-  svg: boolean;
-  sheets: Printable[];
+  cards: string[];
 }
 
 export interface ScriptDoc {

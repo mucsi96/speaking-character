@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="20" y="16" width="360" height="48" rx="10" fill="#8a6510"/>
+  <text x="200" y="40" text-anchor="middle" fill="#ffe9a8" font-size="13" letter-spacing="2">GOLDENES SCHLOSS · WOHNZIMMER</text>
+  <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">Je eine Karte · die ungerade Antwort zählt</text>
+
+  <!-- title -->
+  <text x="200" y="90" text-anchor="middle" fill="#8a6510" font-size="26" font-weight="700">Logik-Rätsel</text>
+
+  <!-- steps -->
+  <g fill="#2a2118" font-size="14">
+    <text x="42" y="120"><tspan fill="#8a6510" font-weight="700">1.</tspan>  Jeder zieht eine <tspan font-weight="700">Rätsel-Karte</tspan>.</text>
+    <text x="42" y="144"><tspan fill="#8a6510" font-weight="700">2.</tspan>  Löst euer Rätsel zusammen.</text>
+    <text x="42" y="168"><tspan fill="#8a6510" font-weight="700">3.</tspan>  Sammelt alle <tspan font-weight="700">5 Antworten</tspan>.</text>
+    <text x="42" y="192"><tspan fill="#8a6510" font-weight="700">4.</tspan>  Welche Antwort ist <tspan font-weight="700">UNGERADE</tspan>?</text>
+    <text x="42" y="216"><tspan fill="#8a6510" font-weight="700">5.</tspan>  Diese Zahl ist eure <tspan font-weight="700">nächste Zahl</tspan>!</text>
+  </g>
+
+  <!-- riddle scroll motif -->
+  <g>
+    <circle cx="330" cy="244" r="24" fill="#c9972b"/>
+    <circle cx="330" cy="244" r="24" fill="none" stroke="#8a6510" stroke-width="2"/>
+    <text x="330" y="252" text-anchor="middle" fill="#fdf6e3" font-size="26" font-weight="700">?</text>
+  </g>
+
+  <!-- footer chip -->
+  <circle cx="44" cy="258" r="7" fill="#c9972b"/>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">Wohnzimmer · C10 · 5 Rätsel</text>
+</svg>

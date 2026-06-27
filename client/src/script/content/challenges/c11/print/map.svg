@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 540" width="190mm" height="135mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="760" height="540" rx="22" fill="#f6eccf"/>
+  <rect x="12" y="12" width="736" height="516" rx="16" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="40" y="26" width="680" height="70" rx="12" fill="#8a6510"/>
+  <text x="400" y="58" text-anchor="middle" fill="#ffe9a8" font-size="17" letter-spacing="3">GOLDENES SCHLOSS · WOHNZIMMER</text>
+  <text x="400" y="82" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">Dem Weg folgen · die ✗ auf dem Weg zählen</text>
+
+  <!-- title -->
+  <text x="400" y="138" text-anchor="middle" fill="#8a6510" font-size="34" font-weight="700">Wohnungs-Karte</text>
+
+  <!-- map panel: rounded rect with double rope border + warm parchment fill -->
+  <rect x="60" y="158" width="640" height="320" rx="18" fill="#fdf6e3" stroke="#c2a76a" stroke-width="6"/>
+  <rect x="70" y="168" width="620" height="300" rx="12" fill="none" stroke="#c2a76a" stroke-width="2.5" stroke-dasharray="3 5"/>
+
+  <!-- faint grid of room lines -->
+  <g stroke="#e3d2a4" stroke-width="1.5">
+    <line x1="270" y1="168" x2="270" y2="468"/>
+    <line x1="480" y1="168" x2="480" y2="468"/>
+    <line x1="70" y1="268" x2="690" y2="268"/>
+    <line x1="70" y1="368" x2="690" y2="368"/>
+  </g>
+
+  <!-- dashed treasure route (oxblood) -->
+  <!-- original points "60,60 200,60 200,200 380,200 380,330 480,330" in 560x400 -->
+  <!-- scaled into panel: x' = 90 + px*(580/560), y' = 188 + py*(260/400) -->
+  <polyline points="152,227 297,227 297,318 484,318 484,402 587,402"
+            fill="none" stroke="#8c2b22" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- room label chips (cream with DEEP text) -->
+  <g font-size="17" font-weight="700">
+    <g>
+      <rect x="96" y="190" width="92" height="30" rx="8" fill="#fdf2d6" stroke="#c2a76a" stroke-width="1.5"/>
+      <text x="142" y="211" text-anchor="middle" fill="#8a6510">Küche</text>
+    </g>
+    <g>
+      <rect x="300" y="190" width="78" height="30" rx="8" fill="#fdf2d6" stroke="#c2a76a" stroke-width="1.5"/>
+      <text x="339" y="211" text-anchor="middle" fill="#8a6510">Flur</text>
+    </g>
+    <g>
+      <rect x="96" y="290" width="156" height="30" rx="8" fill="#fdf2d6" stroke="#c2a76a" stroke-width="1.5"/>
+      <text x="174" y="311" text-anchor="middle" fill="#8a6510">Schlafzimmer</text>
+    </g>
+    <g>
+      <rect x="316" y="290" width="150" height="30" rx="8" fill="#fdf2d6" stroke="#c2a76a" stroke-width="1.5"/>
+      <text x="391" y="311" text-anchor="middle" fill="#8a6510">Kinderzimmer</text>
+    </g>
+    <g>
+      <rect x="100" y="390" width="68" height="30" rx="8" fill="#fdf2d6" stroke="#c2a76a" stroke-width="1.5"/>
+      <text x="134" y="411" text-anchor="middle" fill="#8a6510">Bad</text>
+    </g>
+    <!-- Truhe (treasure) in oxblood with chest accent -->
+    <g>
+      <rect x="540" y="388" width="110" height="34" rx="9" fill="#f6dcb0" stroke="#8c2b22" stroke-width="2"/>
+      <text x="585" y="411" text-anchor="middle" fill="#8c2b22">🪙 Truhe</text>
+    </g>
+  </g>
+
+  <!-- three X marks sitting ON the route -->
+  <g fill="#8c2b22" font-size="30" font-weight="700" text-anchor="middle">
+    <text x="225" y="237">✗</text>
+    <text x="297" y="285">✗</text>
+    <text x="484" y="358">✗</text>
+  </g>
+
+  <!-- guidance text inside panel -->
+  <text x="400" y="450" text-anchor="middle" fill="#8a6510" font-size="16">Folge dem Weg von der Küche zur Truhe. Wie viele ✗ liegen auf dem Weg? Das ist eure Zahl.</text>
+
+  <!-- footer chip -->
+  <circle cx="44" cy="510" r="8" fill="#c9972b"/>
+  <text x="60" y="516" fill="#7a6a4a" font-size="15">Flur · C11</text>
+</svg>
