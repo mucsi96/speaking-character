@@ -4,7 +4,17 @@ import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
 import { constants as fsConstants } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { script, allSpeech } from './scenes.js';
+import {
+  allSpeechFor,
+  getState,
+  loadState,
+  sanitizeScript,
+  sanitizeShow,
+  setScript,
+  setShow,
+  subscribe,
+  type AppState,
+} from './state.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -21,7 +31,15 @@ const CLIENT_DIST = resolve(
 );
 
 const app = express();
-app.use(express.json({ limit: '64kb' }));
+app.use(express.json({ limit: '256kb' }));
+
+/** Origin id of the client that made a write, so it can ignore its own echo. */
+function originOf(req: Request): string | null {
+  const fromBody = req.body?.origin;
+  if (typeof fromBody === 'string' && fromBody) return fromBody;
+  const header = req.header('x-client-id');
+  return header ?? null;
+}
 
 async function fileExists(path: string): Promise<boolean> {
   try {
@@ -130,10 +148,69 @@ async function runPrecache(texts: string[]): Promise<void> {
   );
 }
 
-// Serve the show script (German text + codes) to the client. The client renders
-// from this rather than holding its own copy, so the script has a single home.
+// Serve the show script (German text + codes) to the client. Kept for backwards
+// compatibility; new clients use `GET /api/state` which also carries show state.
 app.get('/api/script', (_req: Request, res: Response) => {
-  res.json(script);
+  res.json(getState().script);
+});
+
+// Full app state: the script plus the live show progress (phase + sceneIndex).
+app.get('/api/state', (_req: Request, res: Response) => {
+  res.json(getState());
+});
+
+// Replace the script. Validates the payload, persists + broadcasts the change,
+// then re-warms the TTS cache for the new lines in the background.
+app.put('/api/state/script', async (req: Request, res: Response) => {
+  try {
+    const script = sanitizeScript(req.body?.script);
+    const next = await setScript(script, originOf(req));
+    res.json({ ok: true, rev: next.rev });
+    if (ELEVENLABS_API_KEY && ELEVENLABS_VOICE_ID) {
+      void runPrecache(allSpeechFor(script));
+    }
+  } catch (err) {
+    res.status(400).json({ error: err instanceof Error ? err.message : 'Invalid script.' });
+  }
+});
+
+// Drive the show: set the current phase / scene. Used by the admin UI to update
+// the screen on the fly, and by the display to report its own progress.
+app.put('/api/state/show', async (req: Request, res: Response) => {
+  try {
+    const show = sanitizeShow(req.body?.show);
+    const next = await setShow(show, originOf(req));
+    res.json({ ok: true, rev: next.rev });
+  } catch (err) {
+    res.status(400).json({ error: err instanceof Error ? err.message : 'Invalid show state.' });
+  }
+});
+
+// Server-Sent Events stream: pushes the full state to every connected client on
+// connect and on every change, so the display and admin UI update live.
+app.get('/api/events', (req: Request, res: Response) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache, no-transform',
+    Connection: 'keep-alive',
+    // Disable proxy buffering (e.g. nginx) so events flush immediately.
+    'X-Accel-Buffering': 'no',
+  });
+  res.write('retry: 3000\n\n');
+
+  const send = (state: AppState, origin: string | null) => {
+    res.write(`data: ${JSON.stringify({ state, origin })}\n\n`);
+  };
+
+  send(getState(), null); // initial snapshot
+  const unsubscribe = subscribe(({ state, origin }) => send(state, origin));
+  // Comment ping keeps idle connections (and intermediaries) from timing out.
+  const keepAlive = setInterval(() => res.write(': ping\n\n'), 25_000);
+
+  req.on('close', () => {
+    clearInterval(keepAlive);
+    unsubscribe();
+  });
 });
 
 // `/health` is what the node_app Helm chart probes (liveness/startup); `/healthz`
@@ -205,6 +282,9 @@ app.get('*', async (_req: Request, res: Response) => {
   }
 });
 
+// Load the persisted state (script + show progress) before serving, then start.
+await loadState();
+
 app.listen(PORT, () => {
   console.log(`speaking-character server listening on :${PORT}`);
   console.log(`  client dist: ${CLIENT_DIST}`);
@@ -215,7 +295,7 @@ app.listen(PORT, () => {
   // Pre-render every line on startup so the live show is smooth. Runs in the
   // background; the server is already accepting requests while it warms up.
   if (ELEVENLABS_API_KEY && ELEVENLABS_VOICE_ID) {
-    void runPrecache(allSpeech);
+    void runPrecache(allSpeechFor(getState().script));
   } else {
     console.log('[precache] skipped: ElevenLabs not configured');
   }

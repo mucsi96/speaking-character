@@ -146,3 +146,7 @@ vite.config.ts.timestamp-*
 # Generated TTS audio cache
 /cache/
 server/cache/
+# Persisted app state (script + show progress) written at runtime
+/data/
+server/data/
+state.json
