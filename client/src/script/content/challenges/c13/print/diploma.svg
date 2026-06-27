@@ -6,9 +6,6 @@
   <rect x="18" y="18" width="724" height="504" rx="14" fill="none" stroke="#c9972b" stroke-width="5"/>
   <rect x="30" y="30" width="700" height="480" rx="10" fill="none" stroke="#c9972b" stroke-width="2"/>
 
-  <!-- subtitle near top -->
-  <text x="380" y="68" text-anchor="middle" fill="#8a6510" font-size="17" font-style="italic">5× drucken — für jeden eines</text>
-
   <!-- heading -->
   <text x="380" y="138" text-anchor="middle" fill="#8c2b22" font-size="48" font-weight="700">🏴‍☠️ Echter Pirat 🏴‍☠️</text>
 
@@ -20,7 +17,6 @@
 
   <!-- name write-line -->
   <line x1="200" y1="280" x2="560" y2="280" stroke="#8a6510" stroke-width="2" stroke-dasharray="4 6"/>
-  <text x="380" y="304" text-anchor="middle" fill="#7a6a4a" font-size="16" font-style="italic">Name des tapferen Seeräubers</text>
 
   <!-- body -->
   <text x="380" y="356" text-anchor="middle" fill="#2a2118" font-size="22">Hat alle vier Schlösser geknackt</text>
@@ -29,8 +25,4 @@
   <!-- signature -->
   <text x="700" y="452" text-anchor="end" fill="#8c2b22" font-size="30" font-weight="700">🦜 Käpt'n Coco</text>
   <line x1="500" y1="464" x2="700" y2="464" stroke="#c9972b" stroke-width="1.5"/>
-
-  <!-- footer -->
-  <circle cx="48" cy="500" r="7" fill="#c9972b"/>
-  <text x="62" y="505" fill="#7a6a4a" font-size="14">Finale · Urkunde</text>
 </svg>
