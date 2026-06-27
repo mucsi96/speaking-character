@@ -1,18 +1,20 @@
 ---
 order: 11
 id: C11
-title: Schatzkarten-Route
-room: "Előszoba · térkép"
-tags: [Mapping]
+title: Kompass-Kurs
+room: "Előszoba · iránytű"
+tags: [Iránytű, "5 párhuzamos"]
 dial: "🟡 → 3"
 code: "3"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„In den FLUR, kleine Piraten! Dort hängt eine Schatzkarte — folgt dem Weg, jeder fährt ein Zimmer mit dem Finger nach!”"
+  - "„In den FLUR, kleine Piraten! An der Tür hängen fünf Kompass-Karten — jeder schnappt sich eine, dreht seinen Kompass nach RECHTS und findet heraus, wohin sein Schiff am Ende segelt!”"
+  - "„Wenn alle fünf ihre End-Richtung haben, zählt zusammen: Wie viele Schiffe schauen nach SÜDEN? Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A lakás-térkép a bejárati előszobában, a cipőtartóra tűzve („a kalózok az ajtónál kötnek ki”)."]
-    - [Megoldás, "3 db X az úton → **3**", sol]
+    - [Elrejtés, "Az anleitő kártya (Schatz-Tabellával) + az 5 iránytű-kártya az előszobában, a cipőszekrényre / a bejárati ajtóra tűzve („a kalózok az ajtónál tájolnak be”). Minden kártyán egy iránytű, egy kiinduló irány és »X× jobbra« fordulás."]
+    - ["Mind az 5", "Mindenki az óramutató járása szerint (jobbra) forgat — É→K→D→Ny a sorrend —, és beírja a végső irányt. Indulás / fordulás → vég: 1) Norden, 2× jobbra → **SÜDEN** · 2) Westen, 3× jobbra → **SÜDEN** · 3) Norden, 1× jobbra → OSTEN · 4) Süden, 1× jobbra → WESTEN · 5) Osten, 2× jobbra → WESTEN. A legtöbb fordulósat (2) a nagyobbaknak, az 1 fordulósakat (3, 4) a kisebbeknek."]
+    - [Megoldás, "Hányan néznek DÉL-re (SÜDEN)? 2 db → Schatz-Tabelle: 2 → **3**", sol]
 ---
