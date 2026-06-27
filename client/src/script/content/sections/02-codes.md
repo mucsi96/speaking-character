@@ -26,7 +26,7 @@ validation:
     - [C4, "Tükör-matek (kivonás)", "5"]
     - [C5, "Számsor", "2"]
     - [C6, "Geomag (5 zacskó)", "6"]
-    - [C7, "Keresés (érmék összege)", "4"]
+    - [C7, "Magánhangzók (mondatok)", "4"]
     - [C8, "Titkosírás", "6"]
     - [C9, "Puzzle", "8"]
     - [C10, "Logikai rejtvények", "9"]
