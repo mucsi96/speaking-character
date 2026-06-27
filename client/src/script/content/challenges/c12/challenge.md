@@ -1,14 +1,14 @@
 ---
-order: 3
+order: 12
 id: C12
 title: Der große Piratenschwur
 room: "Láda előtt · csapatmunka"
 tags: ["Csapat (mind az 5)"]
 dial: "🟡 → 1"
+lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„Die letzte Aufgabe — ALLE zusammen! Jeder legt eine Geomag-Stange, bis der Stern fertig ist.”"
-question: "„Gemeinsam seid ihr EINE Crew — die EINS!”"
+  - "„Die letzte Aufgabe, kleine Crew — ALLE zusammen! Stellt euch um die Truhe und macht es gemeinsam.”"
 parent:
   ph: Szülőknek
   entries:

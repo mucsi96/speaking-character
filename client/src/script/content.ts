@@ -1,5 +1,6 @@
 import { block, parseFile, type ParsedFile } from './markdown';
 import type {
+  Challenge,
   CodesSection,
   FlowSection,
   Meta,
@@ -7,9 +8,7 @@ import type {
   PrintIntro,
   Printable,
   ScriptDoc,
-  Station,
   TvSection,
-  Zone,
 } from './types';
 
 // Pull every markdown file in content/ into the bundle at build time. Vite
@@ -40,20 +39,13 @@ function group(dir: string, exclude?: string): Array<ParsedFile & { path: string
     .sort((a, b) => Number(a.data.order ?? 0) - Number(b.data.order ?? 0));
 }
 
-function buildZones(): Zone[] {
-  // Each zones/<name>/ directory holds a zone.md plus its station files.
-  const dirs = new Set(
-    Object.keys(parsed)
-      .filter((p) => p.includes('/zones/'))
-      .map((p) => p.replace(/\/[^/]+$/, ''))
-  );
-
-  return [...dirs]
-    .map((dir) => {
-      const zone = file(`${dir.replace(/^.*\/zones\//, '/zones/')}/zone.md`).data as unknown as Zone;
-      const stations = group(`${dir}/`, 'zone.md').map((f) => f.data as unknown as Station);
-      return { ...zone, stations };
-    })
+function buildChallenges(): Challenge[] {
+  // Each challenges/<id>/ directory holds one challenge.md (the task narration)
+  // plus its printable sheet(s). The challenges form a flat list — the four
+  // locks ride along as metadata on the challenge that opens / closes each.
+  return Object.entries(parsed)
+    .filter(([p]) => p.includes('/challenges/') && p.endsWith('/challenge.md'))
+    .map(([, f]) => f.data as unknown as Challenge)
     .sort((a, b) => a.order - b.order);
 }
 
@@ -69,8 +61,10 @@ function buildDoc(): ScriptDoc {
     flow: file('sections/03-flow.md').data as unknown as FlowSection,
     tv: file('sections/04-tv-script.md').data as unknown as TvSection,
     printIntro: file('sections/05-printables.md').data as unknown as PrintIntro,
-    zones: buildZones(),
-    printables: group('/printables/').map((f) => f.data as unknown as Printable),
+    challenges: buildChallenges(),
+    // Printables now live beside their challenge (challenges/<id>/*.md, every
+    // file except challenge.md); still rendered together, ordered by `order`.
+    printables: group('/challenges/', 'challenge.md').map((f) => f.data as unknown as Printable),
   };
 }
 
