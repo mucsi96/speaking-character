@@ -22,7 +22,7 @@ sessions:
     title: "3. menet (finálé)"
     lead: "🟡 Gold lakat + KINCS!"
     items:
-      - "C10 (nappali) → C11 (előszoba) → C12 (láda, 5 aranykulcs)"
+      - "C10 (nappali) → C11 (előszoba) → C12 (láda, 5 Bibot-rács)"
       - "Kód 9-3-1 → 🟡 le → 🪙 LÁDA NYÍLIK!"
 footnote: "Fizikailag mind a 4 lakat a ládán van az elejétől — ez a lényeg: a gyerekek látják, ahogy a lakatkupac fogy."
 ---

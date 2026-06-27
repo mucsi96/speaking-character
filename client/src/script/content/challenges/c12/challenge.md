@@ -1,20 +1,20 @@
 ---
 order: 12
 id: C12
-title: Die fünf goldenen Schlüssel
+title: Bibot auf Schatzsuche
 room: "Láda előtt · 5 párhuzamos"
-tags: [Számolás, "5 párhuzamos"]
+tags: [Programozás, "5 párhuzamos"]
 dial: "🟡 → 1"
 code: "1"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„Die allerletzte Aufgabe, kleine Crew — und sie ist GOLDEN! Vor der Truhe liegen fünf goldene Schlüssel-Karten bereit: jeder schnappt sich einen Schlüssel und zählt ganz genau die Zacken am Bart. Schreibt eure Zahl in das Kästchen!”"
-  - "„Dann legt eure fünf Zahlen zusammen und addiert sie zu einer Gesamtzahl. Sucht diese Gesamtzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein, und das GOLDENE Schloss fällt!”"
+  - "„Die allerletzte Aufgabe, kleine Crew — und hier hilft euch ein Roboter! Das ist BIBOT. Vor der Truhe liegen fünf Bibot-Karten mit einem Gitter bereit: jeder schnappt sich eine, folgt den Pfeilen Feld für Feld und findet heraus, auf welchem Feld Bibot stehen bleibt — zum Beispiel C3!”"
+  - "„Sucht euer Feld in der Tabelle auf eurer Karte — daneben steht eure Zahl. Dann legt eure fünf Zahlen zusammen und sucht die Summe in der Schatz-Tabelle auf der Anleitungs-Karte. Die Zahl daneben tippt ihr mir mit der Fernbedienung ein — und das GOLDENE Schloss fällt!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "Az anleitő kártya (Schatz-Tabellával) + az 5 aranykulcs-kártya a láda előtt kiterítve — ez a fináléhoz méltó utolsó közös pillanat. Minden kártyán egy arany kulcs, a tollán (Bart) különböző számú foggal (Zacken), és van rá írómező. A több fogú, nehezebben számolható kulcsokat a nagyobbaknak, a kevesebb fogúakat a kisebbeknek."]
-    - ["Mind az 5", "Mindenki megszámolja a saját kulcsa fogait és beírja. Kulcs / fogak: 1) 5 · 2) 4 · 3) 6 · 4) 4 · 5) 5."]
-    - [Megoldás, "Összeadás: 5 + 4 + 6 + 4 + 5 = 24 → Schatz-Tabelle: 24 → **1**", sol]
+    - [Elrejtés, "Az anleitő kártya (Schatz-Tabellával) + az 5 Bibot-kártya a láda előtt kiterítve. Minden kártyán egy 4×4 rács (A–D oszlop, 1–4 sor, mint a sakktáblán), a Bibot robot a kiinduló mezőn, mellette a nyilak (parancsok) és egy kis „mező → szám” tábla. A több parancsos kártyákat (5) a nagyobbaknak, a kevesebbet (3) a kisebbeknek."]
+    - ["Mind az 5", "Mindenki lépésről lépésre követi a nyilakat (↑ fel, ↓ le, ← balra, → jobbra), megkeresi a végmezőt, majd a kártya tábláján a hozzá tartozó számot. Kártya / parancsok / végmező → szám: 1) B1, ↑↑→→ → D3 → 5 · 2) A4, →↓↓ → B2 → 3 · 3) C1, ↑↑↑← → B4 → 6 · 4) D2, ←←↑ → B3 → 4 · 5) A1, →→↑↑↑ → C4 → 6."]
+    - [Megoldás, "Összeadás: 5 + 3 + 6 + 4 + 6 = 24 → Schatz-Tabelle: 24 → **1**", sol]
 ---

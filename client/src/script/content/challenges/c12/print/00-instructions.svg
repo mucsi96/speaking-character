@@ -9,14 +9,14 @@
   <text x="200" y="53" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">So bekommt ihr eure Zahl</text>
 
   <!-- title -->
-  <text x="200" y="82" text-anchor="middle" fill="#8a6510" font-size="22" font-weight="700">Die fünf goldenen Schlüssel</text>
+  <text x="200" y="82" text-anchor="middle" fill="#8a6510" font-size="22" font-weight="700">Bibot auf Schatzsuche</text>
 
   <!-- steps -->
-  <g fill="#2a2118" font-size="13">
-    <text x="34" y="106"><tspan fill="#8a6510" font-weight="700">1.</tspan>  Jeder schnappt sich einen <tspan font-weight="700">goldenen Schlüssel</tspan>.</text>
-    <text x="34" y="128"><tspan fill="#8a6510" font-weight="700">2.</tspan>  Zählt die <tspan font-weight="700">Zacken am Bart</tspan> und schreibt die Zahl ins Kästchen.</text>
-    <text x="34" y="150"><tspan fill="#8a6510" font-weight="700">3.</tspan>  Legt eure <tspan font-weight="700">5 Zahlen zusammen</tspan> und addiert sie.</text>
-    <text x="34" y="172"><tspan fill="#8a6510" font-weight="700">4.</tspan>  Sucht die <tspan font-weight="700">Summe</tspan> in der Schatz-Tabelle — die Zahl daneben ist eure Zahl!</text>
+  <g fill="#2a2118" font-size="12.5">
+    <text x="34" y="105"><tspan fill="#8a6510" font-weight="700">1.</tspan>  Jeder nimmt eine <tspan font-weight="700">Bibot-Karte</tspan> mit Gitter.</text>
+    <text x="34" y="126"><tspan fill="#8a6510" font-weight="700">2.</tspan>  Folgt den <tspan font-weight="700">Pfeilen</tspan> — wo bleibt Bibot stehen? (z.B. C3)</text>
+    <text x="34" y="147"><tspan fill="#8a6510" font-weight="700">3.</tspan>  Sucht das Feld in <tspan font-weight="700">eurer Tabelle</tspan> — daneben steht die Zahl.</text>
+    <text x="34" y="168"><tspan fill="#8a6510" font-weight="700">4.</tspan>  Addiert eure <tspan font-weight="700">5 Zahlen</tspan>; sucht die Summe in der Tabelle.</text>
   </g>
 
   <!-- treasure mapping table: Summe -> Zahl -->
@@ -54,5 +54,5 @@
   </g>
 
   <!-- footer -->
-  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C12 · 5 Schlüssel</text>
+  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C12 · 5 Bibot-Karten · ↑ hoch  ↓ runter  ← links  → rechts</text>
 </svg>

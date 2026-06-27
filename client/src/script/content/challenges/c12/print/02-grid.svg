@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header -->
+  <rect x="20" y="14" width="360" height="40" rx="10" fill="#8a6510"/>
+  <text x="200" y="41" text-anchor="middle" fill="#fdf2d6" font-size="20" font-weight="700" letter-spacing="2">BIBOT 2</text>
+
+  <!-- ===== grid (cols A-D, rows 1-4, row 1 at bottom) ===== -->
+  <g>
+    <rect x="40" y="80" width="112" height="112" fill="#fdf6e3"/>
+    <g fill="#e8d5a8">
+      <rect x="40" y="164" width="28" height="28"/><rect x="40" y="108" width="28" height="28"/>
+      <rect x="68" y="136" width="28" height="28"/><rect x="68" y="80" width="28" height="28"/>
+      <rect x="96" y="164" width="28" height="28"/><rect x="96" y="108" width="28" height="28"/>
+      <rect x="124" y="136" width="28" height="28"/><rect x="124" y="80" width="28" height="28"/>
+    </g>
+    <g stroke="#c2a76a" stroke-width="1.4">
+      <line x1="40" y1="80" x2="152" y2="80"/><line x1="40" y1="108" x2="152" y2="108"/>
+      <line x1="40" y1="136" x2="152" y2="136"/><line x1="40" y1="164" x2="152" y2="164"/>
+      <line x1="40" y1="192" x2="152" y2="192"/>
+      <line x1="40" y1="80" x2="40" y2="192"/><line x1="68" y1="80" x2="68" y2="192"/>
+      <line x1="96" y1="80" x2="96" y2="192"/><line x1="124" y1="80" x2="124" y2="192"/>
+      <line x1="152" y1="80" x2="152" y2="192"/>
+    </g>
+    <g fill="#8a6510" font-size="11" font-weight="700" text-anchor="middle">
+      <text x="54" y="205">A</text><text x="82" y="205">B</text><text x="110" y="205">C</text><text x="138" y="205">D</text>
+      <text x="31" y="98">4</text><text x="31" y="126">3</text><text x="31" y="154">2</text><text x="31" y="182">1</text>
+    </g>
+    <!-- Bibot at start A4 -->
+    <g transform="translate(54,94)">
+      <rect x="-10" y="-8" width="20" height="17" rx="4" fill="#2b8a8a" stroke="#175e5e" stroke-width="1.2"/>
+      <line x1="0" y1="-8" x2="0" y2="-13" stroke="#175e5e" stroke-width="1.2"/>
+      <circle cx="0" cy="-14" r="2" fill="#f4c542"/>
+      <circle cx="-4" cy="-1" r="2.6" fill="#fff"/><circle cx="4" cy="-1" r="2.6" fill="#fff"/>
+      <circle cx="-4" cy="-1" r="1.1" fill="#143"/><circle cx="4" cy="-1" r="1.1" fill="#143"/>
+    </g>
+    <text x="96" y="227" text-anchor="middle" fill="#7a6a4a" font-size="10" font-style="italic">Start: A4</text>
+  </g>
+
+  <!-- ===== commands ===== -->
+  <text x="178" y="80" fill="#8a6510" font-size="12" font-weight="700">Befehle:</text>
+  <g font-size="17" fill="#2b8a8a" text-anchor="middle">
+    <rect x="178" y="88" width="26" height="26" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="191" y="107">&#8594;</text>
+    <rect x="208" y="88" width="26" height="26" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="221" y="107">&#8595;</text>
+    <rect x="238" y="88" width="26" height="26" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="251" y="107">&#8595;</text>
+  </g>
+
+  <!-- ===== per-card mapping table: Feld -> Zahl ===== -->
+  <text x="178" y="136" fill="#8a6510" font-size="11" font-weight="700" letter-spacing="1">FELD &#8594; ZAHL</text>
+  <g font-size="14" text-anchor="middle">
+    <rect x="182" y="142" width="44" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="204" y="157" fill="#2a2118">C2</text>
+    <text x="236" y="157" fill="#7a6a4a">&#8594;</text>
+    <rect x="250" y="142" width="38" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="269" y="157" fill="#8a6510" font-weight="700">8</text>
+    <rect x="182" y="168" width="44" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="204" y="183" fill="#2a2118">B2</text>
+    <text x="236" y="183" fill="#7a6a4a">&#8594;</text>
+    <rect x="250" y="168" width="38" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="269" y="183" fill="#8a6510" font-weight="700">3</text>
+    <rect x="182" y="194" width="44" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="204" y="209" fill="#2a2118">B3</text>
+    <text x="236" y="209" fill="#7a6a4a">&#8594;</text>
+    <rect x="250" y="194" width="38" height="22" rx="6" fill="#fdf6e3" stroke="#c2a76a" stroke-width="1.6"/><text x="269" y="209" fill="#8a6510" font-weight="700">1</text>
+  </g>
+
+  <!-- answer slot -->
+  <rect x="40" y="234" width="320" height="36" rx="9" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="60" y="257" fill="#8a6510" font-size="14">Feld =</text>
+  <rect x="118" y="240" width="64" height="24" rx="6" fill="#fff" stroke="#c2a76a" stroke-width="1.4"/>
+  <text x="214" y="257" fill="#8a6510" font-size="14">Zahl =</text>
+  <rect x="274" y="240" width="44" height="24" rx="6" fill="#fff" stroke="#c2a76a" stroke-width="1.4"/>
+
+  <!-- footer -->
+  <circle cx="44" cy="284" r="6" fill="#c9972b"/>
+  <text x="56" y="289" fill="#7a6a4a" font-size="12">C12</text>
+  <text x="356" y="289" text-anchor="end" font-size="14"><tspan fill="#e0a92e">&#9733;</tspan><tspan fill="#d8c9a0"> &#9733; &#9733;</tspan></text>
+</svg>
