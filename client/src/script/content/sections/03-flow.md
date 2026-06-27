@@ -8,15 +8,15 @@ sessions:
     lead: "Prológus + a láda megtalálása + 🔴 Rot lakat"
     items:
       - "Coco köszöntő → nyom a ládához"
-      - "C1 (konyha) → C2 (nappali) → C3 (előszoba)"
+      - "C1 (konyha) → C2 (fürdő) → C3 (nappali)"
       - "Kód 3-7-4 → 🔴 le!"
     foot: "🍪 Szünet 1"
   - when: "⏱ ~40 perc"
     title: "2. menet"
     lead: "🔵 Blau + 🟢 Grün lakat"
     items:
-      - "C4 (háló) → C5 (konyha) → C6 (nappali) → 5-2-6 → 🔵 le!"
-      - "C7 (gyerekszoba) → C8 (háló) → C9 (előszoba) → 4-6-8 → 🟢 le!"
+      - "C4 (háló) → C5 (dolgozó) → C6 (nappali) → 5-2-6 → 🔵 le!"
+      - "C7 (gyerekszoba) → C8 (kis WC) → C9 (dolgozó) → 4-6-8 → 🟢 le!"
     foot: "🍪 Szünet 2"
   - when: "⏱ ~30 perc"
     title: "3. menet (finálé)"

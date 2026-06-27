@@ -13,7 +13,7 @@ lock:
   headGradient: "linear-gradient(180deg,#3a82c9,var(--lock-blue))"
   unlockGradient: "linear-gradient(90deg,#3a82c9,var(--lock-blue))"
   title: "Lakat 2 — Blau · Kapitänskajüte"
-  subtitle: "Háló → konyha → nappali · C4 C5 C6 · tükör + számsor + Geomag"
+  subtitle: "Háló → dolgozó → nappali · C4 C5 C6 · tükör + számsor + Geomag"
   code: "5 - 2 - 6"
   intro:
     who: "Coco · Intro"

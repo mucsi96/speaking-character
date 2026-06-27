@@ -24,7 +24,7 @@ lines:
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "Az 5 rejtvénykártya a dohányzóasztalon, lefelé fordítva."]
+    - [Elrejtés, "Az 5 rejtvénykártya a TV-szekrényen / a nagy étkezőasztalon, lefelé fordítva."]
     - [Válaszok, "9, 4, 8, 6, 2 — egyetlen páratlan a 9."]
     - [Megoldás, "páratlan → **9**", sol]
 ---

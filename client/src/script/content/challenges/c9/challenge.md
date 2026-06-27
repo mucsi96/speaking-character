@@ -2,17 +2,17 @@
 order: 9
 id: C9
 title: Schatz-Puzzle
-room: "Előszoba · puzzle"
+room: "Dolgozószoba · puzzle"
 tags: [Puzzle, Csapat]
 dial: "🟢 → 8"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:
-  - "„Jetzt in den FLUR! Setzt dort das Flaggen-Puzzle zusammen — alle helfen mit, dann zeigt es sich!”"
+  - "„Zurück ins ARBEITSZIMMER! Setzt dort das Flaggen-Puzzle zusammen — alle helfen mit, dann zeigt es sich!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A felvágott négyzeteket egy kis kalózládikóban/borítékban add oda az előszobában; a cipőszekrény tetején rakják össze."]
+    - [Elrejtés, "A felvágott négyzeteket egy kis kalózládikóban/borítékban add oda a dolgozószobában; az egyik egyszemélyes ágyon rakják össze."]
     - [Megoldás, "A kép egy nagy „8” → **8**", sol]
 unlock:
   title: "🟢 GRÜN LAKAT LE! (3/4)"

@@ -12,7 +12,7 @@ lines:
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "Geomag + a terv a nappali földjén egy szőnyegen (legyen hely építeni)."]
+    - [Elrejtés, "Geomag + a terv a nappaliban, a nagy kanapé melletti szőnyegen (legyen hely építeni)."]
     - [Megoldás, "Tetraéder = 4 golyó + **6** pálca → 6", sol]
 unlock:
   title: "🔵 BLAU LAKAT LE! (2/4)"
