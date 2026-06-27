@@ -31,5 +31,5 @@ parent:
   entries:
     - [Elrejtés, "A leírókártya + az 5 feladatkártya a konyhaszigeten, jól láthatóan (a feladat a számolás, nem a keresés)."]
     - ["Mind az 5", "1) 15+9+8=32 · 2) 7×4=28 · 3) piramis 8,6,5 → 25 · 4) 2,5,8,?,14 → 11 · 5) 4+3+5=12. A nehezebbeket (1–3) a nagyobbaknak, a 4–5-öt a kisebbeknek."]
-    - [Megoldás, "20 felett: 32, 28, 25 → **3**", sol]
+    - [Megoldás, "20 alatt: 11, 12 → 2 db → Schatz-Tabelle: 2 → **3**", sol]
 ---
