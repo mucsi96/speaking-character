@@ -191,23 +191,17 @@ every rollout would start with an empty cache and re-synthesize the whole show
 against ElevenLabs on the next warm-up. `deploy.sh` provisions one claim via the
 `node-app` chart's `persistentVolumeClaims` value (chart `>= 19.0.0`):
 
-| Field              | Value               |
-| ------------------ | ------------------- |
-| `name`             | `party-audio-cache` |
-| `mountPath`        | `/app/cache`        |
-| `volumeName`       | `party-app`         |
-| `storage`          | `1Gi`               |
-| `accessMode`       | `ReadWriteMany`     |
-| `storageClassName` | `azurefile-csi`     |
+| Field              | Value             |
+| ------------------ | ----------------- |
+| `name`             | `party-pvc`       |
+| `accessMode`       | `ReadWriteOnce`   |
+| `volumeName`       | `party-app`       |
+| `mountPath`        | `/app/cache`      |
+| `storageClassName` | `""` (static)     |
+| `storage`          | `1Gi`             |
 
-The claim binds to the pre-provisioned `party-app` PersistentVolume via
-`volumeName`.
-
-`ReadWriteMany` (Azure Files) is used so the chart's default `RollingUpdate`
-strategy works cleanly — the old and new pod can hold the volume at the same
-time during a rollout. Switching to a `ReadWriteOnce` disk class (e.g.
-`managed-csi`) would risk the new pod getting stuck waiting for the old one to
-release the volume.
+The empty `storageClassName` plus `volumeName` statically bind the claim to the
+pre-provisioned `party-app` PersistentVolume (no dynamic provisioning).
 
 The whole flow (smoke test → publish image → deploy) runs automatically on push
 to `main` via [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
