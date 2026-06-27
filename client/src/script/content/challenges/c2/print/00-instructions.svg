@@ -13,7 +13,7 @@
 
   <!-- header band -->
   <rect x="20" y="16" width="360" height="48" rx="10" fill="#8c2b22"/>
-  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS · KÜCHE</text>
+  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS</text>
   <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="15" font-style="italic">So bekommt ihr eure Zahl</text>
 
   <!-- title -->
@@ -21,7 +21,7 @@
 
   <!-- steps -->
   <g fill="#2a2118" font-size="14">
-    <text x="42" y="124"><tspan fill="#8c2b22" font-weight="700">1.</tspan>  <tspan font-weight="700">5 Goldmünzen</tspan> sind in der Küche versteckt.</text>
+    <text x="42" y="124"><tspan fill="#8c2b22" font-weight="700">1.</tspan>  <tspan font-weight="700">5 Goldmünzen</tspan> sind hier im Raum versteckt.</text>
     <text x="42" y="148"><tspan fill="#8c2b22" font-weight="700">2.</tspan>  Jeder findet <tspan font-weight="700">EINE Münze</tspan>.</text>
     <text x="42" y="172"><tspan fill="#8c2b22" font-weight="700">3.</tspan>  Legt alle Münzen nebeneinander.</text>
     <text x="42" y="196"><tspan fill="#8c2b22" font-weight="700">4.</tspan>  Welche Zahl ist die <tspan font-weight="700">KLEINSTE</tspan>?</text>
@@ -35,5 +35,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="258" r="7" fill="#d6463a"/>
-  <text x="58" y="263" fill="#7a6a4a" font-size="13">Küche · C2 · 5 Münzen</text>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">C2 · 5 Münzen</text>
 </svg>

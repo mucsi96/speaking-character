@@ -5,7 +5,7 @@
 
   <!-- header band -->
   <rect x="20" y="16" width="360" height="48" rx="10" fill="#1d4e89"/>
-  <text x="200" y="40" text-anchor="middle" fill="#bfe0ff" font-size="13" letter-spacing="2">BLAUES SCHLOSS · SCHLAFZIMMER</text>
+  <text x="200" y="40" text-anchor="middle" fill="#bfe0ff" font-size="13" letter-spacing="2">BLAUES SCHLOSS</text>
   <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="15" font-style="italic">Halte jede Karte vor den Spiegel</text>
 
   <!-- title -->
@@ -29,5 +29,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="258" r="7" fill="#2b6cb0"/>
-  <text x="58" y="263" fill="#7a6a4a" font-size="13">Schlafzimmer · C4 · 5 Karten</text>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">C4 · 5 Karten</text>
 </svg>

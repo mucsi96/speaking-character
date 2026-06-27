@@ -24,6 +24,6 @@
   <line x1="196" y1="250" x2="312" y2="250" stroke="#c2a76a" stroke-width="2" stroke-dasharray="4 5"/>
 
   <circle cx="44" cy="284" r="6" fill="#d6463a"/>
-  <text x="56" y="289" fill="#7a6a4a" font-size="12">Küche · C1</text>
+  <text x="56" y="289" fill="#7a6a4a" font-size="12">C1</text>
   <text x="356" y="289" text-anchor="end" font-size="14"><tspan fill="#e0a92e">★ ★</tspan><tspan fill="#d8c9a0"> ★</tspan></text>
 </svg>

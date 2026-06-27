@@ -9,10 +9,10 @@ secret:
   # The "Kód" column (index 2) is styled as a code badge.
   codeColumn: 2
   rows:
-    - ["1", "🔴 Rot · Konyha (Kombüse)", "3-7-4", "C1 C2 C3"]
-    - ["2", "🔵 Blau · Háló (Kapitänskajüte)", "5-2-6", "C4 C5 C6"]
-    - ["3", "🟢 Grün · Gyerekszoba (Werkstatt)", "4-6-8", "C7 C8 C9"]
-    - ["4", "🟡 Gold · Előszoba + finálé", "9-3-1", "C10 C11 C12"]
+    - ["1", "🔴 Rot · konyha → fürdő → nappali", "3-7-4", "C1 C2 C3"]
+    - ["2", "🔵 Blau · háló → dolgozó → nappali", "5-2-6", "C4 C5 C6"]
+    - ["3", "🟢 Grün · gyerekszoba → kis WC → dolgozó", "4-6-8", "C7 C8 C9"]
+    - ["4", "🟡 Gold · nappali → előszoba → láda", "9-3-1", "C10 C11 C12"]
   note: "Állítsd be mindegyik lakatot a kódjára, zárd be, majd **keverd össze a tárcsákat** a buli előtt. Köss színes szalagot mindegyikre (piros/kék/zöld/arany)."
 validation:
   heading: Coco ellenőrző-lista — amit a gyerekek beírnak

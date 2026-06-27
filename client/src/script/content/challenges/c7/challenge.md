@@ -13,12 +13,12 @@ lock:
   headGradient: "linear-gradient(180deg,#3a9c66,var(--lock-green))"
   unlockGradient: "linear-gradient(90deg,#3a9c66,var(--lock-green))"
   title: "Lakat 3 — Grün · Werkstatt"
-  subtitle: "Gyerekszoba (LEGO!) · C7 C8 C9 · LEGO + jelfejtés + puzzle"
+  subtitle: "Gyerekszoba → kis WC → dolgozó · C7 C8 C9 · LEGO + jelfejtés + puzzle"
   code: "4 - 6 - 8"
   intro:
     who: "Coco · Intro"
     lines:
-      - "„In die WERKSTATT (Kinderzimmer)! Eure beschrifteten LEGO-Boxen helfen euch. Drei Aufgaben — dann fällt das GRÜNE Schloss!”"
+      - "„Auf zum GRÜNEN Schloss! Eure erste Aufgabe wartet in der WERKSTATT (Kinderzimmer) — eure beschrifteten LEGO-Boxen helfen euch. Drei Aufgaben, dann fällt das GRÜNE Schloss!”"
 who: Coco mondja
 lines:
   - "„Baut die kleine Technic-Maschine nach dem Plan — holt die Teile aus den beschrifteten Boxen!”"

@@ -5,7 +5,7 @@
 
   <!-- header band -->
   <rect x="40" y="30" width="680" height="70" rx="12" fill="#1d4e89"/>
-  <text x="400" y="62" text-anchor="middle" fill="#bfe0ff" font-size="16" letter-spacing="3">BLAUES SCHLOSS · SCHLAFZIMMER</text>
+  <text x="400" y="62" text-anchor="middle" fill="#bfe0ff" font-size="16" letter-spacing="3">BLAUES SCHLOSS</text>
   <text x="400" y="86" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">Welche Zahl kommt als Nächstes?</text>
 
   <!-- title -->
@@ -38,5 +38,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="508" r="8" fill="#2b6cb0"/>
-  <text x="60" y="514" fill="#7a6a4a" font-size="16">Schlafzimmer · C5</text>
+  <text x="60" y="514" fill="#7a6a4a" font-size="16">C5</text>
 </svg>

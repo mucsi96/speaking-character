@@ -8,9 +8,9 @@ brand: "🦜 Coco"
 nav:
   - { href: "#attekintes", label: "Áttekintés" }
   - { href: "#kodok", label: "Kódok 🤫" }
-  - { href: "#z1", label: "🔴 Konyha" }
-  - { href: "#z2", label: "🔵 Háló" }
-  - { href: "#z3", label: "🟢 Gyerekszoba" }
+  - { href: "#z1", label: "🔴 Piros" }
+  - { href: "#z2", label: "🔵 Kék" }
+  - { href: "#z3", label: "🟢 Zöld" }
   - { href: "#z4", label: "🟡 Finálé" }
   - { href: "#skript", label: "Beállítás" }
   - { href: "#nyomtat", label: "Nyomtatandó" }

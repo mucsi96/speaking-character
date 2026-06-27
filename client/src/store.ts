@@ -117,14 +117,22 @@ export const useShow = create<ShowState>((set, get) => ({
     const sceneIndex = get().sceneIndex;
     const scene = scenes[sceneIndex];
     const isLast = sceneIndex >= scenes.length - 1;
-    // A scene with a `code` gates progress behind the kids entering it; without
-    // one (e.g. the outro) the show just ends.
-    if (scene?.code && !isLast) {
+    if (isLast) {
+      // The final scene (the gold finale) has no answer — the show just ends.
+      set({ phase: 'finished', mouthOpen: 0 });
+      push('finished', sceneIndex);
+    } else if (scene?.code) {
+      // A scene with a `code` gates progress behind the kids entering it.
       set({ phase: 'entering', mouthOpen: 0 });
       push('entering', sceneIndex);
     } else {
-      set({ phase: 'finished', mouthOpen: 0 });
-      push('finished', sceneIndex);
+      // A codeless mid-show narration (a lock's intro/prologue, an unlock
+      // celebration or a break) has nothing to enter — roll straight on to the
+      // next scene once Coco finishes speaking. Without this the prologue that
+      // sends the kids to the kitchen would end the show before C1 is asked.
+      const next = sceneIndex + 1;
+      set({ phase: 'playing', sceneIndex: next, mouthOpen: 0 });
+      push('playing', next);
     }
   },
 
