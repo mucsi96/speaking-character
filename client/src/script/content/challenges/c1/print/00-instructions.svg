@@ -13,7 +13,7 @@
 
   <!-- header band -->
   <rect x="20" y="16" width="360" height="48" rx="10" fill="#8c2b22"/>
-  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS · KÜCHE</text>
+  <text x="200" y="40" text-anchor="middle" fill="#f6c95b" font-size="13" letter-spacing="2">ROTES SCHLOSS</text>
   <text x="200" y="58" text-anchor="middle" fill="#fdf2d6" font-size="15" font-style="italic">So bekommt ihr eure Zahl</text>
 
   <!-- title -->
@@ -35,5 +35,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="258" r="7" fill="#d6463a"/>
-  <text x="58" y="263" fill="#7a6a4a" font-size="13">Küche · C1 · 5 Aufgaben</text>
+  <text x="58" y="263" fill="#7a6a4a" font-size="13">C1 · 5 Aufgaben</text>
 </svg>
