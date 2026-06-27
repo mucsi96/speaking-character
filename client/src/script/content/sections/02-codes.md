@@ -30,6 +30,6 @@ validation:
     - [C8, "Titkosírás", "6"]
     - [C9, "Puzzle", "8"]
     - [C10, "Logikai rejtvények", "9"]
-    - [C11, "Térkép / útvonal", "3"]
+    - [C11, "Iránytű / égtájak", "3"]
     - [C12, "Csapatmunka", "1"]
 ---

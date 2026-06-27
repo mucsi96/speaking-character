@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header -->
+  <rect x="20" y="16" width="360" height="44" rx="10" fill="#8a6510"/>
+  <text x="200" y="45" text-anchor="middle" fill="#fdf2d6" font-size="22" font-weight="700">Aufgabe 2</text>
+  <text x="200" y="80" text-anchor="middle" fill="#8a6510" font-size="12" letter-spacing="2">WOHIN SEGELT DAS SCHIFF AM ENDE?</text>
+
+  <!-- compass rose -->
+  <circle cx="102" cy="190" r="58" fill="#fdf6e3" stroke="#c2a76a" stroke-width="3"/>
+  <circle cx="102" cy="190" r="49" fill="none" stroke="#c2a76a" stroke-width="1.5" stroke-dasharray="3 5"/>
+  <polygon points="102,140 120,172 152,190 120,208 102,240 84,208 52,190 84,172" fill="#efd79a" stroke="#c2a76a" stroke-width="1.5"/>
+  <g fill="#8a6510" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="102" y="128">N</text>
+    <text x="176" y="196">O</text>
+    <text x="102" y="266">S</text>
+    <text x="28" y="196">W</text>
+  </g>
+  <!-- needle: red half points to the START heading -->
+  <g transform="rotate(270,102,190)">
+    <polygon points="102,148 96,190 108,190" fill="#8c2b22"/>
+    <polygon points="102,232 96,190 108,190" fill="#f6eccf" stroke="#c2a76a" stroke-width="1"/>
+  </g>
+  <circle cx="102" cy="190" r="5" fill="#8a6510"/>
+
+  <!-- right column -->
+  <text x="290" y="100" text-anchor="middle" fill="#8a6510" font-size="10" letter-spacing="1">DAS SCHIFF SCHAUT NACH:</text>
+  <rect x="212" y="108" width="156" height="34" rx="9" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="290" y="131" text-anchor="middle" fill="#8a6510" font-size="18" font-weight="700">WESTEN</text>
+
+  <text x="290" y="170" text-anchor="middle" fill="#8a6510" font-size="10" letter-spacing="1">UND DREHT SICH:</text>
+  <rect x="212" y="178" width="156" height="34" rx="9" fill="#fdf2d6" stroke="#c2a76a" stroke-width="2"/>
+  <path d="M232 188 A 9 9 0 1 1 222 194" fill="none" stroke="#8a6510" stroke-width="2"/>
+  <polygon points="222,194 217,191 220,198" fill="#8a6510"/>
+  <text x="248" y="201" fill="#2a2118" font-size="15" font-weight="700">3× nach rechts</text>
+
+  <!-- answer slot -->
+  <rect x="212" y="226" width="156" height="46" rx="10" fill="#fdf6e3" stroke="#c2a76a" stroke-width="2"/>
+  <text x="226" y="255" fill="#8a6510" font-size="16">Ende =</text>
+  <line x1="288" y1="259" x2="356" y2="259" stroke="#c2a76a" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <!-- footer -->
+  <circle cx="44" cy="284" r="6" fill="#c9972b"/>
+  <text x="56" y="289" fill="#7a6a4a" font-size="12">C11</text>
+  <text x="356" y="289" text-anchor="end" font-size="14"><tspan fill="#e0a92e">★ ★ ★</tspan></text>
+</svg>
