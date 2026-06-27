@@ -214,7 +214,7 @@ export default function ScriptPage() {
           <Zone key={zone.anchor} zone={zone} />
         ))}
 
-        {/* Coco TV script */}
+        {/* Parent setup checklist */}
         <section id={tv.id}>
           <h2 className="sec">
             <span className="num">{tv.num}</span>
@@ -222,15 +222,6 @@ export default function ScriptPage() {
             {tv.note ? <span className={`lang-${tv.noteLang ?? 'hu'}`}>{tv.note}</span> : null}
           </h2>
           <hr className="rule" />
-          {tv.lead ? <Inline as="p" className="sec-lead" md={tv.lead} /> : null}
-          <div className="scriptbox">
-            {tv.lines.map((line, i) => (
-              <div key={i} className="scriptline">
-                <b>{line.label}</b>
-                <Inline md={line.text} />
-              </div>
-            ))}
-          </div>
           <h3 style={SUBHEAD}>{tv.setup.heading}</h3>
           <div className="parent">
             <div className="ph">{tv.setup.ph}</div>

@@ -72,19 +72,15 @@ export interface FlowSection {
   footnote?: string;
 }
 
-export interface ScriptLine {
-  label: string;
-  text: string;
-}
-
+/** §iv — the parent setup / preparation checklist. (Coco's connecting
+ *  narration is no longer duplicated here; the zones, the gold finale and the
+ *  server's reaction lines are the single source for what Coco speaks.) */
 export interface TvSection {
   id?: string;
   num: string;
   title: string;
   note?: string;
   noteLang?: 'de' | 'hu';
-  lead?: string;
-  lines: ScriptLine[];
   setup: { heading: string; ph: string; items: string[] };
 }
 

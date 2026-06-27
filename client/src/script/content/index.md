@@ -12,7 +12,7 @@ nav:
   - { href: "#z2", label: "🔵 Háló" }
   - { href: "#z3", label: "🟢 Gyerekszoba" }
   - { href: "#z4", label: "🟡 Finálé" }
-  - { href: "#skript", label: "Coco-Skript" }
+  - { href: "#skript", label: "Beállítás" }
   - { href: "#nyomtat", label: "Nyomtatandó" }
 locks:
   - { color: "var(--lock-red)", label: "Rot · 3-7-4" }
