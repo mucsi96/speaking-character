@@ -6,10 +6,6 @@ note: összekötő szövegek
 noteLang: de
 lead: "A feladat-szövegek a kártyáknál vannak; itt az összekötő narráció. A gyerekek minden feladat után **beírják a számot**, Coco ellenőrzi és továbbküld."
 lines:
-  - label: Begrüßung
-    text: "„AHOI, ihr tapferen Piraten! 🦜 Ich bin Coco! Heute jagen wir einen ECHTEN Schatz! Vier Schlösser bewachen die Truhe. Findet zuerst die Truhe — los geht's, ARRR!”"
-  - label: Truhe gefunden
-    text: "„YO-HO! Vier Schlösser — Rot, Blau, Grün, Gold. Für jedes braucht ihr drei Zahlen. Auf in die KOMBÜSE!”"
   - label: Richtige Zahl
     text: "„RICHTIG! 🎉 Das ist eine Zahl vom Schloss!” — <em>(falsch:)</em> „Hm, ein Sturm! Versucht es nochmal, Piraten!”"
   - label: Schloss offen
