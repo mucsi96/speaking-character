@@ -12,7 +12,7 @@
 
   <!-- header band -->
   <rect x="40" y="28" width="680" height="70" rx="12" fill="#1f5d3a"/>
-  <text x="380" y="62" text-anchor="middle" fill="#bdeccb" font-size="17" letter-spacing="2">GRÜNES SCHLOSS · KINDERZIMMER</text>
+  <text x="380" y="62" text-anchor="middle" fill="#bdeccb" font-size="17" letter-spacing="2">GRÜNES SCHLOSS · FLUR</text>
   <text x="380" y="85" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">In Stücke schneiden · mischen · zusammensetzen</text>
 
   <!-- title -->
@@ -42,5 +42,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="512" r="9" fill="#2e7d4f"/>
-  <text x="62" y="518" fill="#7a6a4a" font-size="16">Kinderzimmer · C9</text>
+  <text x="62" y="518" fill="#7a6a4a" font-size="16">Flur · C9</text>
 </svg>

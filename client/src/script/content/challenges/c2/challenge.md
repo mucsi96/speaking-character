@@ -2,17 +2,17 @@
 order: 2
 id: C2
 title: Goldmünzen-Suche
-room: "Konyha · keresés + összehasonlítás"
+room: "Nappali · keresés + összehasonlítás"
 tags: [Keresés]
 dial: "🔴 → 7"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:
-  - "„Fünf Goldmünzen sind in der Küche versteckt — jeder findet eine und bringt sie her!”"
+  - "„Lauft ins WOHNZIMMER, kleine Piraten! Dort sind fünf Goldmünzen versteckt — jeder findet eine und bringt sie her!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "5 érme (csoki vagy nyomtatott) rejtve: vízforraló mögött, tálban, sziget alatt, komódfiókban, hűtőn mágnessel."]
+    - [Elrejtés, "5 érme (csoki vagy nyomtatott) a nappaliban rejtve: kanapépárna alatt, könyvespolcon, virágcserépben, TV-szekrényen, fiókban."]
     - [Hátoldal, "7, 8, 11, 14, 20. (A csokit megtarthatják.)"]
     - [Megoldás, "legkisebb → **7**", sol]
 ---

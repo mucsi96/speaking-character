@@ -2,17 +2,17 @@
 order: 3
 id: C3
 title: Die Papageien-Geschichte
-room: "Konyha · felolvasás"
+room: "Előszoba · felolvasás"
 tags: [Olvasás]
 dial: "🔴 → 4"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:
-  - "„Eine echte Piraten-Geschichte wartet! Jeder liest einen Absatz LAUT vor — hört gut zu!”"
+  - "„Jetzt in den FLUR, kleine Piraten! Dort wartet eine echte Piraten-Geschichte — jeder liest einen Absatz LAUT vor, hört gut zu!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A kinyomtatott lap a konyhai komód tetején, „pecséttel”."]
+    - [Elrejtés, "A kinyomtatott lap az előszobai komód / cipőszekrény tetején, „pecséttel”."]
     - [Megoldás, "PAPAGEI 4×szerepel → **4**", sol]
 # Last challenge of the RED lock: once C3's code is entered, Coco celebrates the
 # unlock and sends the crew to the break.

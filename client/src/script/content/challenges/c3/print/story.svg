@@ -5,7 +5,7 @@
 
   <!-- header band -->
   <rect x="40" y="28" width="680" height="70" rx="12" fill="#8c2b22"/>
-  <text x="380" y="58" text-anchor="middle" fill="#f6c95b" font-size="16" letter-spacing="3">ROTES SCHLOSS · KÜCHE</text>
+  <text x="380" y="58" text-anchor="middle" fill="#f6c95b" font-size="16" letter-spacing="3">ROTES SCHLOSS · FLUR</text>
   <text x="380" y="82" text-anchor="middle" fill="#fdf2d6" font-size="16" font-style="italic">Jeder liest eine Zeile laut — zählt, wie oft PAPAGEI vorkommt!</text>
 
   <!-- title -->
@@ -38,5 +38,5 @@
 
   <!-- footer chip -->
   <circle cx="60" cy="508" r="7" fill="#d6463a"/>
-  <text x="74" y="513" fill="#7a6a4a" font-size="14">Küche · C3 · laut vorlesen</text>
+  <text x="74" y="513" fill="#7a6a4a" font-size="14">Flur · C3 · laut vorlesen</text>
 </svg>

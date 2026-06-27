@@ -8,7 +8,7 @@ dial: "🟡 → 3"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„Eine Schatzkarte! Folgt dem Weg — jeder fährt ein Zimmer mit dem Finger nach!”"
+  - "„In den FLUR, kleine Piraten! Dort hängt eine Schatzkarte — folgt dem Weg, jeder fährt ein Zimmer mit dem Finger nach!”"
 parent:
   ph: Szülőknek
   entries:

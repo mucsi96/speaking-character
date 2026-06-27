@@ -5,7 +5,7 @@
 
   <!-- header band -->
   <rect x="40" y="28" width="680" height="70" rx="12" fill="#1f5d3a"/>
-  <text x="380" y="60" text-anchor="middle" fill="#bdeccb" font-size="16" letter-spacing="3">GRÜNES SCHLOSS · KINDERZIMMER</text>
+  <text x="380" y="60" text-anchor="middle" fill="#bdeccb" font-size="16" letter-spacing="3">GRÜNES SCHLOSS · SCHLAFZIMMER</text>
   <text x="380" y="84" text-anchor="middle" fill="#fdf2d6" font-size="18" font-style="italic">Legende → Wort entschlüsseln</text>
 
   <!-- title -->
@@ -91,5 +91,5 @@
 
   <!-- footer chip -->
   <circle cx="44" cy="506" r="8" fill="#2e7d4f"/>
-  <text x="60" y="512" fill="#7a6a4a" font-size="16">Kinderzimmer · C8</text>
+  <text x="60" y="512" fill="#7a6a4a" font-size="16">Schlafzimmer · C8</text>
 </svg>
