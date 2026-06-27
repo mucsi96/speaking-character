@@ -19,6 +19,6 @@ setup:
     - "Gyerekszoba: LEGO útmutató az asztalon + címkézett dobozok (C7)."
     - "Kis WC / zuhanyzó: jelmagyarázat a falra/ajtóra ragasztva + szimbólum-kártyák a polcon (C8)."
     - "Előszoba: térkép a cipőszekrényen (C11)."
-    - "Finálé: Geomag-csillag/szalagok a láda köré, alá rejtett „1” (C12)."
+    - "Finálé: 5 aranykulcs-kártya + anleitő kártya a láda elé kiterítve (C12)."
     - "Kincs becsomagolva; snack + 2 Tom & Jerry epizód előkészítve."
 ---

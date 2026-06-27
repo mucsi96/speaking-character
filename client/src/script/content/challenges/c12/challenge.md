@@ -1,18 +1,20 @@
 ---
 order: 12
 id: C12
-title: Der große Piratenschwur
-room: "Láda előtt · csapatmunka"
-tags: ["Csapat (mind az 5)"]
+title: Die fünf goldenen Schlüssel
+room: "Láda előtt · 5 párhuzamos"
+tags: [Számolás, "5 párhuzamos"]
 dial: "🟡 → 1"
 code: "1"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„Die letzte Aufgabe, kleine Crew — ALLE zusammen! Stellt euch um die Truhe und macht es gemeinsam.”"
+  - "„Die allerletzte Aufgabe, kleine Crew — und sie ist GOLDEN! Vor der Truhe liegen fünf goldene Schlüssel-Karten bereit: jeder schnappt sich einen Schlüssel und zählt ganz genau die Zacken am Bart. Schreibt eure Zahl in das Kästchen!”"
+  - "„Dann legt eure fünf Zahlen zusammen und addiert sie zu einer Gesamtzahl. Sucht diese Gesamtzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein, und das GOLDENE Schloss fällt!”"
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A Geomag-csillag/szalagok a láda köré előkészítve. Csak együtt megy. A kész csillag alatt rejtett arany „1”."]
-    - [Megoldás, "a csillag elkészül → rejtett „1” → **1**", sol]
+    - [Elrejtés, "Az anleitő kártya (Schatz-Tabellával) + az 5 aranykulcs-kártya a láda előtt kiterítve — ez a fináléhoz méltó utolsó közös pillanat. Minden kártyán egy arany kulcs, a tollán (Bart) különböző számú foggal (Zacken), és van rá írómező. A több fogú, nehezebben számolható kulcsokat a nagyobbaknak, a kevesebb fogúakat a kisebbeknek."]
+    - ["Mind az 5", "Mindenki megszámolja a saját kulcsa fogait és beírja. Kulcs / fogak: 1) 5 · 2) 4 · 3) 6 · 4) 4 · 5) 5."]
+    - [Megoldás, "Összeadás: 5 + 4 + 6 + 4 + 5 = 24 → Schatz-Tabelle: 24 → **1**", sol]
 ---
