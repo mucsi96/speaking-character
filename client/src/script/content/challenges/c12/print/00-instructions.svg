@@ -13,14 +13,25 @@
 
   <!-- steps -->
   <g fill="#2a2118" font-size="12.5">
-    <text x="34" y="105"><tspan fill="#8a6510" font-weight="700">1.</tspan>  Jeder nimmt eine <tspan font-weight="700">Bibot-Karte</tspan> mit Gitter.</text>
-    <text x="34" y="126"><tspan fill="#8a6510" font-weight="700">2.</tspan>  Folgt den <tspan font-weight="700">Pfeilen</tspan> — wo bleibt Bibot stehen? (z.B. C3)</text>
-    <text x="34" y="147"><tspan fill="#8a6510" font-weight="700">3.</tspan>  Sucht das Feld in <tspan font-weight="700">eurer Tabelle</tspan> — daneben steht die Zahl.</text>
-    <text x="34" y="168"><tspan fill="#8a6510" font-weight="700">4.</tspan>  Addiert eure <tspan font-weight="700">5 Zahlen</tspan>; sucht die Summe in der Tabelle.</text>
+    <text x="34" y="103"><tspan fill="#8a6510" font-weight="700">1.</tspan>  Jeder nimmt eine <tspan font-weight="700">Bibot-Karte</tspan> — Bibot blickt nach vorn (Nase).</text>
+    <text x="34" y="122"><tspan fill="#8a6510" font-weight="700">2.</tspan>  Führt die <tspan font-weight="700">Befehle</tspan> aus — wo bleibt Bibot stehen? (z.B. C3)</text>
+    <text x="34" y="141"><tspan fill="#8a6510" font-weight="700">3.</tspan>  Sucht das Feld in <tspan font-weight="700">eurer Tabelle</tspan> — daneben steht die Zahl.</text>
+    <text x="34" y="160"><tspan fill="#8a6510" font-weight="700">4.</tspan>  Addiert eure <tspan font-weight="700">5 Zahlen</tspan>; sucht die Summe in der Tabelle.</text>
+  </g>
+
+  <!-- command legend -->
+  <g font-size="11" fill="#2a2118">
+    <text x="34" y="182" font-weight="700" fill="#8a6510">Befehle:</text>
+    <text x="92" y="183" font-size="14" fill="#2b8a8a" text-anchor="middle">&#8593;</text>
+    <text x="104" y="182">vorwärts</text>
+    <g transform="translate(178,178) scale(0.9)" fill="none" stroke="#2b8a8a" stroke-width="2.2" stroke-linecap="round"><path d="M3.5,-6.06 A7,7 0 1 1 -3.5,-6.06"/><polygon points="-0.04,-8.06 -2.2,-3.81 -4.8,-8.31" fill="#2b8a8a" stroke="none"/></g>
+    <text x="190" y="182">rechts drehen</text>
+    <g transform="translate(290,178) scale(-0.9,0.9)" fill="none" stroke="#2b8a8a" stroke-width="2.2" stroke-linecap="round"><path d="M3.5,-6.06 A7,7 0 1 1 -3.5,-6.06"/><polygon points="-0.04,-8.06 -2.2,-3.81 -4.8,-8.31" fill="#2b8a8a" stroke="none"/></g>
+    <text x="302" y="182">links drehen</text>
   </g>
 
   <!-- treasure mapping table: Summe -> Zahl -->
-  <text x="200" y="204" text-anchor="middle" fill="#8a6510" font-size="13" font-weight="700" letter-spacing="1">SCHATZ-TABELLE</text>
+  <text x="200" y="206" text-anchor="middle" fill="#8a6510" font-size="13" font-weight="700" letter-spacing="1">SCHATZ-TABELLE</text>
   <g font-size="12" fill="#7a6a4a" text-anchor="end">
     <text x="40" y="230">Summe</text>
     <text x="40" y="258">Zahl</text>
@@ -54,5 +65,5 @@
   </g>
 
   <!-- footer -->
-  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C12 · 5 Bibot-Karten · ↑ hoch  ↓ runter  ← links  → rechts</text>
+  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C12 · 5 Bibot-Karten · Bibot dreht sich auf der Stelle</text>
 </svg>
