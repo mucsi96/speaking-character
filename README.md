@@ -46,10 +46,37 @@ State is read over `GET /api/state` (`{ script, show, rev }`); `GET /api/script`
 is kept for backwards compatibility. The server still pre-renders all TTS on
 startup (see below).
 
+## Parent guide (`/script`)
+
+The printable host's playbook — *"Coco & die 4 Schlösser"*, the bilingual
+treasure-hunt guide that used to live as the hand-written static `script.html`
+at the repo root — is now a **dynamic page at `/script`** (e.g.
+http://localhost:5173/script in dev).
+
+Its content lives as a **structured markdown directory** under
+[`client/src/script/content/`](client/src/script/content):
+
+```
+content/
+  index.md              # hero, top nav, footer
+  sections/             # overview, secret codes, game flow, TV script, printables intro
+  zones/<n>-<color>/    # each lock zone: zone.md + one file per station (c1.md …)
+  printables/           # one file per cut-out sheet (cards, cipher, map, diplomas, …)
+```
+
+Each file is YAML frontmatter (structured data) plus a markdown body (prose).
+The files are bundled at build time (`import.meta.glob`) and rendered by React
+components in [`client/src/script/`](client/src/script) that reuse the original
+look & feel (see `script.css`). To change task text, codes, hints or printables,
+edit the markdown — no component changes needed. The route is lazy-loaded, so
+its bundle and parchment styles never reach the TV display or `/admin`.
+
+`script.html` is kept as the original design reference.
+
 ## Project layout
 
 ```
-client/   React + react-three-fiber app (Vite)
+client/   React + react-three-fiber app (Vite); /script renders the parent guide from client/src/script/content/
 server/   Express server: /api/tts proxy + serves the built client
 scripts/  Deployment & local smoke-test helpers (deploy.sh, pod_up.sh, …)
 test/     Local container smoke-test pod manifest
