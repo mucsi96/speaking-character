@@ -183,6 +183,26 @@ pipeline) and Key Vault secrets:
 | Key Vault     | `api-client-id`                               | Azure workload-identity client id        |
 | Key Vault     | `elevenlabs-api-key` / `elevenlabs-voice-id`  | ElevenLabs credentials                   |
 
+### Persistent audio cache
+
+The ElevenLabs MP3 cache (`CACHE_DIR=/app/cache`) is backed by a
+`PersistentVolumeClaim` so it survives redeploys and image upgrades — without it
+every rollout would start with an empty cache and re-synthesize the whole show
+against ElevenLabs on the next warm-up. `deploy.sh` provisions one claim via the
+`node-app` chart's `persistentVolumeClaims` value (chart `>= 19.0.0`):
+
+| Field              | Value             |
+| ------------------ | ----------------- |
+| `name`             | `party-pvc`       |
+| `accessMode`       | `ReadWriteOnce`   |
+| `volumeName`       | `party-app`       |
+| `mountPath`        | `/app/cache`      |
+| `storageClassName` | `""` (static)     |
+| `storage`          | `1Gi`             |
+
+The empty `storageClassName` plus `volumeName` statically bind the claim to the
+pre-provisioned `party-app` PersistentVolume (no dynamic provisioning).
+
 The whole flow (smoke test → publish image → deploy) runs automatically on push
 to `main` via [`.github/workflows/pipeline.yml`](.github/workflows/pipeline.yml).
 
