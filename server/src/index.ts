@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile, access } from 'node:fs/promises';
 import { constants as fsConstants } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { script, allSpeech } from './scenes.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,6 +35,106 @@ async function fileExists(path: string): Promise<boolean> {
 function healthHandler(_req: Request, res: Response): void {
   res.json({ status: 'ok', voiceConfigured: Boolean(ELEVENLABS_VOICE_ID && ELEVENLABS_API_KEY) });
 }
+
+/** Thrown when ElevenLabs responds with a non-OK status. */
+class TtsUpstreamError extends Error {
+  constructor(public status: number, public detail: string) {
+    super(`ElevenLabs error ${status}`);
+    this.name = 'TtsUpstreamError';
+  }
+}
+
+/** Cache path for a line, keyed by a hash of (voice + model + text). */
+function cachePathFor(text: string): string {
+  const hash = createHash('sha256')
+    .update(`${ELEVENLABS_VOICE_ID}:${ELEVENLABS_MODEL_ID}:${text}`)
+    .digest('hex');
+  return join(CACHE_DIR, `${hash}.mp3`);
+}
+
+/**
+ * Return the MP3 for `text`, generating it via ElevenLabs and caching it on disk
+ * on a miss. `cached` reports whether the result came from the disk cache.
+ */
+async function synthesize(text: string): Promise<{ audio: Buffer; cached: boolean }> {
+  const cachePath = cachePathFor(text);
+  if (await fileExists(cachePath)) {
+    return { audio: await readFile(cachePath), cached: true };
+  }
+
+  const upstream = await fetch(
+    `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(ELEVENLABS_VOICE_ID)}`,
+    {
+      method: 'POST',
+      headers: {
+        'xi-api-key': ELEVENLABS_API_KEY,
+        'Content-Type': 'application/json',
+        Accept: 'audio/mpeg',
+      },
+      body: JSON.stringify({
+        text,
+        model_id: ELEVENLABS_MODEL_ID,
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+          style: 0.4,
+          use_speaker_boost: true,
+        },
+      }),
+    }
+  );
+
+  if (!upstream.ok) {
+    const detail = await upstream.text().catch(() => '');
+    throw new TtsUpstreamError(upstream.status, detail);
+  }
+
+  const audio = Buffer.from(await upstream.arrayBuffer());
+  await mkdir(CACHE_DIR, { recursive: true });
+  await writeFile(cachePath, audio);
+  return { audio, cached: false };
+}
+
+/**
+ * Warm the disk cache for every line up front so the live show never waits on
+ * ElevenLabs. Runs sequentially in the background and logs progress so the
+ * warm-up can be followed in the server logs.
+ */
+async function runPrecache(texts: string[]): Promise<void> {
+  const total = texts.length;
+  let cachedCount = 0;
+  let generatedCount = 0;
+  let failedCount = 0;
+
+  console.log(`[precache] starting warm-up of ${total} clip(s)`);
+  for (let i = 0; i < total; i++) {
+    const text = texts[i];
+    const position = `${i + 1}/${total}`;
+    const preview = text.length > 60 ? `${text.slice(0, 57)}...` : text;
+    try {
+      const { cached } = await synthesize(text);
+      if (cached) cachedCount++;
+      else generatedCount++;
+      console.log(
+        `[precache] ${position} ${cached ? 'already cached' : 'generated'}: "${preview}"`
+      );
+    } catch (err) {
+      failedCount++;
+      const reason = err instanceof Error ? err.message : String(err);
+      console.error(`[precache] ${position} FAILED (${reason}): "${preview}"`);
+    }
+  }
+  console.log(
+    `[precache] finished: ${total} total, ${cachedCount} already cached, ` +
+      `${generatedCount} generated, ${failedCount} failed`
+  );
+}
+
+// Serve the show script (German text + codes) to the client. The client renders
+// from this rather than holding its own copy, so the script has a single home.
+app.get('/api/script', (_req: Request, res: Response) => {
+  res.json(script);
+});
 
 // `/health` is what the node_app Helm chart probes (liveness/startup); `/healthz`
 // is kept for backwards compatibility with the local/dev manifests.
@@ -75,57 +176,17 @@ app.post('/api/tts', async (req: Request, res: Response) => {
     return;
   }
 
-  const hash = createHash('sha256')
-    .update(`${ELEVENLABS_VOICE_ID}:${ELEVENLABS_MODEL_ID}:${text}`)
-    .digest('hex');
-  const cachePath = join(CACHE_DIR, `${hash}.mp3`);
-
   try {
-    if (await fileExists(cachePath)) {
-      const cached = await readFile(cachePath);
-      res.setHeader('Content-Type', 'audio/mpeg');
-      res.setHeader('X-Cache', 'HIT');
-      res.send(cached);
-      return;
-    }
-
-    const upstream = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(ELEVENLABS_VOICE_ID)}`,
-      {
-        method: 'POST',
-        headers: {
-          'xi-api-key': ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json',
-          Accept: 'audio/mpeg',
-        },
-        body: JSON.stringify({
-          text,
-          model_id: ELEVENLABS_MODEL_ID,
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-            style: 0.4,
-            use_speaker_boost: true,
-          },
-        }),
-      }
-    );
-
-    if (!upstream.ok) {
-      const detail = await upstream.text().catch(() => '');
-      console.error(`ElevenLabs error ${upstream.status}: ${detail}`);
-      res.status(502).json({ error: 'TTS upstream failed.', status: upstream.status });
-      return;
-    }
-
-    const audio = Buffer.from(await upstream.arrayBuffer());
-    await mkdir(CACHE_DIR, { recursive: true });
-    await writeFile(cachePath, audio);
-
+    const { audio, cached } = await synthesize(text);
     res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('X-Cache', 'MISS');
+    res.setHeader('X-Cache', cached ? 'HIT' : 'MISS');
     res.send(audio);
   } catch (err) {
+    if (err instanceof TtsUpstreamError) {
+      console.error(`ElevenLabs error ${err.status}: ${err.detail}`);
+      res.status(502).json({ error: 'TTS upstream failed.', status: err.status });
+      return;
+    }
     console.error('TTS request failed:', err);
     res.status(500).json({ error: 'Internal error generating speech.' });
   }
@@ -150,4 +211,12 @@ app.listen(PORT, () => {
   console.log(`  cache dir:   ${CACHE_DIR}`);
   console.log(`  voice:       ${ELEVENLABS_VOICE_ID || '(not set)'}`);
   console.log(`  model:       ${ELEVENLABS_MODEL_ID}`);
+
+  // Pre-render every line on startup so the live show is smooth. Runs in the
+  // background; the server is already accepting requests while it warms up.
+  if (ELEVENLABS_API_KEY && ELEVENLABS_VOICE_ID) {
+    void runPrecache(allSpeech);
+  } else {
+    console.log('[precache] skipped: ElevenLabs not configured');
+  }
 });

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { scenes } from './scenes';
+import { fetchScript, type Script } from './script';
 
 export type Phase =
   | 'idle'
@@ -19,7 +19,11 @@ interface ShowState {
   sceneIndex: number;
   /** 0..1 mouth-open value derived from the audio, drives the beak/jaw. */
   mouthOpen: number;
+  /** The show script, fetched from the server. Null until it has loaded. */
+  script: Script | null;
 
+  /** Fetch the script from the server. Called once on startup. */
+  loadScript: () => Promise<void>;
   start: () => void;
   /** Called when the current scene's narration has finished playing. */
   finishNarration: () => void;
@@ -42,14 +46,26 @@ export const useShow = create<ShowState>((set, get) => ({
   phase: 'idle',
   sceneIndex: 0,
   mouthOpen: 0,
+  script: null,
+
+  loadScript: async () => {
+    if (get().script) return;
+    try {
+      set({ script: await fetchScript() });
+    } catch (err) {
+      console.error('Failed to load show script:', err);
+    }
+  },
 
   start: () => {
-    if (get().phase !== 'idle') return;
+    // Don't start until the script has loaded, or there'd be nothing to play.
+    if (get().phase !== 'idle' || !get().script) return;
     set({ phase: 'playing', sceneIndex: 0 });
   },
 
   finishNarration: () => {
     if (get().phase !== 'playing') return;
+    const scenes = get().script?.scenes ?? [];
     const scene = scenes[get().sceneIndex];
     const isLast = get().sceneIndex >= scenes.length - 1;
     // A scene with a `code` gates progress behind the kids entering it; without
@@ -63,7 +79,7 @@ export const useShow = create<ShowState>((set, get) => ({
 
   submitCode: (code) => {
     if (get().phase !== 'entering') return;
-    const scene = scenes[get().sceneIndex];
+    const scene = get().script?.scenes[get().sceneIndex];
     const correct = scene?.code === code.trim();
     set({ phase: correct ? 'celebrating' : 'rejecting' });
   },
@@ -72,7 +88,7 @@ export const useShow = create<ShowState>((set, get) => ({
     const phase = get().phase;
     if (phase === 'celebrating') {
       const next = get().sceneIndex + 1;
-      if (next >= scenes.length) {
+      if (next >= (get().script?.scenes.length ?? 0)) {
         set({ phase: 'finished' });
       } else {
         set({ phase: 'playing', sceneIndex: next });

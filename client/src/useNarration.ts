@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useShow } from './store';
-import { scenes, correctLines, wrongLines } from './scenes';
 import { audioEngine } from './audio';
 
 function pick(lines: string[]): string {
@@ -24,23 +23,26 @@ function pick(lines: string[]): string {
 export function useNarration(): void {
   const phase = useShow((s) => s.phase);
   const sceneIndex = useShow((s) => s.sceneIndex);
+  const script = useShow((s) => s.script);
   const finishNarration = useShow((s) => s.finishNarration);
   const reactionDone = useShow((s) => s.reactionDone);
 
   useEffect(() => {
+    if (!script) return;
+
     let text: string;
     let onDone: () => void;
 
     if (phase === 'playing') {
-      const scene = scenes[sceneIndex];
+      const scene = script.scenes[sceneIndex];
       if (!scene) return;
       text = scene.text;
       onDone = finishNarration;
     } else if (phase === 'celebrating') {
-      text = pick(correctLines);
+      text = pick(script.correctLines);
       onDone = reactionDone;
     } else if (phase === 'rejecting') {
-      text = pick(wrongLines);
+      text = pick(script.wrongLines);
       onDone = reactionDone;
     } else {
       return;
@@ -66,5 +68,5 @@ export function useNarration(): void {
       controller.abort();
       audioEngine.stop();
     };
-  }, [phase, sceneIndex, finishNarration, reactionDone]);
+  }, [phase, sceneIndex, script, finishNarration, reactionDone]);
 }
