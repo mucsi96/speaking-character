@@ -9,8 +9,7 @@ code: "4"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:
-  - "„Jetzt ins WOHNZIMMER, kleine Piraten! Dort liegen fünf Geschichten-Karten bereit — jeder schnappt sich eine und liest sie ganz LAUT vor. Auf jeder Karte steht oben EUER Wort: zählt, wie oft es in eurer Geschichte vorkommt, und schreibt die Zahl in das Kästchen!”"
-  - "„Dann legt eure fünf Zahlen zusammen und addiert sie zu einer Gesamtzahl. Sucht diese Gesamtzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„Jetzt ins **WOHNZIMMER**, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

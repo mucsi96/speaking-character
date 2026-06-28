@@ -17,8 +17,8 @@ lock:
   code: "9 - 3 - 1"
 who: Coco mondja
 lines:
-  - "„Das große Finale, Mannschaft! Das letzte — das GOLDENE Schloss. Drei Aufgaben, dann gehört der Schatz EUCH!”"
-  - "„Ab ins WOHNZIMMER zum großen Finale! Fünf knifflige Rätsel liegen bereit — jeder schnappt sich eine Karte, kreuzt die richtige Antwort an und merkt sich die Zahl daneben!”"
+  - "„Das große Finale, Mannschaft! Das letzte — das **GOLDENE** Schloss. Drei Aufgaben, dann gehört der Schatz EUCH!”"
+  - "„Ab ins **WOHNZIMMER** zum großen Finale! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:
