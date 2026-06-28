@@ -5,7 +5,7 @@ variant: break
 # Codeless OK-gated scene: the second break, before the gold finale.
 who: Coco mondja
 lines:
-  - "Yo-ho-ho! Noch eine kleine Pause, tapfere Crew — esst etwas und sammelt neue Kräfte. Wenn ihr bereit seid für das große Finale, drückt OK!"
+  - "Yo-ho-ho! Noch eine kleine Pause, tapfere Crew — esst etwas und sammelt neue Kräfte. Wenn ihr bereit seid für das große Finale, drückt die große Taste in der Mitte!"
 emoji: "🧀"
 title: SZÜNET 2
 # Parent-only prep note (shown on the printable break bar, not spoken by Coco).
