@@ -71,7 +71,7 @@ function LockHead({ lock }: { lock: NonNullable<ChallengeData['lock']> }) {
 
 /** One entry of the flat challenge list. Most are task cards (C0–C12); a
  *  challenge's `variant` switches it to the gold finale card or to the colored
- *  unlock / break bars that close a lock — each now its own standalone scene. */
+ *  break bar between locks — each its own standalone scene. */
 export function Challenge({ challenge }: { challenge: ChallengeData }) {
   if (challenge.variant === 'finale') {
     return (
@@ -93,21 +93,6 @@ export function Challenge({ challenge }: { challenge: ChallengeData }) {
         <div className="body">
           <CocoBubble who={challenge.who ?? ''} lines={challenge.lines} />
           {challenge.parent ? <ParentBox ph={challenge.parent.ph} entries={challenge.parent.entries} /> : null}
-        </div>
-      </div>
-    );
-  }
-
-  // A lock's unlock celebration — a colored bar; its body is the spoken lines.
-  if (challenge.variant === 'unlock') {
-    return (
-      <div className="unlock" style={{ background: challenge.gradient }}>
-        <span className="ic">🔓</span>
-        <div>
-          <h5>{challenge.title}</h5>
-          {challenge.lines.map((line, i) => (
-            <Inline key={i} as="p" md={line} />
-          ))}
         </div>
       </div>
     );

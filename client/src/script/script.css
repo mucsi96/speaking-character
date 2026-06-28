@@ -149,11 +149,6 @@ body.script-mode #root {
 .script-root .parent dd { margin: 0; }
 .script-root .parent .sol { font-family: var(--type); color: var(--oxblood); }
 
-.script-root .unlock { border-radius: 12px; padding: 13px 18px; margin: 8px 0 4px; display: flex; gap: 14px; align-items: center; color: #fff; box-shadow: 0 5px 16px var(--shadow); }
-.script-root .unlock .ic { font-size: 28px; }
-.script-root .unlock h5 { margin: 0; font-family: var(--head); letter-spacing: .04em; font-size: 17px; }
-.script-root .unlock p { margin: .2em 0 0; font-size: .93em; }
-
 .script-root .breakbar { background: linear-gradient(90deg, var(--oxblood), #a8392e); color: #fbe6c8; border-radius: 12px; padding: 15px 22px; margin: 20px 0; display: flex; gap: 14px; align-items: center; box-shadow: 0 5px 16px var(--shadow); }
 .script-root .breakbar .ic { font-size: 30px; }
 .script-root .breakbar h4 { margin: 0; font-family: var(--head); letter-spacing: .05em; }
@@ -180,7 +175,7 @@ body.script-mode #root {
   @page { size: A4; margin: 8mm; }
   .script-root .topbar, .script-root .printbtn, .script-root footer .noprint { display: none !important; }
   body.script-mode { background: #fff; font-size: 12pt; }
-  .script-root .station, .script-root .parent, .script-root .coco, .script-root .breakbar, .script-root .unlock, .script-root .print-intro, .script-root .secret { box-shadow: none; }
+  .script-root .station, .script-root .parent, .script-root .coco, .script-root .breakbar, .script-root .print-intro, .script-root .secret { box-shadow: none; }
   .script-root .station { break-inside: avoid; }
   .script-root .page-break { break-before: page; }
   /* One challenge per A4 page: every group but the first starts a fresh page

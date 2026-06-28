@@ -19,9 +19,11 @@
  *       * a challenge with a `code` is a code gate — the kids enter the single
  *         digit to advance (`C1`..`C12`);
  *       * a challenge without a `code` is an OK gate — Coco speaks and the show
- *         waits for a grown-up to press OK (the C0 prologue, every lock's
- *         unlock celebration `<id>-unlock`, the breaks `<id>-break`). The very
- *         last codeless scene (the gold finale) simply ends the show.
+ *         waits for a grown-up to press OK (the C0 prologue, the breaks
+ *         `<id>-break`). The very last codeless scene (the gold finale) simply
+ *         ends the show. There is no separate unlock scene per lock: the kids
+ *         set its dials digit by digit as they solve each challenge, so Coco's
+ *         praise on the final digit is the celebration.
  *  Coco speaks before every challenge and never explains the task — the puzzle
  *  lives on the printable in the challenge's folder — so the scene is the
  *  spoken lead-in only, with no question appended. The four locks ride along as
@@ -178,7 +180,7 @@ export function buildDefaultScript(): Script {
     // there is no `question` to append.
     const text = speak(challenge.lines);
     if (challenge.code === undefined || challenge.code === null || challenge.code === '') {
-      // Codeless ⇒ an OK-gated scene (the prologue, an unlock, a break) or the
+      // Codeless ⇒ an OK-gated scene (the prologue, a break) or the
       // finale. The client waits for OK, or ends the show on the last scene.
       scenes.push({ id: challenge.id, text });
       continue;

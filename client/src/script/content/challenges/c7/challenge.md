@@ -12,7 +12,6 @@ lock:
   emoji: "🟢"
   color: var(--lock-green)
   headGradient: "linear-gradient(180deg,#3a9c66,var(--lock-green))"
-  unlockGradient: "linear-gradient(90deg,#3a9c66,var(--lock-green))"
   title: "Lakat 3 — Grün · Werkstatt"
   subtitle: "Gyerekszoba → kis WC → dolgozó · C7 C8 C9 · nyelv + jelfejtés + puzzle"
   code: "4 - 6 - 8"

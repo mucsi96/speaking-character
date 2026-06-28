@@ -8,7 +8,7 @@ room: "Kód 9-3-1 → KINCS"
 headGradient: "linear-gradient(180deg,#dcae47,var(--lock-gold))"
 who: "Coco · Finálé"
 lines:
-  - "„NEUN-DREI-EINS! Das letzte Schloss fällt! Drei… zwei… eins… **ÖFFNEN!** 🪙🎉”"
+  - "„Das letzte Schloss fällt! Drei… zwei… eins… **ÖFFNEN!** 🪙🎉”"
   - "„Ihr seid die mutigste Piraten-Crew der sieben Meere! Und du, Geburtstagskind, bist ab heute KAPITÄN! HURRA!”"
 parent:
   ph: Szülőknek — a nagy pillanat

@@ -102,7 +102,6 @@ export interface ChallengeLock {
   emoji: string;
   color: string;
   headGradient: string;
-  unlockGradient?: string;
   title: string;
   subtitle: string;
   code: string;
@@ -112,7 +111,7 @@ export interface ChallengeLock {
  *  speaks the single `lines` block *before* the challenge to set the scene
  *  (and, where it opens a lock, to reveal that lock) and never explains the
  *  task itself — the puzzle lives on the printable in the same challenge
- *  folder. `lock` opens a new lock; `unlock`/`break` close one. */
+ *  folder. `lock` opens a new lock; a `break` scene sits between locks. */
 export interface Challenge {
   order: number;
   id: string;
@@ -121,7 +120,7 @@ export interface Challenge {
   tags?: string[];
   dial?: string;
   /** Single-digit answer the kids enter on the remote. Absent ⇒ an OK-gated
-   *  scene (the C0 prologue, a lock's unlock celebration, a break, the finale). */
+   *  scene (the C0 prologue, a break, the finale). */
   code?: string;
   /** Accent color for the challenge card's left border (its lock's color). */
   lockColor?: string;
@@ -131,17 +130,15 @@ export interface Challenge {
   hint?: string;
   parent?: { ph: string; entries: ParentEntry[] };
   /** Picks the printable card style. Absent ⇒ a normal task card.
-   *  "intro" also renders as a task card; "unlock"/"break" render the colored
-   *  unlock / break bars; "finale" renders the gold climax card. */
-  variant?: 'intro' | 'unlock' | 'break' | 'finale';
+   *  "intro" also renders as a task card; "break" renders the colored break
+   *  bar; "finale" renders the gold climax card. */
+  variant?: 'intro' | 'break' | 'finale';
   icon?: string;
   headGradient?: string;
   /** Present on the first challenge of a lock: its header (printable only). */
   lock?: ChallengeLock;
-  /** "unlock"/"break" bar fields: a heading, plus a gradient (unlock) or an
-   *  emoji (break). An unlock bar's body is the scene's spoken `lines`; a break
-   *  bar shows the parent-only `note` (its `lines` are Coco's spoken break cue). */
-  gradient?: string;
+  /** "break" bar fields: a heading and an emoji. A break bar shows the
+   *  parent-only `note` (its `lines` are Coco's spoken break cue). */
   emoji?: string;
   note?: string;
 }
