@@ -16,7 +16,6 @@ lock:
   emoji: "🔴"
   color: var(--lock-red)
   headGradient: "linear-gradient(180deg,#d6463a,var(--lock-red))"
-  unlockGradient: "linear-gradient(90deg,#d6463a,var(--lock-red))"
   title: "Lakat 1 — Rot · Kombüse"
   subtitle: "Konyha → fürdő → nappali · C1 C2 C3 · matek + keresés + felolvasás"
   code: "3 - 7 - 4"

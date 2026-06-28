@@ -128,10 +128,10 @@ export const useShow = create<ShowState>((set, get) => ({
       set({ phase: 'entering', mouthOpen: 0 });
       push('entering', sceneIndex);
     } else {
-      // A codeless scene (the C0 prologue, an unlock celebration, a break) has
-      // nothing to enter — it waits for a grown-up to press OK on the remote
-      // before advancing, so the crew can move rooms / fetch the chest / take a
-      // break at their own pace. Every non-code scene is OK-gated.
+      // A codeless scene (the C0 prologue, a break) has nothing to enter — it
+      // waits for a grown-up to press OK on the remote before advancing, so the
+      // crew can move rooms / fetch the chest / take a break at their own pace.
+      // Every non-code scene is OK-gated.
       set({ phase: 'waiting', mouthOpen: 0 });
       push('waiting', sceneIndex);
     }

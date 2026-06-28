@@ -69,9 +69,11 @@ content/
 
 The challenges are a **flat list** — there are no zone folders. The hunt's four
 colored locks ride along as metadata on the challenge that **opens** each
-(`lock:` — header + Coco's intro) and the one that **closes** it (`unlock:` /
-`break:`). Coco's lead-in sets the scene but never poses the task; the puzzle
-lives entirely on the challenge's printable sheet in the same folder.
+(`lock:` — header + Coco's intro); a `break:` scene sits between locks. The kids
+set each lock's dials digit by digit as they solve its challenges, so there is
+no separate unlock scene — Coco's praise on the final digit is the celebration.
+Coco's lead-in sets the scene but never poses the task; the puzzle lives
+entirely on the challenge's printable sheet in the same folder.
 
 Each file is YAML frontmatter (structured data) plus a markdown body (prose).
 The files are bundled at build time (`import.meta.glob`) and rendered by React

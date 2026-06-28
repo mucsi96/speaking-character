@@ -16,5 +16,7 @@ parent:
     - [Elrejtés, "5 Geomag-zacskó + 5 építőkártya a nappali szőnyegén, a nagy kanapé mellett (legyen hely építeni). Minden zacskóban a saját modellhez szükséges alkatrészek ÉS pontosan 2 extra darab."]
     - ["Mind az 5", "Mindenki kiépíti a kártyája szerinti modellt: 1) Ikozaéder · 2) Tetraéder XL · 3) Hatszög-piramis · 4) Kocka · 5) Ötszög-piramis. A nehezebbeket (ikozaéder, hatszög-piramis) a nagyobbaknak, a kockát / ötszög-piramist a legkisebbeknek."]
     - [Megoldás, "Zacskónként 2 extra darab × 5 zacskó = **10** megmaradt alkatrész → Schatz-Tabelle: 10 → **6**", sol]
-# The BLUE lock's unlock celebration is its own codeless OK-gated scene (c6-unlock).
+# The kids set the BLUE lock's dials digit by digit as they solve C4–C6, so
+# there's no separate unlock scene — Coco's praise on the C6 code is the
+# celebration, then the break follows.
 ---

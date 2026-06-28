@@ -15,6 +15,8 @@ parent:
   entries:
     - [Elrejtés, "A felvágott négyzeteket egy kis kalózládikóban/borítékban add oda a dolgozószobában; az egyik egyszemélyes ágyon rakják össze."]
     - [Megoldás, "A kép egy nagy „8” → **8**", sol]
-# The GREEN lock's unlock celebration and the break that follows are now their
-# own codeless OK-gated scenes (c9-unlock, c9-break).
+# The break that follows the GREEN lock is its own codeless OK-gated scene
+# (c9-break). The kids set the lock's dials digit by digit as they solve C7–C9,
+# so there's no separate unlock scene — Coco's praise on the C9 code is the
+# celebration, then the break.
 ---
