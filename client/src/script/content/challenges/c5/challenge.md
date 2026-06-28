@@ -9,8 +9,8 @@ code: "2"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins ARBEITSZIMMER, kleine Piraten! Auf dem Schreibtisch liegen fünf Zahlenreihen-Karten bereit — jeder schnappt sich eine und findet heraus, welche Zahl als Nächstes kommt. Schreibt eure Zahl in das Kästchen!”"
-  - "„Dann schaut euch eure fünf Zahlen an und zählt: Wie viele sind GRÖSSER als elf? Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„Ab ins **ARBEITSZIMMER**, kleine Piraten! Auf dem Schreibtisch liegen fünf Zahlenreihen-Karten bereit — jeder schnappt sich eine. Die Karte verrät euch, was zu tun ist!”"
+  - "„Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
 parent:
   ph: Szülőknek
   entries:

@@ -9,8 +9,8 @@ code: "3"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„In den FLUR, kleine Piraten! An der Tür hängen fünf Kompass-Karten — jeder schnappt sich eine, dreht seinen Kompass nach RECHTS und findet heraus, wohin sein Schiff am Ende segelt!”"
-  - "„Wenn alle fünf ihre End-Richtung haben, zählt zusammen: Wie viele Schiffe schauen nach SÜDEN? Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„In den **FLUR**, kleine Piraten! An der Tür hängen fünf Kompass-Karten — jeder schnappt sich eine. Die Karte verrät euch, was zu tun ist!”"
+  - "„Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
 parent:
   ph: Szülőknek
   entries:

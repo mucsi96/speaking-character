@@ -23,7 +23,7 @@ lock:
 who: Coco mondja
 lines:
   - "„Yo-ho-ho! Da ist sie ja — unsere **Schatztruhe**, mitten im Wohnzimmer! Schaut sie euch ganz genau an: Sie hat **VIER** Schlösser, und jedes hat eine **eigene Farbe** — **ROT**, **BLAU**, **GRÜN** und **GOLD**. Achtet immer auf die Farbe, denn die verrät euch, welches Schloss ihr gerade knackt! Jedes Schloss hat **drei Drehräder** mit Zahlen. Nach jeder Aufgabe bekommt ihr eine Zahl — die drückt ihr mir auf der Fernbedienung, und dann dreht ihr das nächste Rad von **oben nach unten** auf die richtige Zahl. Wenn alle drei Räder eines Schlosses stimmen, fällt es ab!”"
-  - "„Fangen wir an, kleine Piraten — das erste Schloss ist **ROT**, die Kombüse! Eure allererste Aufgabe wartet in der **KÜCHE**: dort liegen fünf Aufgaben-Karten für euch bereit — jeder schnappt sich eine und rechnet los!”"
+  - "„Fangen wir an, kleine Piraten — das erste Schloss ist **ROT**, die Kombüse! Eure allererste Aufgabe wartet in der **KÜCHE**: dort liegen fünf Aufgaben-Karten für euch bereit — jeder schnappt sich eine!”"
   - "„Die Karten verraten euch, was zu tun ist. Wenn ihr die erste Aufgabe gelöst habt, kommt wieder zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein — dann sage ich euch, ob sie stimmt. Auf geht's!”"
 hint: "💡 A piros lakat indul: a feladatkártyák a konyhaszigeten. (A láda ekkor már a nappaliban van — lásd C0.)"
 parent:

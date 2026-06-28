@@ -9,8 +9,8 @@ code: "6"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins WOHNZIMMER, kleine Baumeister! Auf dem Teppich liegen fünf Geomag-Beutel und fünf Baukarten bereit — jeder schnappt sich einen Beutel und die passende Karte und baut sein Bauwerk genau nach dem Plan!”"
-  - "„Wenn alle fertig sind, legt die ÜBRIG gebliebenen Teile aus allen Beuteln zusammen in die Mitte und zählt sie. Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„Ab ins **WOHNZIMMER**, kleine Baumeister! Auf dem Teppich liegen fünf Geomag-Beutel und fünf Baukarten bereit — jeder schnappt sich einen Beutel und die passende Karte. Die Karte verrät euch, was zu tun ist!”"
+  - "„Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
 parent:
   ph: Szülőknek
   entries:

@@ -9,8 +9,8 @@ code: "6"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:
-  - "„Lauft ins kleine GÄSTE-WC mit der Dusche, kleine Piraten! Dort liegen fünf Puzzle-Karten bereit — jeder schnappt sich eine Tüte mit Teilen und setzt sie zusammen. So erscheint eure geheime zweistellige Zahl!”"
-  - "„Wenn alle fünf ihre Zahl haben, zählt zusammen: Wie viele sind GRÖSSER als 50? Sucht diese Anzahl in der Schatz-Tabelle auf der Anleitungs-Karte — die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„Lauft ins kleine **GÄSTE-WC** mit der Dusche, kleine Piraten! Dort liegen fünf Puzzle-Karten bereit — jeder schnappt sich eine Tüte mit Teilen. Die Karte verrät euch, was zu tun ist!”"
+  - "„Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
 parent:
   ph: Szülőknek
   entries:

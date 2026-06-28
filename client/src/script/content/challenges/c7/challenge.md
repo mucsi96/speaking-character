@@ -18,8 +18,8 @@ lock:
   code: "4 - 6 - 8"
 who: Coco mondja
 lines:
-  - "„Auf zum GRÜNEN Schloss! Eure erste Aufgabe wartet im KINDERZIMMER — dort liegen fünf Satz-Karten bereit. Drei Aufgaben, dann fällt das GRÜNE Schloss!”"
-  - "„Jeder nimmt eine Karte und zählt, wie viele VOKALE (a, e, i, o, u) im Satz stehen. Wenn ihr alle fünf Zahlen habt, zählt sie ZUSAMMEN — und sucht die Summe in der Schatz-Tabelle. Die Zahl daneben tippt ihr mir mit der Fernbedienung ein!”"
+  - "„Auf zum **GRÜNEN** Schloss! Eure erste Aufgabe wartet im **KINDERZIMMER** — dort liegen fünf Satz-Karten bereit. Drei Aufgaben, dann fällt das GRÜNE Schloss!”"
+  - "„Jeder schnappt sich eine Karte — die verrät euch, was zu tun ist. Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
 parent:
   ph: Szülőknek
   entries:
