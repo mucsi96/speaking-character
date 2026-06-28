@@ -9,7 +9,7 @@ code: "6"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins **WOHNZIMMER**, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
+  - "„Diese Aufgabe wartet **hier im Wohnzimmer**, kleine Piraten — ihr seid ja schon da! Sucht eure Aufgaben-Karten, jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:
