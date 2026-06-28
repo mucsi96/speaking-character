@@ -9,7 +9,7 @@
   <text x="200" y="53" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">So bekommt ihr eure Zahl</text>
 
   <!-- title -->
-  <text x="200" y="82" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">Geheimcode</text>
+  <text x="200" y="82" text-anchor="middle" fill="#1f5d3a" font-size="22" font-weight="700">Puzzle</text>
 
   <!-- steps -->
   <g fill="#2a2118" font-size="12">
