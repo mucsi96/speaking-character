@@ -9,7 +9,7 @@ code: "7"
 lockColor: var(--lock-red)
 who: Coco mondja
 lines:
-  - "„Schwimmt ins **BADEZIMMER**, kleine Piraten! Dort sind fünf Münz-Karten versteckt — jeder schnappt sich eine!”"
+  - "„Schwimmt ins **BADEZIMMER**, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

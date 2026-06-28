@@ -9,7 +9,7 @@ code: "6"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins **WOHNZIMMER**, kleine Baumeister! Auf dem Teppich liegen fünf Geomag-Beutel und fünf Baukarten bereit — jeder schnappt sich einen Beutel und die passende Karte!”"
+  - "„Ab ins **WOHNZIMMER**, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

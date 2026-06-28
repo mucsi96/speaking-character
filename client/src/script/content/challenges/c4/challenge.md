@@ -18,7 +18,7 @@ lock:
   code: "5 - 2 - 6"
 who: Coco mondja
 lines:
-  - "„Ein Schloss ist gefallen — bravo, kleine Piraten! Jetzt leuchtet das **BLAUE** Schloss. Eure erste Aufgabe wartet in der **KAPITÄNSKAJÜTE** (Schlafzimmer): dort liegen fünf Karten bereit — und vergesst den **Spiegel** hinter der Tür nicht!”"
+  - "„Ein Schloss ist gefallen — bravo, kleine Piraten! Jetzt leuchtet das **BLAUE** Schloss. Eure erste Aufgabe wartet in der **KAPITÄNSKAJÜTE** (Schlafzimmer): sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

@@ -9,7 +9,7 @@ code: "3"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„In den **FLUR**, kleine Piraten! An der Tür hängen fünf Kompass-Karten — jeder schnappt sich eine!”"
+  - "„In den **FLUR**, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

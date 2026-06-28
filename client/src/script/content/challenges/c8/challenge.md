@@ -9,7 +9,7 @@ code: "6"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:
-  - "„Lauft ins kleine **GÄSTE-WC** mit der Dusche, kleine Piraten! Dort liegen fünf Puzzle-Karten bereit — jeder schnappt sich eine Tüte mit Teilen!”"
+  - "„Lauft ins kleine **GÄSTE-WC** mit der Dusche, kleine Piraten! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:

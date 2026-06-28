@@ -9,7 +9,7 @@ code: "1"
 lockColor: var(--lock-gold)
 who: Coco mondja
 lines:
-  - "„Die allerletzte Aufgabe, kleine Crew — und hier hilft euch ein Roboter! Das ist **BIBOT**. Vor der Truhe liegen fünf Bibot-Karten bereit: jeder schnappt sich eine — und dann fällt das **GOLDENE** Schloss!”"
+  - "„Die allerletzte Aufgabe, kleine Crew! Sucht **vor der Truhe** eure Aufgaben-Karten — jeder schnappt sich eine, und dann fällt das **GOLDENE** Schloss!”"
 parent:
   ph: Szülőknek
   entries:
