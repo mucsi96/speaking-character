@@ -9,7 +9,7 @@ code: "8"
 lockColor: var(--lock-green)
 who: Coco mondja
 lines:
-  - "„Zurück ins **ARBEITSZIMMER**, kleine Piraten! Dort wartet ein großes Flaggen-Puzzle — alle helfen mit! Wenn es sich zeigt, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
+  - "„Zurück ins **ARBEITSZIMMER**, kleine Piraten! Dort wartet ein großes Flaggen-Puzzle — alle helfen mit!”"
 parent:
   ph: Szülőknek
   entries:

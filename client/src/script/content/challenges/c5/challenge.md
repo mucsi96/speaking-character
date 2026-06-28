@@ -9,8 +9,7 @@ code: "2"
 lockColor: var(--lock-blue)
 who: Coco mondja
 lines:
-  - "„Ab ins **ARBEITSZIMMER**, kleine Piraten! Auf dem Schreibtisch liegen fünf Zahlenreihen-Karten bereit — jeder schnappt sich eine. Die Karte verrät euch, was zu tun ist!”"
-  - "„Wenn ihr fertig seid, kommt zu mir zurück und **tippt die Zahl mit der Fernbedienung** ein!”"
+  - "„Ab ins **ARBEITSZIMMER**, kleine Piraten! Auf dem Schreibtisch liegen fünf Zahlenreihen-Karten bereit — jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:
