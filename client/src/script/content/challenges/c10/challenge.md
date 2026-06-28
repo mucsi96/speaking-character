@@ -18,7 +18,7 @@ lock:
 who: Coco mondja
 lines:
   - "„Das **letzte** Schloss, Mannschaft — das **GOLDENE**! Drei Aufgaben noch, dann gehört der Schatz EUCH!”"
-  - "„Ab ins **WOHNZIMMER**! Sucht dort eure Aufgaben-Karten — jeder schnappt sich eine!”"
+  - "„Eure Aufgaben-Karten sind **hier im Wohnzimmer** — ihr seid ja schon da! Sucht sie, jeder schnappt sich eine!”"
 parent:
   ph: Szülőknek
   entries:
