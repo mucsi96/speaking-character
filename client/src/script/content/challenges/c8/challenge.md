@@ -13,6 +13,7 @@ lines:
 parent:
   ph: Szülőknek
   entries:
-    - [Elrejtés, "A jelmagyarázat (Legende) a kis WC / zuhanyzó falára vagy ajtajára ragasztva; az 5 szimbólum-kártya az ablakpárkányon / polcon."]
-    - [Megoldás, "🗡️🦴👑🪙🗡️ → S-E-C-H-S = „SECHS” → **6**", sol]
+    - [Elrejtés, "Az anleitő kártya (Legende-jelmagyarázattal) a kis WC / zuhanyzó falára vagy ajtajára ragasztva; az 5 szimbólum-kártya (1–5) az ablakpárkányon / polcon."]
+    - ["Mind az 5", "Mindenki kap egy szimbólum-kártyát (1–5), és a Legende segítségével kibetűzi a saját betűjét. Sorba rakva (1·2·3·4·5): 🗡️→S · 🦴→E · 👑→C · 🪙→H · 🗡️→S."]
+    - [Megoldás, "S-E-C-H-S = „SECHS” (= hat) → **6**", sol]
 ---
