@@ -25,6 +25,9 @@ ELEVENLABS_API_KEY=$(az keyvault secret show --vault-name "$AZURE_KEYVAULT_NAME"
 latestTag=$(curl -s "https://registry.hub.docker.com/v2/repositories/$DOCKERHUB_USERNAME/speaking-character/tags" | jq -r '.results | map(select(.name != "latest")) | sort_by(.last_updated) | reverse | .[0].name')
 
 echo "Updating Helm repositories..."
+# The mucsi96 charts no longer bundle Prometheus exporter sidecars or
+# ServiceMonitors (client-app >= 22.0.0, spring-app >= 30.0.0, node-app >= 20.0.0).
+# This deploy rolls out the updated charts and drops those containers.
 helm repo add mucsi96 https://mucsi96.github.io/k8s-helm-charts --force-update
 
 nodeAppChartVersion=$(helm search repo mucsi96/node-app --output json | jq -r '.[0].version')
