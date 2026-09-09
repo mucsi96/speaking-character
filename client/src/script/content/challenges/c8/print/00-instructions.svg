@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100mm" height="75mm" font-family="Georgia, 'Times New Roman', serif">
+  <!-- parchment + cut frame -->
+  <rect x="0" y="0" width="400" height="300" rx="16" fill="#f6eccf"/>
+  <rect x="7" y="7" width="386" height="286" rx="12" fill="none" stroke="#c2a76a" stroke-width="2" stroke-dasharray="7 6"/>
+
+  <!-- header band -->
+  <rect x="20" y="14" width="360" height="46" rx="10" fill="#1f5d3a"/>
+  <text x="200" y="36" text-anchor="middle" fill="#bdeccb" font-size="13" letter-spacing="2">GRÜNES SCHLOSS</text>
+  <text x="200" y="53" text-anchor="middle" fill="#fdf2d6" font-size="14" font-style="italic">Legende → Wort entschlüsseln</text>
+
+  <!-- title -->
+  <text x="200" y="80" text-anchor="middle" fill="#1f5d3a" font-size="20" font-weight="700">Legende</text>
+
+  <!-- legend: 8 chips, 4 columns x 2 rows -->
+  <g>
+    <!-- row 1 -->
+    <g>
+      <rect x="20" y="90" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="44" y="114" text-anchor="middle" font-size="17">⚓</text>
+      <text x="80" y="114" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">A</text>
+    </g>
+    <g>
+      <rect x="116" y="90" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="140" y="114" text-anchor="middle" font-size="17">🦴</text>
+      <text x="176" y="114" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">E</text>
+    </g>
+    <g>
+      <rect x="212" y="90" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="236" y="114" text-anchor="middle" font-size="17">🗡️</text>
+      <text x="272" y="114" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">S</text>
+    </g>
+    <g>
+      <rect x="308" y="90" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="332" y="114" text-anchor="middle" font-size="17">👑</text>
+      <text x="368" y="114" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">C</text>
+    </g>
+    <!-- row 2 -->
+    <g>
+      <rect x="20" y="130" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="44" y="154" text-anchor="middle" font-size="17">🪙</text>
+      <text x="80" y="154" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">H</text>
+    </g>
+    <g>
+      <rect x="116" y="130" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="140" y="154" text-anchor="middle" font-size="17">🐚</text>
+      <text x="176" y="154" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">I</text>
+    </g>
+    <g>
+      <rect x="212" y="130" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="236" y="154" text-anchor="middle" font-size="17">🦜</text>
+      <text x="272" y="154" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">R</text>
+    </g>
+    <g>
+      <rect x="308" y="130" width="84" height="34" rx="9" fill="#fffaf0" stroke="#c2a76a" stroke-width="2"/>
+      <text x="332" y="154" text-anchor="middle" font-size="17">☠️</text>
+      <text x="368" y="154" text-anchor="middle" fill="#1f5d3a" font-size="18" font-weight="700">N</text>
+    </g>
+  </g>
+
+  <!-- steps -->
+  <g fill="#2a2118" font-size="11">
+    <text x="34" y="190"><tspan fill="#1f5d3a" font-weight="700">1.</tspan>  Jeder nimmt eine <tspan font-weight="700">Symbol-Karte</tspan> (1–5).</text>
+    <text x="34" y="208"><tspan fill="#1f5d3a" font-weight="700">2.</tspan>  Schlagt euer Symbol hier nach — <tspan font-weight="700">Buchstaben</tspan> aufschreiben.</text>
+    <text x="34" y="226"><tspan fill="#1f5d3a" font-weight="700">3.</tspan>  Legt die Karten der Reihe nach (1·2·3·4·5).</text>
+    <text x="34" y="244"><tspan fill="#1f5d3a" font-weight="700">4.</tspan>  Das geheime Wort ist eine <tspan font-weight="700">Zahl</tspan> — schreibt sie als Ziffer. Das ist eure Zahl!</text>
+  </g>
+
+  <!-- footer -->
+  <text x="200" y="285" text-anchor="middle" fill="#7a6a4a" font-size="12">C8 · 5 Karten</text>
+</svg>
